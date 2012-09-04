@@ -1,0 +1,24 @@
+﻿<Window x:Class="TAlex.Testcheck.Tester.ChoiceTestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Choice test" Height="300" Width="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid>
+        <GroupBox Header="Tests" Margin="10,5,10,40">
+            <ListView Name="testsListView" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}" Width="130" />
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Description}" Width="250" />
+                        <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Path=Author}" Width="200" />
+                        <GridViewColumn Header="Copyright" DisplayMemberBinding="{Binding Path=Copyright}" Width="200" />
+                        <GridViewColumn Header="Questions" DisplayMemberBinding="{Binding Path=QuestionCount}" Width="80" />
+                        <GridViewColumn Header="Time limit" DisplayMemberBinding="{Binding Path=Timelimit}" Width="80" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,10,10" Name="cancelButton" VerticalAlignment="Bottom" Width="75" Click="cancelButton_Click">Cancel</Button>
+        <Button Height="23" Margin="0,0,95,10" Name="okButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="okButton_Click">OK</Button>
+    </Grid>
+</Window>

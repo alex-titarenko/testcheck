@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="TAlex.Testcheck.Editor.Controls.Editors.TrueFalseEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <GroupBox Header="Answer">
+            <StackPanel>
+                <RadioButton Name="trueRadioButton" Margin="4" Checked="trueRadioButton_Checked">True</RadioButton>
+                <RadioButton Name="falseRadioButton" Margin="4" Checked="falseRadioButton_Checked">False</RadioButton>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

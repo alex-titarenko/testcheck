@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TAlex.Testcheck.Editor.Controls.Editors.EssayEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="0">
+        <GroupBox Header="Correct answers" Margin="0,0,0,30">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Name="correctAnswersGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+
+        <Button Height="25" VerticalAlignment="Bottom" Click="addCorrectAnswerButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Margin="2,2,10,2" Source="/Resources/Images/add.png" />
+                <Label Padding="0">Add answer</Label>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="TAlex.Testcheck.Editor.Controls.Editors.FillBlankEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <GroupBox Header="Blank text (key words must be enclosed in [ brackets ])">
+            <TextBox Name="blankTextBox" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" TextChanged="blankTextBox_TextChanged"></TextBox>
+        </GroupBox>
+    </Grid>
+</UserControl>

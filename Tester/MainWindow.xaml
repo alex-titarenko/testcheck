@@ -1,0 +1,119 @@
+﻿<Window x:Class="TAlex.Testcheck.Tester.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:TAlex.Testcheck.Tester.Controls"
+    Title="Testcheck Tester" MinHeight="400" MinWidth="400" Height="600" Width="800" Topmost="True" WindowStartupLocation="CenterScreen"
+    Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextBrush" Color="DimGray" />
+        
+        <LinearGradientBrush x:Key="ButtonBgBrush" EndPoint="0,1">
+            <GradientStop Color="#fff3f3f3" Offset="0" />
+            <GradientStop Color="#ffebebeb" Offset="0.499" />
+            <GradientStop Color="#ffdddddd" Offset="0.5" />
+            <GradientStop Color="#ffcecece" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Resources>
+    
+    <Grid Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="23" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="#ffeaeaea">
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#fff5f5f5" Offset="0" />
+                    <GradientStop Color="#ffe0e0e0" Offset="0.5" />
+                    <GradientStop Color="WhiteSmoke" Offset="1" />
+                </LinearGradientBrush>
+            </Menu.Background>
+            
+            <MenuItem Header="_File">
+                <MenuItem Header="E_xit" InputGestureText="Alt+F4" Click="exitMenuItem_Click" />
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="80" Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition MinHeight="50" Height="150" />
+            </Grid.RowDefinitions>
+            
+            <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch">
+                <GridSplitter.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="WhiteSmoke" Offset="0" />
+                        <GradientStop Color="#d0d0d0" Offset="1" />
+                    </LinearGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            
+            <Border Grid.Row="0" BorderBrush="Gray">
+                <WebBrowser Name="questionWebBrowser" Grid.Row="0" PreviewKeyDown="questionWebBrowser_PreviewKeyDown" />
+            </Border>
+                
+            <ScrollViewer Name="questinChoicesScrollViewer" Grid.Row="2" Background="White"></ScrollViewer>
+        </Grid>
+        
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource TextBrush}">Time elapsed:</Label>
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,20,0,0" Name="timeElapsedLabel" VerticalAlignment="Top" HorizontalAlignment="Left"  Foreground="{StaticResource TextBrush}"></Label>
+        
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource TextBrush}">Time left:</Label>
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,60,0,0" Name="timeLeftLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource TextBrush}"></Label>
+        
+        <controls:ProgressBarTest x:Name="progressBarTest" Grid.Row="1" Grid.Column="1" Margin="0,100,0,25" />
+               
+        <!-- Control panel -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="WhiteSmoke" Offset="0" />
+                    <GradientStop Color="Silver" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid Width="250" Margin="5">                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Button Margin="0,5,10,5" Grid.Column="0" Name="previousButton" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Previous question" Click="previousButton_Click">
+                    <Image Source="Resources\Images\previous.png" />
+                </Button>
+                
+                <Button Margin="10,0,10,0" Grid.Column="1" Name="acceptButton" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Accept answer" Click="acceptButton_Click">
+                    <Image Source="Resources\Images\accept.png" />
+                </Button>
+                
+                <Button Margin="10,5,0,5" Grid.Column="2" Name="nextButton" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Next question" Click="nextButton_Click">
+                    <Image Source="Resources\Images\forward.png" />
+                </Button>
+            </Grid>
+        </Grid>
+
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="2">
+            <StatusBar.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="WhiteSmoke" Offset="0" />
+                    <GradientStop Color="Silver" Offset="0.05" />
+                    <GradientStop Color="WhiteSmoke" Offset="1" />
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            
+            <StatusBarItem Content="Question" Foreground="{StaticResource TextBrush}" />
+            <StatusBarItem Name="currentQuestionStatusBarItem" Foreground="{StaticResource TextBrush}" />
+        </StatusBar>
+    </Grid>
+</Window>

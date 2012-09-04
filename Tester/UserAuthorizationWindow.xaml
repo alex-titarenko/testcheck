@@ -1,0 +1,28 @@
+﻿<Window x:Class="TAlex.Testcheck.Tester.UserAuthorizationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="User authorization" Height="190" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <GroupBox Header="User info" Margin="10,10,10,40">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">User _name:</Label>
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">User _group:</Label>
+                
+                <TextBox Name="userNameTextBox" TabIndex="0" Grid.Row="0" Grid.Column="1" Height="23" Margin="0,0,10,0" />
+                <TextBox Name="userGroupTextBox" Grid.Row="1" Grid.Column="1" Height="23" Margin="0,0,10,0" />
+            </Grid>
+        </GroupBox>
+        
+        <Button Name="okButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80" Height="23" Margin="0,0,100,10" Click="okButton_Click">_OK</Button>
+        <Button Name="cancelButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80" Height="23" Margin="0,0,10,10" Click="cancelButton_Click">_Cancel</Button>
+    </Grid>
+</Window>

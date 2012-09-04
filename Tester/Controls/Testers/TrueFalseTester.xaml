@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="TAlex.Testcheck.Tester.Controls.Testers.TrueFalseTester"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <StackPanel Margin="5">
+            <RadioButton Name="trueRadioButton" Margin="0,1,0,1">True</RadioButton>
+            <RadioButton Name="falseRadioButton" Margin="0,1,0,1">False</RadioButton>
+        </StackPanel>
+    </Grid>
+</UserControl>
