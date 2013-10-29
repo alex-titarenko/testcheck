@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{40E11C85-7545-4D1D-A88B-0A62AF05182A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Tester", "Tester\Testcheck.Tester.csproj", "{40E11C85-7545-4D1D-A88B-0A62AF05182A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Editor\Editor.csproj", "{A59478FA-F7A9-45E3-AD56-F03AA3EA6D25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Editor", "Editor\Testcheck.Editor.csproj", "{A59478FA-F7A9-45E3-AD56-F03AA3EA6D25}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetupBootstrapper", "TestcheckSetupBootstrapper\TestcheckSetupBootstrapper.wixproj", "{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetup", "TestcheckSetup\TestcheckSetup.wixproj", "{0A0C035F-5DB0-45F1-ABD1-9178F537A644}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2361C182-747F-400B-BED5-E1D646C71FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

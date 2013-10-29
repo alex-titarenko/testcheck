@@ -210,9 +210,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tester\Tester.csproj">
+    <ProjectReference Include="..\Tester\Testcheck.Tester.csproj">
       <Project>{40E11C85-7545-4D1D-A88B-0A62AF05182A}</Project>
-      <Name>Tester</Name>
+      <Name>Testcheck.Tester</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
