@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{40E11C85-7545-4D1D-A88B-0A62AF05182A}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TestcheckSetup", "TestcheckSetup\TestcheckSetup.vdproj", "{4B8EE8FF-D393-4B90-BBBC-10026D71D580}"
