@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="TestcheckSetupBootstrapper" Version="1.0.0.0" Manufacturer="" UpgradeCode="3c7026ec-9bf1-458a-ba6b-f7863a2451e5">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+			<!-- TODO: Define the list of chained packages. -->
+			<!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+		</Chain>
+	</Bundle>
+</Wix>
