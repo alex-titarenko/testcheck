@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Bundle Name="TestcheckSetupBootstrapper" Version="1.0.0.0" Manufacturer="" UpgradeCode="3c7026ec-9bf1-458a-ba6b-f7863a2451e5">
-		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<?include Variables.wxi ?>
+  
+  <Bundle Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" Copyright="$(var.Copyright)" AboutUrl="$(var.HomePageUrl)" UpdateUrl="$(var.UpdateInformation)" HelpUrl="$(var.HelpLink)">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseFile="$(var.TestcheckSetup.ProjectDir)\Resources\License.rtf"
+
+        SuppressOptionsUI="yes" />
+    </BootstrapperApplicationRef>
 
 		<Chain>
-			<!-- TODO: Define the list of chained packages. -->
-			<!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+			<PackageGroupRef Id="NetFx45Web" />
+			<MsiPackage DisplayInternalUI="yes" Compressed="yes" ForcePerMachine="yes" SourceFile="$(var.TestcheckSetup.TargetPath)" />
 		</Chain>
 	</Bundle>
 </Wix>

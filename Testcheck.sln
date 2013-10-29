@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Editor\Editor.csp
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetupBootstrapper", "TestcheckSetupBootstrapper\TestcheckSetupBootstrapper.wixproj", "{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetup", "TestcheckSetup\TestcheckSetup.wixproj", "{0A0C035F-5DB0-45F1-ABD1-9178F537A644}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}.Release|x86.ActiveCfg = Release|x86
 		{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}.Release|x86.Build.0 = Release|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Debug|x86.ActiveCfg = Debug|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Debug|x86.Build.0 = Debug|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|Any CPU.ActiveCfg = Release|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|x86.ActiveCfg = Release|x86
+		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

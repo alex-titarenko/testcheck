@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define ProductName = "Testcheck" ?>
+  <?define ProductVersion="2.1.0" ?>
+  <?define Manufacturer = "T-Alex Software" ?>
+  <?define UpgradeCode="286D8DC1-702C-43DF-8719-4FFD7ACE5AEA" ?>
+
+  <?define HomePageUrl="http://www.talex-soft.com" ?>
+  <?define SupportLink="http://www.talex-soft.com" ?>
+  <?define HelpLink="http://www.talex-soft.com" ?>
+  <?define UpdateInformation="http://www.talex-soft.com" ?>
+  <?define Copyright="Copyright © 2013 T-Alex Software" ?>
+</Include>
