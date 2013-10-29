@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace TAlex.Testcheck.Core.Helpers
 {
-    public static class CryptoHelper
+    internal static class CryptoHelper
     {
         #region Fields
 
