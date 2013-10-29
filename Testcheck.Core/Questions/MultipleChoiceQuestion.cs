@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace TAlex.Testcheck.Tester.TestCore.Questions
+using TAlex.Testcheck.Core.Choices;
+
+namespace TAlex.Testcheck.Core.Questions
 {
     /// <summary>
-    /// Represents the ranking of the type of question.
+    /// Represents the multiple choice of the type of question.
     /// </summary>
     /// <remarks>
-    /// A list of choices has certain logic.
-    /// The logical order of the sequence should be restored.
+    /// Only one of several choices should be selected as an answer.
     /// </remarks>
     [Serializable]
-    public class RankingQuestion : ShuffledChoicesQuestion
+    public class MultipleChoiceQuestion : ShuffledChoicesQuestion
     {
         #region Fields
 
         private const string ChoicesElemName = "Choices";
         private const string ChoiceElemName = "Choice";
+        private const string AnswerElemName = "Answer";
+
+        private int _answer = -1;
 
         private List<string> _choices = new List<string>();
 
@@ -34,11 +38,24 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
             }
         }
 
+        public int Answer
+        {
+            get
+            {
+                return _answer;
+            }
+
+            set
+            {
+                _answer = value;
+            }
+        }
+
         public override string TypeName
         {
             get
             {
-                return "Ranking";
+                return "Multiple choice";
             }
         }
 
@@ -46,11 +63,11 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
 
         #region Constructors
 
-        public RankingQuestion()
+        public MultipleChoiceQuestion()
         {
         }
 
-        protected RankingQuestion(RankingQuestion question)
+        protected MultipleChoiceQuestion(MultipleChoiceQuestion question)
             : base(question)
         {
             int n = question._choices.Count;
@@ -58,6 +75,8 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
             {
                 _choices.Add((string)question._choices[i].Clone());
             }
+
+            _answer = question._answer;
         }
 
         #endregion
@@ -66,32 +85,28 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
 
         public override decimal Check(object data)
         {
-            return Check(data as int[]);
+            return Check((int)data);
         }
 
-        public decimal Check(int[] keys)
+        public decimal Check(int key)
         {
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (keys[i] != i)
-                    return 0;
-            }
-
-            return Points;
+            return (key == _answer) ? Points : 0;
         }
 
         protected override void ReadXml(XmlElement element)
         {
             base.ReadXml(element);
 
+            Answer = XmlConvert.ToInt32(element[AnswerElemName].InnerText);
+
             _choices.Clear();
 
             XmlElement choicesElem = element[ChoicesElemName];
-            foreach (XmlElement choice in choicesElem.ChildNodes)
+            foreach (XmlElement choiceElem in choicesElem.ChildNodes)
             {
-                if (choice.Name == ChoiceElemName)
+                if (choiceElem.Name == ChoiceElemName)
                 {
-                    _choices.Add(choice.InnerText);
+                    _choices.Add(choiceElem.InnerText);
                 }
             }
         }
@@ -108,6 +123,8 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
             }
 
             writer.WriteEndElement();
+
+            writer.WriteElementString(AnswerElemName, Answer.ToString());
         }
 
         public override int GetHashCode()
@@ -119,6 +136,8 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
                 hashCode ^= _choices[i].GetHashCode();
             }
 
+            hashCode ^= _answer;
+
             return hashCode;
         }
 
@@ -127,7 +146,9 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
             if (!base.Equals(obj))
                 return false;
 
-            RankingQuestion q = (RankingQuestion)obj;
+            MultipleChoiceQuestion q = (MultipleChoiceQuestion)obj;
+
+            if (_answer != q._answer) return false;
 
             if (_choices.Count != q._choices.Count) return false;
 
@@ -142,7 +163,7 @@ namespace TAlex.Testcheck.Tester.TestCore.Questions
 
         public override object Clone()
         {
-            return new RankingQuestion(this);
+            return new MultipleChoiceQuestion(this);
         }
 
         #endregion

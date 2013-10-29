@@ -13,7 +13,7 @@ using System.Windows.Threading;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core.Questions;
 
 
 namespace TAlex.Testcheck.Tester.Controls.Testers
@@ -67,8 +67,8 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             leftChoicesStackPanel.Children.Clear();
             rightChoicesStackPanel.Children.Clear();
 
-            int[] leftIndexes = Helpers.Shuffles.GetRandomSequence(_question.LeftChoices.Count, _question.ShuffleMode, rand);
-            int[] rightIndexes = Helpers.Shuffles.GetRandomSequence(_question.RightChoices.Count, _question.ShuffleMode, rand);
+            int[] leftIndexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.LeftChoices.Count, _question.ShuffleMode, rand);
+            int[] rightIndexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.RightChoices.Count, _question.ShuffleMode, rand);
 
             for (int i = 0; i < leftIndexes.Length; i++)
             {

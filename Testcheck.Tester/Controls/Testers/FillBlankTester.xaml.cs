@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Markup;
 
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core.Questions;
 
 namespace TAlex.Testcheck.Tester.Controls.Testers
 {

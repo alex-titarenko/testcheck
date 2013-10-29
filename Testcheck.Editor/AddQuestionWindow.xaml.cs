@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core.Questions;
 
 namespace TAlex.Testcheck.Editor
 {

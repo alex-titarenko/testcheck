@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core.Questions;
 
 namespace TAlex.Testcheck.Tester.Controls.Testers
 {
@@ -48,7 +48,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         {
             choicesStackPanel.Children.Clear();
 
-            int[] indexes = Helpers.Shuffles.GetRandomSequence(_question.Choices.Count, _question.ShuffleMode, rand);
+            int[] indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.Choices.Count, _question.ShuffleMode, rand);
 
             for (int i = 0; i < _question.Choices.Count; i++)
             {

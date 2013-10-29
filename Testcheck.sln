@@ -11,6 +11,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetup", "Testcheck
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2361C182-747F-400B-BED5-E1D646C71FFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Core", "Testcheck.Core\Testcheck.Core.csproj", "{CF178AF8-ACB8-41BC-822B-5D2167C894A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,16 @@ Global
 		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|x86.ActiveCfg = Release|x86
 		{0A0C035F-5DB0-45F1-ABD1-9178F537A644}.Release|x86.Build.0 = Release|x86
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CF178AF8-ACB8-41BC-822B-5D2167C894A3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

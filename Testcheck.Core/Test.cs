@@ -4,12 +4,13 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
-
-using TAlex.Testcheck.Tester.TestCore.Questions;
-using TAlex.Testcheck.Tester.Helpers;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace TAlex.Testcheck.Tester.TestCore
+using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Core.Helpers;
+
+
+namespace TAlex.Testcheck.Core
 {
     [Serializable]
     [XmlRoot("Test")]

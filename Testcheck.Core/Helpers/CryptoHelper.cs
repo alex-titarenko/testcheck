@@ -5,7 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace TAlex.Testcheck.Tester.Helpers
+
+namespace TAlex.Testcheck.Core.Helpers
 {
     public static class CryptoHelper
     {

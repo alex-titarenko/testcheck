@@ -6,7 +6,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Globalization;
 
-namespace TAlex.Testcheck.Tester.TestCore.Questions
+namespace TAlex.Testcheck.Core.Questions
 {
     /// <summary>
     /// Provides a base class for different types of questions,

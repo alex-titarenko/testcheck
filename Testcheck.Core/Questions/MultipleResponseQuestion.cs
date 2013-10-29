@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-using TAlex.Testcheck.Tester.TestCore.Choices;
+using TAlex.Testcheck.Core.Choices;
 
-namespace TAlex.Testcheck.Tester.TestCore.Questions
+namespace TAlex.Testcheck.Core.Questions
 {
     /// <summary>
     /// Represents the multiple response of the type of question.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TAlex.Testcheck.Tester.TestCore.Choices
+namespace TAlex.Testcheck.Core.Choices
 {
     [Serializable]
     public class AnswerChoice

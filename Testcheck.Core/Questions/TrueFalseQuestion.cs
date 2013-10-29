@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace TAlex.Testcheck.Tester.TestCore.Questions
+namespace TAlex.Testcheck.Core.Questions
 {
     /// <summary>
     /// Represents the true/false of the type of question.

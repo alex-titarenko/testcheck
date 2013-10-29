@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 
-using TAlex.Testcheck.Tester.TestCore;
+using TAlex.Testcheck.Core;
 
 namespace TAlex.Testcheck.Tester
 {

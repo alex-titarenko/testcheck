@@ -194,7 +194,6 @@
     <Compile Include="Controls\Testers\TrueFalseTester.xaml.cs">
       <DependentUpon>TrueFalseTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -212,22 +211,6 @@
     <Compile Include="ResultWindow.xaml.cs">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestCore\Choices\AnswerChoice.cs" />
-    <Compile Include="TestCore\IShuffles.cs" />
-    <Compile Include="TestCore\Questions\EssayQuestion.cs" />
-    <Compile Include="TestCore\Questions\FillBlankQuestion.cs" />
-    <Compile Include="TestCore\Questions\KeyPair.cs" />
-    <Compile Include="TestCore\Questions\MatchingMode.cs" />
-    <Compile Include="TestCore\Questions\MatchingQuestion.cs" />
-    <Compile Include="TestCore\Questions\MultipleChoiceQuestion.cs" />
-    <Compile Include="TestCore\Questions\Question.cs" />
-    <Compile Include="TestCore\Questions\RankingQuestion.cs" />
-    <Compile Include="TestCore\Questions\MultipleResponseQuestion.cs" />
-    <Compile Include="TestCore\Questions\ShuffledChoicesQuestion.cs" />
-    <Compile Include="TestCore\Questions\TrueFalseQuestion.cs" />
-    <Compile Include="TestCore\ShuffleMode.cs" />
-    <Compile Include="TestCore\Test.cs" />
-    <Compile Include="Helpers\Shuffles.cs" />
     <Compile Include="UserAuthorizationWindow.xaml.cs">
       <DependentUpon>UserAuthorizationWindow.xaml</DependentUpon>
     </Compile>
@@ -293,6 +276,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Testcheck.Core\Testcheck.Core.csproj">
+      <Project>{cf178af8-acb8-41bc-822b-5d2167c894a3}</Project>
+      <Name>Testcheck.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

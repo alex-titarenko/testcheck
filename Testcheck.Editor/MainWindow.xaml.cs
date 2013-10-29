@@ -14,8 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using TAlex.Testcheck.Tester.TestCore;
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core;
+using TAlex.Testcheck.Core.Questions;
 using TAlex.Testcheck.Editor.Controls.Editors;
 
 using TAlex.WPF.Controls;

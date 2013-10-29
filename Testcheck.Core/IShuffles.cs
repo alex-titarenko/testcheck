@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TAlex.Testcheck.Tester.TestCore
+namespace TAlex.Testcheck.Core
 {
     public interface IShuffles
     {

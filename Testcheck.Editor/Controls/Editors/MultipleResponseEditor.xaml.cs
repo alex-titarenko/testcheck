@@ -11,8 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using TAlex.Testcheck.Tester.TestCore.Choices;
-using TAlex.Testcheck.Tester.TestCore.Questions;
+using TAlex.Testcheck.Core.Choices;
+using TAlex.Testcheck.Core.Questions;
 
 namespace TAlex.Testcheck.Editor.Controls.Editors
 {

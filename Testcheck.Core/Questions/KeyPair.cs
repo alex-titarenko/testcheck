@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TAlex.Testcheck.Tester.TestCore.Questions
+namespace TAlex.Testcheck.Core.Questions
 {
     [Serializable]
     public struct KeyPair : IComparable, IComparable<KeyPair>

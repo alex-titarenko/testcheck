@@ -210,12 +210,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Testcheck.Tester\Testcheck.Tester.csproj">
-      <Project>{40E11C85-7545-4D1D-A88B-0A62AF05182A}</Project>
-      <Name>Testcheck.Tester</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\close.png" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +253,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Testcheck.Core\Testcheck.Core.csproj">
+      <Project>{cf178af8-acb8-41bc-822b-5d2167c894a3}</Project>
+      <Name>Testcheck.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

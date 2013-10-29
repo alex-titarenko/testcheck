@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using TAlex.Testcheck.Tester.TestCore;
+using TAlex.Testcheck.Core;
 
-namespace TAlex.Testcheck.Tester.Helpers
+namespace TAlex.Testcheck.Core.Helpers
 {
     public static class Shuffles
     {
