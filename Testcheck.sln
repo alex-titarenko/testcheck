@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Tester", "Tester\Testcheck.Tester.csproj", "{40E11C85-7545-4D1D-A88B-0A62AF05182A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Tester", "Testcheck.Tester\Testcheck.Tester.csproj", "{40E11C85-7545-4D1D-A88B-0A62AF05182A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Editor", "Editor\Testcheck.Editor.csproj", "{A59478FA-F7A9-45E3-AD56-F03AA3EA6D25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testcheck.Editor", "Testcheck.Editor\Testcheck.Editor.csproj", "{A59478FA-F7A9-45E3-AD56-F03AA3EA6D25}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TestcheckSetupBootstrapper", "TestcheckSetupBootstrapper\TestcheckSetupBootstrapper.wixproj", "{3C7026EC-9BF1-458A-BA6B-F7863A2451E5}"
 EndProject
