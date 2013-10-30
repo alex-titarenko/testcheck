@@ -24,11 +24,13 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Banner.bmp" />
     <Content Include="Resources\License.rtf" />
     <Content Include="Variables.wxi" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources" />
+    <Folder Include="Resources\Images" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
