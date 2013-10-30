@@ -6,7 +6,7 @@
 		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
       <bal:WixStandardBootstrapperApplication
         LicenseFile="$(var.TestcheckSetup.ProjectDir)\Resources\License.rtf"
-
+        LogoFile="Resources/logo.bmp"
         SuppressOptionsUI="yes" />
     </BootstrapperApplicationRef>
 
