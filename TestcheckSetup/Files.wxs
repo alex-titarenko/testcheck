@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include Variables.wxi ?>
+  
+	<Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <!-- Core Library file -->
+      <Component Id="CMP_TestcheckCore" Guid="E1024A4C-A427-404E-981B-88430ED40C5D">
+        <File Id="TestcheckCoreFile" Name="$(var.Testcheck.Core.TargetFileName)" Source="$(var.Testcheck.Core.TargetPath)" DiskId="1" KeyPath="yes"></File>
+      </Component>
+      <!-- Tester Executable file -->
+      <Component Id="CMP_TesterExecutable" Guid="9DC29F6B-8831-493E-90D7-3DF8380788BD">
+        <File Id="TesterExecutableFile" Name="$(var.Testcheck.Tester.TargetFileName)" Source="$(var.Testcheck.Tester.TargetPath)" DiskId="1" KeyPath="yes"></File>
+      </Component>
+      <!-- Editor Executable file -->
+      <Component Id="CMP_EditorExecutable" Guid="BC79CE0C-9FD4-4553-90CA-0987275D955A">
+        <File Id="EditorExecutableFile" Name="$(var.Testcheck.Editor.TargetFileName)" Source="$(var.Testcheck.Editor.TargetPath)" DiskId="1" KeyPath="yes"></File>
+      </Component>
+      <!-- TAlex.Common -->
+      <Component Id="CMP_TAlexCommon" Guid="AEE820B9-8A3D-42A6-852F-0A03ECC93F83">
+        <File Id="FILE_TAlexCommon" Name="TAlex.Common.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <!-- TAlex.WPF.Controls -->
+      <Component Id="CMP_TAlexWPFControls" Guid="56B914D0-FCD2-4429-BEC4-8185B4D6F781">
+        <File Id="FILE_TAlexWPFControls" Name="TAlex.WPF.Controls.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+	</Fragment>
+</Wix>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Include>
   <?define ProductName = "Testcheck" ?>
+  <?define TesterProductName = "Tester" ?>
+  <?define EditorProductName = "Editor" ?>
   <?define ProductVersion="2.1.0" ?>
   <?define Manufacturer = "T-Alex Software" ?>
   <?define ProductCode="C4A2E03A-8882-4758-91DF-4AE5BE8341D4" ?>

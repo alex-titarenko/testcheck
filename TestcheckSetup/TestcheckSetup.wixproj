@@ -21,7 +21,13 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components.wxs" />
+    <Compile Include="Features.wxs" />
+    <Compile Include="Files.wxs" />
     <Compile Include="Product.wxs" />
+    <Compile Include="Shortcuts.wxs" />
+    <Compile Include="UI\AdditionalTasksDlg.wxs" />
+    <Compile Include="UI\WixUI_InstallDirEx.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\Banner.bmp" />
@@ -30,8 +36,53 @@
     <Content Include="Variables.wxi" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Localization" />
+    <Folder Include="UI" />
     <Folder Include="Resources" />
     <Folder Include="Resources\Images" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\WixUI_en-us.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Testcheck.Core\Testcheck.Core.csproj">
+      <Name>Testcheck.Core</Name>
+      <Project>{cf178af8-acb8-41bc-822b-5d2167c894a3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Testcheck.Editor\Testcheck.Editor.csproj">
+      <Name>Testcheck.Editor</Name>
+      <Project>{a59478fa-f7a9-45e3-ad56-f03aa3ea6d25}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Testcheck.Tester\Testcheck.Tester.csproj">
+      <Name>Testcheck.Tester</Name>
+      <Project>{40e11c85-7545-4d1d-a88b-0a62af05182a}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

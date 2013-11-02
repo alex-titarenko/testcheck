@@ -5,28 +5,52 @@
   <Product Id="$(var.ProductCode)" UpgradeCode="$(var.UpgradeCode)" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <!-- Detecting installed version of .NET Framework -->
+    <PropertyRef Id="$(var.FrameworkVersion)"/>
+    <Condition Message="This application requires .NET Framework $(var.FrameworkVersionText). Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR $(var.FrameworkVersion)]]>
+    </Condition>
+
+    <!-- Upgrading -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="TestcheckSetup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
+    <!-- Properties for UI -->
+    <Property Id="SHORTCUT_PROGRAMMENU">1</Property>
+    <Property Id="SHORTCUT_DESKTOP">1</Property>
+
+    <!--Directory structure-->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ManufacturerFolder" Name="$(var.Manufacturer)">
+          <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)"></Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)" />
+      </Directory>
+
+      <Directory Id="DesktopFolder" />
+    </Directory>
+
+    <FeatureRef Id="Complete"/>
+
+    <!-- Icons -->
+    <Icon Id="ProductIcon.exe" SourceFile="$(var.Testcheck.Tester.TargetPath)" />
+    <Icon Id="EditorIcon.exe" SourceFile="$(var.Testcheck.Editor.TargetPath)" />
+
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon.exe" />
+    <Property Id="ARPHELPLINK" Value="$(var.HelpLink)" />
+    <Property Id="ARPURLINFOABOUT" Value="$(var.SupportLink)" />
+    <Property Id="ARPURLUPDATEINFO" Value="$(var.UpdateInformation)" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION"></Property>
+
+    <WixVariable Id="WixUIBannerBmp" Overridable="yes" Value="Resources/Images/Banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Overridable="yes" Value="Resources/Images/Dialog.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Overridable="yes" Value="Resources/License.rtf" />
+
+    <UIRef Id="WixUI_InstallDirEx" />
 	</Product>
-
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="TestcheckSetup" />
-			</Directory>
-		</Directory>
-	</Fragment>
-
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
 </Wix>
