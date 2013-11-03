@@ -23,7 +23,7 @@
           <Publish Event="NewDialog" Value="InstallDirDlg" Order="10" />
         </Control>
         <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
-          <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="10" />
+          <Publish Event="NewDialog" Value="FeaturesDlg" Order="10" />
         </Control>
         <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
           <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>

@@ -13,7 +13,7 @@
         <ComponentRef Id="CMP_TesterExecutableDesktopShorctut" />
       </Feature>
 
-      <Feature Id="Editor" Title="Editr" Description="Editor" Level="1" AllowAdvertise="no" Absent="allow" InstallDefault="local">
+      <Feature Id="Editor" Title="Editor" Description="Editor" Level="1001" AllowAdvertise="no" Absent="allow" InstallDefault="local">
         <ComponentRef Id="CMP_EditorExecutable" />
         <ComponentRef Id="CMP_TAlexWPFControls" />
       </Feature>
