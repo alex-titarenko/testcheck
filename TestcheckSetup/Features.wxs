@@ -16,6 +16,9 @@
       <Feature Id="Editor" Title="Editor" Description="Editor" Level="1001" AllowAdvertise="no" Absent="allow" InstallDefault="local">
         <ComponentRef Id="CMP_EditorExecutable" />
         <ComponentRef Id="CMP_TAlexWPFControls" />
+
+        <ComponentRef Id="CMP_EditorProgramsMenuShortcut" />
+        <ComponentRef Id="CMP_EditorExecutableDesktopShorctut" />
       </Feature>
     </Feature>
 	</Fragment>

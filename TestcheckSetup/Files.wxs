@@ -11,6 +11,12 @@
       <!-- Tester Executable file -->
       <Component Id="CMP_TesterExecutable" Guid="9DC29F6B-8831-493E-90D7-3DF8380788BD">
         <File Id="TesterExecutableFile" Name="$(var.Testcheck.Tester.TargetFileName)" Source="$(var.Testcheck.Tester.TargetPath)" DiskId="1" KeyPath="yes"></File>
+
+        <ProgId Id="Tester.BinaryTest" Description="Binary file test" Advertise="yes" Icon="BinaryTestFile.ico">
+          <Extension Id="tst">
+            <Verb Id="open" Command="Open" Argument='"%1"' />
+          </Extension>
+        </ProgId>
       </Component>
       <!-- Editor Executable file -->
       <Component Id="CMP_EditorExecutable" Guid="BC79CE0C-9FD4-4553-90CA-0987275D955A">

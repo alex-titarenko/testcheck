@@ -39,6 +39,7 @@
     <!-- Icons -->
     <Icon Id="ProductIcon.exe" SourceFile="$(var.Testcheck.Tester.TargetPath)" />
     <Icon Id="EditorIcon.exe" SourceFile="$(var.Testcheck.Editor.TargetPath)" />
+    <Icon Id="BinaryTestFile.ico" SourceFile="$(var.Testcheck.Tester.ProjectDir)Resources\Icons\testfile.ico" />
 
     <Property Id="ARPPRODUCTICON" Value="ProductIcon.exe" />
     <Property Id="ARPHELPLINK" Value="$(var.HelpLink)" />
