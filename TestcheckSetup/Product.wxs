@@ -7,6 +7,7 @@
 
     <!-- Detecting installed version of .NET Framework -->
     <PropertyRef Id="$(var.FrameworkVersion)"/>
+    <PropertyRef Id="WIX_DIR_COMMON_DOCUMENTS"/>
     <Condition Message="This application requires .NET Framework $(var.FrameworkVersionText). Please install the .NET Framework then run this installer again.">
       <![CDATA[Installed OR $(var.FrameworkVersion)]]>
     </Condition>
@@ -32,6 +33,11 @@
       </Directory>
 
       <Directory Id="DesktopFolder" />
+
+      <Directory Id="WIX_DIR_COMMON_DOCUMENTS">
+        <Directory Id="CommonDocumentsFolder" Name="$(var.ProductName)">
+        </Directory>
+      </Directory>
     </Directory>
 
     <FeatureRef Id="Complete"/>

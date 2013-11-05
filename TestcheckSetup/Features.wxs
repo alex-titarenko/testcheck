@@ -11,6 +11,10 @@
 
         <ComponentRef Id="CMP_ProgramsMenuShortcuts" />
         <ComponentRef Id="CMP_TesterExecutableDesktopShorctut" />
+
+        <Feature Id="TestExamples" Title="Test Examples" Description="Test Examples" Level="1" AllowAdvertise="no" Absent="allow" InstallDefault="local">
+          <ComponentRef Id="CMP_SimpleTest" />
+        </Feature>
       </Feature>
 
       <Feature Id="Editor" Title="Editor" Description="Editor" Level="1001" AllowAdvertise="no" Absent="allow" InstallDefault="local">

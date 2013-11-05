@@ -31,5 +31,11 @@
         <File Id="FILE_TAlexWPFControls" Name="TAlex.WPF.Controls.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
+    
+    <DirectoryRef Id="CommonDocumentsFolder">
+      <Component Id="CMP_SimpleTest" Guid="EB2920D9-0879-428A-8520-40258D592F62">
+        <File Id="FILE_SimpleTest" Name="Simple Test.tst" Source="$(var.Testcheck.Tester.ProjectDir)Tests\Simple Test.tst" DiskId="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
 	</Fragment>
 </Wix>
