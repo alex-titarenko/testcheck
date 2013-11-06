@@ -36,6 +36,7 @@
 
       <Directory Id="WIX_DIR_COMMON_DOCUMENTS">
         <Directory Id="CommonDocumentsFolder" Name="$(var.ProductName)">
+          <Directory Id="CommonDocumentsTestsFolder" Name="Tests"></Directory>
         </Directory>
       </Directory>
     </Directory>

@@ -22,9 +22,11 @@ namespace TAlex.Testcheck.Tester
     {
         #region Fields
 
-        private static string TestDirPath = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            System.IO.Path.Combine("Testcheck", "Tests"));
+        private static readonly string CommonDocumentsTestDir = System.IO.Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "Testcheck", "Tests");
+
+        private static readonly string MyDocumentsTestDir = System.IO.Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Testcheck", "Tests");
 
         #endregion
 
@@ -45,33 +47,45 @@ namespace TAlex.Testcheck.Tester
         public ChoiceTestWindow()
         {
             InitializeComponent();
-            LoadTests();
+            LoadTests(new[] { CommonDocumentsTestDir, MyDocumentsTestDir });
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadTests()
+        private void LoadTests(IEnumerable<string> paths)
         {
-            if (Directory.Exists(TestDirPath))
+            testsListView.Items.Clear();
+            foreach (string path in paths)
             {
-                string[] filePaths = Directory.GetFiles(TestDirPath);
-
-                for (int i = 0; i < filePaths.Length; i++)
+                foreach (Test test in LoadTests(path))
                 {
-                    string extension = System.IO.Path.GetExtension(filePaths[i]);
+                    testsListView.Items.Add(test);
+                }
+            }
+        }
+
+        private IEnumerable<Test> LoadTests(string targetDirectory)
+        {
+            if (Directory.Exists(targetDirectory))
+            {
+                foreach (string filePath in Directory.GetFiles(targetDirectory))
+                {
+                    string extension = System.IO.Path.GetExtension(filePath);
 
                     if (extension == Test.BinaryTestFileExtension || extension == Test.XmlTestFileExtension)
                     {
+                        Test test = null;
                         try
                         {
-                            Test test = Test.Load(filePaths[i]);
-                            testsListView.Items.Add(test);
+                            test = Test.Load(filePath);
                         }
                         catch (Exception)
                         {
+                            continue;
                         }
+                        yield return test;
                     }
                 }
             }
