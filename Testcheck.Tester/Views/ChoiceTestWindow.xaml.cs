@@ -13,7 +13,7 @@ using System.IO;
 
 using TAlex.Testcheck.Core;
 
-namespace TAlex.Testcheck.Tester
+namespace TAlex.Testcheck.Tester.Views
 {
     /// <summary>
     /// Interaction logic for ChoiceTestWindow.xaml

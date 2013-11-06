@@ -1,0 +1,91 @@
+﻿<Window x:Class="TAlex.Testcheck.Editor.Views.AboutWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="About" Height="300" Width="400" ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner" Background="WhiteSmoke">
+    
+    <Window.Resources>
+        <LinearGradientBrush x:Key="AboutLogoBgBrush" EndPoint="0,1">
+            <GradientStop Color="#ff9a9a9a" Offset="0" />
+            <GradientStop Color="#ff3b3b3b" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="AboutLogoTextBrush" EndPoint="0,1">
+            <GradientStop Color="Gray" Offset="0" />
+            <GradientStop Color="WhiteSmoke" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="AboutVersionTextBrush" Color="WhiteSmoke" />
+        <SolidColorBrush x:Key="AboutHyperlinkForeground" Color="DimGray" />
+    </Window.Resources>
+
+    
+    <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Mode=OneTime}">
+        <Rectangle VerticalAlignment="Top" Height="100" Fill="{DynamicResource AboutLogoBgBrush}" />
+
+        <Label Margin="0,25,0,0" FontSize="36" FontWeight="600" FontFamily="Segoe UI, Arial" VerticalAlignment="Top" HorizontalContentAlignment="Center"
+               Content="{Binding Mode=OneTime, Path=ProductTitle}" Foreground="{DynamicResource AboutLogoTextBrush}" >
+            <Label.BitmapEffect>
+                <DropShadowBitmapEffect Color="White" Direction="270" ShadowDepth="1" Softness="0" />
+            </Label.BitmapEffect>
+        </Label>
+        <Label Margin="0,17,60,0" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="500"
+               Foreground="{DynamicResource AboutVersionTextBrush}"
+               Content="{Binding Mode=OneTime, Path=Version}">
+            <Label.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="90" ShadowDepth="1" Softness="0" />
+            </Label.BitmapEffect>
+        </Label>
+
+        
+        <Label Name="licTextLabel" Margin="60,130,0,0" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Left"
+               Visibility="{Binding Mode=OneTime, Path=LicenseInfoVisibility}">
+            This product is distributed as freeware
+        </Label>
+        
+
+        <Label Margin="60,0,0,80" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            E-Mail:
+        </Label>
+
+        <Label Margin="150,0,0,80" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="{Binding Mode=OneTime, Path=EmailAddress}"
+                       Foreground="{DynamicResource AboutHyperlinkForeground}">
+                <TextBlock Text="{Binding Mode=OneTime, Path=EmailTitle}" />
+            </Hyperlink>
+        </Label>
+
+        <Label Margin="60,0,0,60" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            Web:
+        </Label>
+
+        <Label Margin="150,0,0,60" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="{Binding Mode=OneTime, Path=HomepageUrl}"
+                       Foreground="{DynamicResource AboutHyperlinkForeground}">
+                <TextBlock Text="{Binding Mode=OneTime, Path=HomepageTitle}" />
+            </Hyperlink>
+        </Label>
+
+        <Label Margin="0,0,0,12" Padding="0" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               Content="{Binding Mode=OneTime, Path=Copyright}">
+            <!--<Label.BitmapEffect>
+                <DropShadowBitmapEffect />
+            </Label.BitmapEffect>-->
+        </Label>
+
+        <!-- Easter egg. -->
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Name="dedicatedLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0">
+                This product is dedicated to the best lass in the world!
+            </Label>
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Name="ILabel" Padding="2" Opacity="0">I</Label>
+                <Label Name="LoveLabel" Padding="2" Opacity="0">Love</Label>
+                <Label Name="YouLabel" Padding="2" Opacity="0">You</Label>
+                <Label Name="KseniaLabel" Padding="2" Opacity="0">Ksenia</Label>
+                <Label Name="SavitskayaLabel" Padding="2" Opacity="0">Savitskaya</Label>
+            </WrapPanel>
+        </Grid>
+        
+    </Grid>
+</Window>
