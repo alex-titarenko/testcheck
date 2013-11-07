@@ -47,7 +47,7 @@ namespace TAlex.Testcheck.Editor.Views
         {
             InitializeComponent();
 
-            string productTitle = AboutWindow.ProductTitle;
+            string productTitle = TAlex.Common.Environment.ApplicationInfo.Current.Title;
             Title = productTitle;
 
             aboutMenuItem.Header = "_About " + productTitle;
@@ -393,7 +393,7 @@ namespace TAlex.Testcheck.Editor.Views
 
         private void SetTitle(string filename)
         {
-            Title = String.Format("{0} - {1}", AboutWindow.ProductTitle, filename);
+            Title = String.Format("{0} - {1}", TAlex.Common.Environment.ApplicationInfo.Current.Title, filename);
         }
 
         private MessageBoxResult SaveAsBeforeAction()
