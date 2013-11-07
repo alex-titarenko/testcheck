@@ -30,6 +30,14 @@
       <Component Id="CMP_TAlexWPFControls" Guid="56B914D0-FCD2-4429-BEC4-8185B4D6F781">
         <File Id="FILE_TAlexWPFControls" Name="TAlex.WPF.Controls.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
+      <!-- TAlex.WPF.Mvvm -->
+      <Component Id="CMP_TAlexWPFMvvm" Guid="28AF635B-93C8-427A-BC0B-D264DB3C7883">
+        <File Id="FILE_TAlexWPFMvvm" Name="TAlex.WPF.Mvvm.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <!-- Ninject -->
+      <Component Id="CMP_Ninject" Guid="C754C162-2838-477B-AD46-1DE53CFBFC5B">
+        <File Id="FILE_Ninject" Name="Ninject.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
     </DirectoryRef>
     
     <DirectoryRef Id="CommonDocumentsTestsFolder">
