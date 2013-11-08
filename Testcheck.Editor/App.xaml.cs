@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Threading;
+using TAlex.Common.Diagnostics.ErrorReporting;
+using TAlex.Common.Environment;
+using TAlex.Testcheck.Editor.Locators;
+using TAlex.Testcheck.Editor.Services.Licensing;
+using TAlex.Testcheck.Editor.Views;
 
 namespace TAlex.Testcheck.Editor
 {
@@ -11,5 +18,81 @@ namespace TAlex.Testcheck.Editor
     /// </summary>
     public partial class App : Application
     {
+        #region Constructors
+
+        public App()
+        {
+            DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // check license
+            CheckTrialExpiration();
+        }
+
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            ProcessingUnhandledException(e.Exception);
+            e.Handled = true;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            ProcessingUnhandledException(e.ExceptionObject as Exception);
+        }
+
+        private void ProcessingUnhandledException(Exception exc)
+        {
+            Trace.TraceError(exc.ToString());
+
+            ErrorReportingWindow reportWindow =
+                new ErrorReportingWindow(new ErrorReport(exc), ApplicationInfo.Current);
+
+            Window activeWindow = null;
+            foreach (Window w in Windows)
+            {
+                if (w.IsActive)
+                {
+                    activeWindow = w;
+                    break;
+                }
+            }
+
+            if (activeWindow != null)
+            {
+                reportWindow.Owner = activeWindow;
+            }
+            reportWindow.ShowDialog();
+        }
+
+        private void CheckTrialExpiration()
+        {
+            ViewModelLocator locator = Resources["viewModelLocator"] as ViewModelLocator;
+            AppLicense license = locator.Get<AppLicense>();
+
+            if (license.IsTrial && license.TrialHasExpired)
+            {
+                if (MessageBox.Show(TAlex.Testcheck.Editor.Properties.Resources.locEvaluationPeriodHasExpired,
+                    TAlex.Testcheck.Editor.Properties.Resources.locInformationMessageCaption,
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    RegistrationWindow window = new RegistrationWindow();
+                    window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    window.ShowDialog();
+                }
+                else
+                {
+                    Shutdown();
+                }
+            }
+        }
+
+        #endregion
     }
 }

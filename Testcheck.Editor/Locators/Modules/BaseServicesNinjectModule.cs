@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TAlex.Common.Environment;
+using TAlex.Testcheck.Editor.Services.Windows;
 
 namespace TAlex.Testcheck.Editor.Locators.Modules
 {
@@ -15,7 +16,7 @@ namespace TAlex.Testcheck.Editor.Locators.Modules
             Bind<ApplicationInfo>().ToConstant(ApplicationInfo.Current).InSingletonScope();
 
             //Bind<IMessageService>().To<MessageService>();
-            //Bind<IApplicationService>().To<ApplicationService>();
+            Bind<IApplicationService>().To<ApplicationService>();
             //Bind<IRegistrationWindowService>().To<RegistrationWindowService>();
         }
     }

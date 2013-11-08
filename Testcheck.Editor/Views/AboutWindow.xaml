@@ -34,7 +34,7 @@
                 <DropShadowBitmapEffect Color="White" Direction="270" ShadowDepth="1" Softness="0" />
             </Label.BitmapEffect>
         </Label>
-        <Label Margin="0,17,60,0" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="500"
+        <Label Margin="0,17,57,0" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="500"
                Foreground="{DynamicResource AboutVersionTextBrush}"
                Content="{Binding Mode=OneTime, Path=Version}">
             <Label.BitmapEffect>
@@ -52,14 +52,12 @@
 
         <Label Name="unregTextLabel" Margin="60,115,0,0" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="12" FontWeight="800"
                         Visibility="{Binding Mode=OneTime, Path=UnregisteredTextVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Hyperlink Foreground="Red" Command="{Binding OpenRegistrationDialogCommand}">
-                <TextBlock>Unregistered evaluation copy</TextBlock>
-            </Hyperlink>
+            <TextBlock Foreground="Red">Unregistered evaluation copy</TextBlock>
         </Label>
 
-        <Grid Margin="20,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Grid Margin="60,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="90" />
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
 

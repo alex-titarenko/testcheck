@@ -70,6 +70,33 @@ namespace TAlex.Testcheck.Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evaluation period has expired, please register..
+        /// </summary>
+        internal static string locEvaluationPeriodHasExpired {
+            get {
+                return ResourceManager.GetString("locEvaluationPeriodHasExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string locInformationMessageCaption {
+            get {
+                return ResourceManager.GetString("locInformationMessageCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please restart this program to verify your license data..
+        /// </summary>
+        internal static string locPleaseRestartToVerifyLicense {
+            get {
+                return ResourceManager.GetString("locPleaseRestartToVerifyLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to remove this choice?.
         /// </summary>
         internal static string RemoveChoiceQuestion {
