@@ -161,6 +161,11 @@ namespace TAlex.Testcheck.Editor.Views
             Process.Start(Properties.Resources.HomepageUrl);
         }
 
+        private void registrationMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new RegistrationWindow { Owner = this }.ShowDialog();
+        }
+
         private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             AboutWindow window = new AboutWindow(this);
