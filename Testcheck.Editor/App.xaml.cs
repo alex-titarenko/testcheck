@@ -18,6 +18,19 @@ namespace TAlex.Testcheck.Editor
     /// </summary>
     public partial class App : Application
     {
+        #region Properties
+
+        internal AppLicense License
+        {
+            get
+            {
+                ViewModelLocator locator = Resources["viewModelLocator"] as ViewModelLocator;
+                return locator.Get<AppLicense>();
+            }
+        }
+
+        #endregion
+
         #region Constructors
 
         public App()
@@ -73,8 +86,7 @@ namespace TAlex.Testcheck.Editor
 
         private void CheckTrialExpiration()
         {
-            ViewModelLocator locator = Resources["viewModelLocator"] as ViewModelLocator;
-            AppLicense license = locator.Get<AppLicense>();
+            AppLicense license = License;
 
             if (license.IsTrial && license.TrialHasExpired)
             {

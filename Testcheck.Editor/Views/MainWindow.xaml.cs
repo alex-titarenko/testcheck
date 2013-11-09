@@ -19,6 +19,8 @@ using TAlex.Testcheck.Core.Questions;
 using TAlex.Testcheck.Editor.Controls.Editors;
 
 using TAlex.WPF.Controls;
+using TAlex.Testcheck.Editor.Locators;
+using TAlex.Testcheck.Editor.Services.Licensing;
 
 namespace TAlex.Testcheck.Editor.Views
 {
@@ -294,14 +296,30 @@ namespace TAlex.Testcheck.Editor.Views
             }
         }
 
+        private void passwordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            _currentTest.Password = passwordTextBox.Password;
+        }
+
         #endregion
 
         private bool LoadTest(string path)
         {
             try
             {
-                _initialTest = Test.Load(path);
+                Test test = Test.Load(path);
+                if (!String.IsNullOrWhiteSpace(test.Password))
+                {
+                    PasswordVerificationWindow passVerifWindows = new PasswordVerificationWindow { Owner = this };
+                    if (passVerifWindows.ShowDialog() != true)
+                    {
+                        return false;
+                    }
+                }
+
+                _initialTest = test;
                 _currentTest = (Test)_initialTest.Clone();
+
                 LoadTestToUI(_currentTest);
 
                 _currentFilePath = path;
@@ -323,7 +341,7 @@ namespace TAlex.Testcheck.Editor.Views
             descriptionTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Description") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             authorTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Author") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             copyrightTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Copyright") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
-            
+
             timelimitTextBox.Text = test.Timelimit.ToString();
 
             shuffleQuestionsCheckBox.SetBinding(CheckBox.IsCheckedProperty, new Binding("ShuffleQuestions") { Source = test, Mode = BindingMode.TwoWay });
@@ -398,7 +416,16 @@ namespace TAlex.Testcheck.Editor.Views
 
         private void SetTitle(string filename)
         {
-            Title = String.Format("{0} - {1}", TAlex.Common.Environment.ApplicationInfo.Current.Title, filename);
+            ViewModelLocator locator = App.Current.Resources["viewModelLocator"] as ViewModelLocator;
+            AppLicense license = locator.Get<AppLicense>();
+
+            string title = String.Format("{0} - {1}", TAlex.Common.Environment.ApplicationInfo.Current.Title, filename);
+            if (license.IsTrial)
+            {
+                title = String.Format("{0} (days left: {1})", title, license.TrialDaysLeft);
+            }
+
+            Title = title;
         }
 
         private MessageBoxResult SaveAsBeforeAction()

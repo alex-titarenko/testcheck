@@ -103,6 +103,9 @@
     <Compile Include="Views\ErrorReportingWindow.xaml.cs">
       <DependentUpon>ErrorReportingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PasswordVerificationWindow.xaml.cs">
+      <DependentUpon>PasswordVerificationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PasswordVerificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

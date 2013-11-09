@@ -45,6 +45,8 @@ namespace TAlex.Testcheck.Core
 
         private Decimal _gradingScale = 100;
 
+        private string _password = String.Empty;
+
         private List<Question> _questions = new List<Question>();
 
         #endregion
@@ -172,6 +174,19 @@ namespace TAlex.Testcheck.Core
             }
         }
 
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+
+            set
+            {
+                _password = value;
+            }
+        }
+
         [XmlIgnore]
         public Decimal TotalPoints
         {
@@ -295,6 +310,7 @@ namespace TAlex.Testcheck.Core
             hashCode ^= _timelimit.GetHashCode();
             hashCode ^= _shuffleQuestions.GetHashCode();
             hashCode ^= _gradingScale.GetHashCode();
+            hashCode ^= (_password + String.Empty).GetHashCode();
 
             foreach (Question question in Questions)
             {
@@ -319,6 +335,7 @@ namespace TAlex.Testcheck.Core
             if (Timelimit != t.Timelimit) return false;
             if (ShuffleQuestions != t.ShuffleQuestions) return false;
             if (GradingScale != t.GradingScale) return false;
+            if (Password != t.Password) return false;
 
             if (QuestionCount != t.QuestionCount) return false;
             for (int i = 0; i < QuestionCount; i++)
@@ -340,6 +357,7 @@ namespace TAlex.Testcheck.Core
             test._timelimit = _timelimit;
             test._shuffleQuestions = _shuffleQuestions;
             test._gradingScale = _gradingScale;
+            test._password = _password;
 
             for (int i = 0; i < QuestionCount; i++)
             {

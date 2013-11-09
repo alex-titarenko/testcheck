@@ -47,7 +47,7 @@
                     
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
-                        <RowDefinition MinHeight="300" Height="3.5*" />
+                        <RowDefinition MinHeight="340" Height="3.5*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
@@ -56,6 +56,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="36" />
                                 <RowDefinition MinHeight="36" Height="*" />
+                                <RowDefinition Height="36" />
                                 <RowDefinition Height="36" />
                                 <RowDefinition Height="36" />
                                 <RowDefinition Height="54" />
@@ -79,15 +80,18 @@
 
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Column="0" Grid.Row="3">Copyright:</Label>
                             <TextBox Name="copyrightTestTextBox" Margin="0,0,20,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="3" />
-                            
-                            <Label Margin="20,6,64,22" Grid.Row="4">Timelimit:</Label>
-                            <TextBox Name="timelimitTextBox" HorizontalAlignment="Left" Margin="0,6,0,25" Width="80" Grid.Column="1" Grid.Row="4" TextChanged="timelimitTextBox_TextChanged"></TextBox>
-                            <TextBlock Margin="0,0,0,8" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"><Span FontStyle="italic" Foreground="Silver" FontSize="11">No timelimit <Hyperlink TextDecorations="none" Foreground="Gray" Click="noTimelimitHyperlink_Click">(00:00:00)</Hyperlink></Span></TextBlock>
 
-                            <CheckBox Name="shuffleQuestionsCheckBox" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5">Shuffle questions</CheckBox>
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Column="0" Grid.Row="4">Password:</Label>
+                            <PasswordBox Name="passwordTextBox" Margin="0,0,20,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="4" PasswordChanged="passwordTextBox_PasswordChanged" />
 
-                            <Label Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6">Grading scale:</Label>
-                            <talex:NumericUpDown x:Name="gradingScaleNumericUpDown" Minimum="0" Maximum="100000" Increment="0.5" DecimalPlaces="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" Height="22" Width="80" Grid.Column="1" Grid.Row="6" />
+                            <Label Margin="20,6,64,22" Grid.Row="5">Timelimit:</Label>
+                            <TextBox Name="timelimitTextBox" HorizontalAlignment="Left" Margin="0,6,0,25" Width="80" Grid.Column="1" Grid.Row="5" TextChanged="timelimitTextBox_TextChanged"></TextBox>
+                            <TextBlock Margin="0,0,0,8" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom"><Span FontStyle="italic" Foreground="Silver" FontSize="11">No timelimit <Hyperlink TextDecorations="none" Foreground="Gray" Click="noTimelimitHyperlink_Click">(00:00:00)</Hyperlink></Span></TextBlock>
+
+                            <CheckBox Name="shuffleQuestionsCheckBox" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="6">Shuffle questions</CheckBox>
+
+                            <Label Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7">Grading scale:</Label>
+                            <talex:NumericUpDown x:Name="gradingScaleNumericUpDown" Minimum="0" Maximum="100000" Increment="0.5" DecimalPlaces="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" Height="22" Width="80" Grid.Column="1" Grid.Row="7" />
                         </Grid>
                     </GroupBox>
                 </Grid>
