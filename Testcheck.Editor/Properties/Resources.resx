@@ -138,4 +138,10 @@
   <data name="locEvaluationPeriodHasExpired" xml:space="preserve">
     <value>Evaluation period has expired, please register.</value>
   </data>
+  <data name="locEnteredPasswordIncorrect" xml:space="preserve">
+    <value>Entered password is incorrect. Please try again.</value>
+  </data>
+  <data name="locErrorMessageCaption" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

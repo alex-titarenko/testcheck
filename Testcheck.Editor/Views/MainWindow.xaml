@@ -82,8 +82,10 @@
                             <TextBox Name="copyrightTestTextBox" Margin="0,0,20,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="3" />
 
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Column="0" Grid.Row="4">Password:</Label>
-                            <PasswordBox Name="passwordTextBox" Margin="0,0,20,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="4" PasswordChanged="passwordTextBox_PasswordChanged" />
-
+                            <PasswordBox Name="passwordPasswordBox" Margin="0,0,130,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="4" PasswordChanged="passwordPasswordBox_PasswordChanged" />
+                            <TextBox Name="passwordTextBox" Margin="0,0,130,0" VerticalAlignment="Center" Height="23" Grid.Column="1" Grid.Row="4" Visibility="Collapsed" TextChanged="passwordTextBox_TextChanged" />
+                            <CheckBox Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Content="Show password" Click="showPasswordCheckBox_Click" />
+                            
                             <Label Margin="20,6,64,22" Grid.Row="5">Timelimit:</Label>
                             <TextBox Name="timelimitTextBox" HorizontalAlignment="Left" Margin="0,6,0,25" Width="80" Grid.Column="1" Grid.Row="5" TextChanged="timelimitTextBox_TextChanged"></TextBox>
                             <TextBlock Margin="0,0,0,8" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom"><Span FontStyle="italic" Foreground="Silver" FontSize="11">No timelimit <Hyperlink TextDecorations="none" Foreground="Gray" Click="noTimelimitHyperlink_Click">(00:00:00)</Hyperlink></Span></TextBlock>

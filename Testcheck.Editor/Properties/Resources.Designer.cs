@@ -70,6 +70,24 @@ namespace TAlex.Testcheck.Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entered password is incorrect. Please try again..
+        /// </summary>
+        internal static string locEnteredPasswordIncorrect {
+            get {
+                return ResourceManager.GetString("locEnteredPasswordIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string locErrorMessageCaption {
+            get {
+                return ResourceManager.GetString("locErrorMessageCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Evaluation period has expired, please register..
         /// </summary>
         internal static string locEvaluationPeriodHasExpired {

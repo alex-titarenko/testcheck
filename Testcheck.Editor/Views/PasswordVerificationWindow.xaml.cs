@@ -19,9 +19,44 @@ namespace TAlex.Testcheck.Editor.Views
     /// </summary>
     public partial class PasswordVerificationWindow : Window
     {
-        public PasswordVerificationWindow()
+        #region Fields
+
+        private string _correctPassword;
+
+        #endregion
+
+        #region Constructors
+
+        public PasswordVerificationWindow(string correctPassword)
         {
             InitializeComponent();
+
+            _correctPassword = correctPassword;
         }
+
+        #endregion
+
+        #region Methods
+
+        #region Event Handlers
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            string actualPassword = passwordBox.Password;
+
+            if (!String.Equals(_correctPassword, actualPassword))
+            {
+                MessageBox.Show(this, Properties.Resources.locEnteredPasswordIncorrect,
+                    Properties.Resources.locErrorMessageCaption, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                DialogResult = true;
+            }
+        }
+
+        #endregion
+
+        #endregion
     }
 }

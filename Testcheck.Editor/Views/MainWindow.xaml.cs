@@ -296,9 +296,35 @@ namespace TAlex.Testcheck.Editor.Views
             }
         }
 
-        private void passwordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        private void passwordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            _currentTest.Password = passwordTextBox.Password;
+            _currentTest.Password = passwordPasswordBox.Password;
+            PasswordBox passwordBox = (PasswordBox)sender;
+
+            passwordTextBox.TextChanged -= passwordTextBox_TextChanged;
+            passwordTextBox.Text = _currentTest.Password;
+            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
+        }
+
+        private void passwordTextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            passwordPasswordBox.Password = passwordTextBox.Text;
+        }
+
+        private void showPasswordCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+
+            if (checkBox.IsChecked == true)
+            {
+                passwordPasswordBox.Visibility = System.Windows.Visibility.Collapsed;
+                passwordTextBox.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                passwordPasswordBox.Visibility = System.Windows.Visibility.Visible;
+                passwordTextBox.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         #endregion
@@ -310,7 +336,7 @@ namespace TAlex.Testcheck.Editor.Views
                 Test test = Test.Load(path);
                 if (!String.IsNullOrWhiteSpace(test.Password))
                 {
-                    PasswordVerificationWindow passVerifWindows = new PasswordVerificationWindow { Owner = this };
+                    PasswordVerificationWindow passVerifWindows = new PasswordVerificationWindow(test.Password) { Owner = this };
                     if (passVerifWindows.ShowDialog() != true)
                     {
                         return false;
@@ -341,6 +367,7 @@ namespace TAlex.Testcheck.Editor.Views
             descriptionTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Description") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             authorTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Author") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             copyrightTestTextBox.SetBinding(TextBox.TextProperty, new Binding("Copyright") { Source = test, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            passwordPasswordBox.Password = test.Password;
 
             timelimitTextBox.Text = test.Timelimit.ToString();
 
