@@ -66,8 +66,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="TAlex.Common">
-      <HintPath>..\packages\TAlex.Common.1.5.5043.41561\lib\net40\TAlex.Common.dll</HintPath>
+    <Reference Include="TAlex.Common, Version=1.5.5065.41482, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TAlex.Common.1.5.5065.41482\lib\net40\TAlex.Common.dll</HintPath>
     </Reference>
     <Reference Include="TAlex.WPF.Controls">
       <HintPath>..\packages\TAlex.WPF.Controls.1.7.5018.40064\lib\net40\TAlex.WPF.Controls.dll</HintPath>
