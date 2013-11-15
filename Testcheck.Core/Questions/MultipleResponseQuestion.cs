@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-
+using System.Xml.Serialization;
 using TAlex.Testcheck.Core.Choices;
+
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -68,26 +70,16 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check(object data)
         {
-            return Check(data as int[]);
-        }
-
-        public decimal Check(int[] choiceIndexes)
-        {
-            int answers = 0;
-            for (int i = 0; i < _choices.Count; i++)
-            {
-                if (_choices[i].IsCorrect)
-                    answers++;
-            }
-
-            decimal pointValuePerAnswer = 1M / answers;
-            decimal pointValuePerError = 1M / (_choices.Count - answers);
+            int correctAnswers = _choices.Count(x => x.IsCorrect);
+            
+            decimal pointValuePerAnswer = 1M / correctAnswers;
+            decimal pointValuePerError = 1M / (_choices.Count - correctAnswers);
 
             decimal pointValue = 0;
 
-            for (int i = 0; i < choiceIndexes.Length; i++)
+            foreach (AnswerChoice choice in _choices.Where(x => x.ActualChoice == true))
             {
-                if (_choices[choiceIndexes[i]].IsCorrect)
+                if (choice.IsCorrect)
                     pointValue += pointValuePerAnswer;
                 else
                     pointValue -= pointValuePerError;

@@ -22,7 +22,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     {
         #region Fields
 
-        private MultipleResponseQuestion _question;
+        private Question Question;
 
         #endregion
 
@@ -33,50 +33,20 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public MultipleResponseTester(MultipleResponseQuestion question, Random rand)
+        public MultipleResponseTester(Question question, Random rand)
             : this()
         {
-            _question = question;
-            LoadQuestion(rand);
+            //int[] indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(Question.Choices.Count, Question.ShuffleMode, rand);
+            DataContext = Question = question;
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion(Random rand)
-        {
-            choicesStackPanel.Children.Clear();
-
-            int[] indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.Choices.Count, _question.ShuffleMode, rand);
-
-            for (int i = 0; i < _question.Choices.Count; i++)
-            {
-                CheckBox checkBox = new CheckBox();
-                checkBox.Margin = new Thickness(0, 1, 0, 1);
-
-                TextBlock textBlock = new TextBlock();
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.Choices[indexes[i]].Description;
-
-                checkBox.Content = textBlock;
-                checkBox.Tag = indexes[i];
-
-                choicesStackPanel.Children.Add(checkBox);
-            }
-        }
-
         public decimal Check()
         {
-            List<int> choiceIndexes = new List<int>();
-
-            foreach (CheckBox checkBox in choicesStackPanel.Children)
-            {
-                if (checkBox.IsChecked == true)
-                    choiceIndexes.Add((int)checkBox.Tag);
-            }
-
-            return _question.Check(choiceIndexes.ToArray());
+            return Question.Check("");
         }
 
         #endregion

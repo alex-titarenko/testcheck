@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace TAlex.Testcheck.Core.Choices
 {
@@ -10,6 +11,9 @@ namespace TAlex.Testcheck.Core.Choices
         private string _description = String.Empty;
 
         private bool _isCorrect = false;
+
+        [NonSerialized]
+        private bool _actualChoice;
 
         #endregion
 
@@ -38,6 +42,20 @@ namespace TAlex.Testcheck.Core.Choices
             set
             {
                 _isCorrect = value;
+            }
+        }
+
+        [XmlIgnore]
+        public bool ActualChoice
+        {
+            get
+            {
+                return _actualChoice;
+            }
+
+            set
+            {
+                _actualChoice = value;
             }
         }
 

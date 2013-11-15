@@ -275,7 +275,7 @@ namespace TAlex.Testcheck.Tester.Views
             else if (question is MultipleChoiceQuestion)
                 questinChoicesScrollViewer.Content = new MultipleChoiceTester((MultipleChoiceQuestion)question, rnd);
             else if (question is MultipleResponseQuestion)
-                questinChoicesScrollViewer.Content = new MultipleResponseTester((MultipleResponseQuestion)question, rnd);
+                questinChoicesScrollViewer.Content = new MultipleResponseTester(question, rnd);
             else if (question is EssayQuestion)
                 questinChoicesScrollViewer.Content = new EssayTester(question);
             else if (question is FillBlankQuestion)
