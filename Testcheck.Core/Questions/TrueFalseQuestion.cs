@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -20,6 +21,9 @@ namespace TAlex.Testcheck.Core.Questions
 
         private bool _correctly;
 
+        [NonSerialized]
+        private bool? _actualChoice;
+
         #endregion
 
         #region Properties
@@ -34,6 +38,20 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _correctly = value;
+            }
+        }
+
+        [XmlIgnore]
+        public bool? ActualChoice
+        {
+            get
+            {
+                return _actualChoice;
+            }
+
+            set
+            {
+                _actualChoice = value;
             }
         }
 
@@ -65,12 +83,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check(object data)
         {
-            return Check((bool)data);
-        }
-
-        public decimal Check(bool choice)
-        {
-            return (_correctly == choice) ? Points : 0;
+            return (_correctly == ActualChoice) ? Points : 0;
         }
 
         protected override void ReadXml(XmlElement element)

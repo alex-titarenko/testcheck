@@ -22,7 +22,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     {
         #region Fields
 
-        private TrueFalseQuestion _question;
+        protected Question Question;
 
         #endregion
 
@@ -33,35 +33,19 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public TrueFalseTester(TrueFalseQuestion question)
+        public TrueFalseTester(Question question)
             : this()
         {
-            _question = question;
-            LoadQuestion();
+            DataContext = Question = question;
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion()
-        {
-
-        }
-
         public decimal Check()
         {
-            bool? choice = null;
-
-            if (trueRadioButton.IsChecked == true)
-                choice = true;
-            else if (falseRadioButton.IsChecked == true)
-                choice = false;
-
-            if (choice != null)
-                return _question.Check((bool)choice);
-            else
-                return 0;
+            return Question.Check("");
         }
 
         #endregion

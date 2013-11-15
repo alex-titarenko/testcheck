@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -21,6 +23,9 @@ namespace TAlex.Testcheck.Core.Questions
 
         private List<string> _correctAnswers = new List<string>();
 
+        [NonSerialized]
+        private string _actualAnswer;
+
         #endregion
 
         #region Properties
@@ -30,6 +35,20 @@ namespace TAlex.Testcheck.Core.Questions
             get
             {
                 return _correctAnswers;
+            }
+        }
+
+        [XmlIgnore]
+        public string ActualAnswer
+        {
+            get
+            {
+                return _actualAnswer;
+            }
+
+            set
+            {
+                _actualAnswer = value;
             }
         }
 
@@ -66,22 +85,8 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check(object data)
         {
-            return Check(data as string);
-        }
-
-        public decimal Check(string answer)
-        {
-            answer = answer.ToUpper();
-
-            foreach (string corrAnswer in CorrectAnswers)
-            {
-                if (answer == corrAnswer.ToUpper())
-                {
-                    return Points;
-                }
-            }
-
-            return 0;
+            string answer = ActualAnswer.ToUpper();
+            return CorrectAnswers.Any(x => String.Equals(answer, x.ToUpper())) ? Points : 0;
         }
 
         protected override void ReadXml(XmlElement element)

@@ -2,6 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid VerticalAlignment="Top">
-        <TextBox Name="choiceTextBox" BorderBrush="#F0F0F0" Height="23" />
+        <TextBox Text="{Binding ActualAnswer, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#F0F0F0" Height="23" />
     </Grid>
 </UserControl>

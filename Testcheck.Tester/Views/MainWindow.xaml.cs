@@ -271,13 +271,13 @@ namespace TAlex.Testcheck.Tester.Views
             Random rnd = new Random(_seed + GetQuestionKeyByIndex(questionIndex));
 
             if (question is TrueFalseQuestion)
-                questinChoicesScrollViewer.Content = new TrueFalseTester((TrueFalseQuestion)question);
+                questinChoicesScrollViewer.Content = new TrueFalseTester(question);
             else if (question is MultipleChoiceQuestion)
                 questinChoicesScrollViewer.Content = new MultipleChoiceTester((MultipleChoiceQuestion)question, rnd);
             else if (question is MultipleResponseQuestion)
                 questinChoicesScrollViewer.Content = new MultipleResponseTester((MultipleResponseQuestion)question, rnd);
             else if (question is EssayQuestion)
-                questinChoicesScrollViewer.Content = new EssayTester((EssayQuestion)question);
+                questinChoicesScrollViewer.Content = new EssayTester(question);
             else if (question is FillBlankQuestion)
                 questinChoicesScrollViewer.Content = new FillBlankTester((FillBlankQuestion)question);
             else if (question is MatchingQuestion)

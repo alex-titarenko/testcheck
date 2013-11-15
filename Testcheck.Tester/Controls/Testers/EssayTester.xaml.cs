@@ -22,7 +22,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     {
         #region Fields
 
-        private EssayQuestion _question;
+        protected Question Question;
 
         #endregion
 
@@ -33,30 +33,19 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public EssayTester(EssayQuestion question)
+        public EssayTester(Question question)
             : this()
         {
-            _question = question;
-            LoadQuestion();
+            DataContext = Question = question;
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion()
-        {
-            choiceTextBox.Text = String.Empty;
-        }
-
         public decimal Check()
         {
-            string text = choiceTextBox.Text.Trim();
-
-            //if (String.IsNullOrEmpty(choiceTextBox.Text))
-            //    throw new Exception();
-
-            return _question.Check(text);
+            return Question.Check("");
         }
 
         #endregion
