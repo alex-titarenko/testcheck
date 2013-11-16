@@ -85,7 +85,7 @@ namespace TAlex.Testcheck.Core.Questions
                     pointValue -= pointValuePerError;
             }
 
-            return pointValue * Points;
+            return Math.Max(0, pointValue * Points);
         }
 
         protected override void ReadXml(XmlElement element)
