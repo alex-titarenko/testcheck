@@ -95,7 +95,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public abstract decimal Check(object data);
+        public abstract decimal Check();
 
         XmlSchema IXmlSerializable.GetSchema()
         {

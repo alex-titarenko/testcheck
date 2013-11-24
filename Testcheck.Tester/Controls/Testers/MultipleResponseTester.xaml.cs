@@ -18,14 +18,8 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for MultipleResponseTester.xaml
     /// </summary>
-    public partial class MultipleResponseTester : UserControl, ICheckable
+    public partial class MultipleResponseTester : UserControl
     {
-        #region Fields
-
-        private Question Question;
-
-        #endregion
-
         #region Constructors
 
         protected MultipleResponseTester()
@@ -36,16 +30,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         public MultipleResponseTester(Question question)
             : this()
         {
-            DataContext = Question = question;
-        }
-
-        #endregion
-
-        #region Methods
-
-        public decimal Check()
-        {
-            return Question.Check("");
+            DataContext = question;
         }
 
         #endregion

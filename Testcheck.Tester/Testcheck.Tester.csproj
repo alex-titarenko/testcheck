@@ -191,7 +191,6 @@
     <Compile Include="Controls\Testers\MultipleResponseTester.xaml.cs">
       <DependentUpon>MultipleResponseTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Testers\ICheckable.cs" />
     <Compile Include="Controls\Testers\RankingTester.xaml.cs">
       <DependentUpon>RankingTester.xaml</DependentUpon>
     </Compile>

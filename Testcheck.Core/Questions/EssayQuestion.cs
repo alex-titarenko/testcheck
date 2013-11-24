@@ -83,7 +83,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public override decimal Check(object data)
+        public override decimal Check()
         {
             string answer = ActualAnswer.ToUpper();
             return CorrectAnswers.Any(x => String.Equals(answer, x.ToUpper())) ? Points : 0;

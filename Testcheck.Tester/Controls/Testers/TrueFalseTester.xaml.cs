@@ -18,14 +18,8 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for TrueFalseTester.xaml
     /// </summary>
-    public partial class TrueFalseTester : UserControl, ICheckable
+    public partial class TrueFalseTester : UserControl
     {
-        #region Fields
-
-        protected Question Question;
-
-        #endregion
-
         #region Constructors
 
         protected TrueFalseTester()
@@ -36,16 +30,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         public TrueFalseTester(Question question)
             : this()
         {
-            DataContext = Question = question;
-        }
-
-        #endregion
-
-        #region Methods
-
-        public decimal Check()
-        {
-            return Question.Check("");
+            DataContext = question;
         }
 
         #endregion

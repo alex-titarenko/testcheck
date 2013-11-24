@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -24,6 +25,9 @@ namespace TAlex.Testcheck.Core.Questions
 
         private string _blankText = String.Empty;
 
+        [NonSerialized]
+        private List<string> _actualAnswers = new List<string>();
+
         #endregion
 
         #region Properties
@@ -38,6 +42,15 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _blankText = value;
+            }
+        }
+
+        [XmlIgnore]
+        public List<string> ActualAnswers
+        {
+            get
+            {
+                return _actualAnswers;
             }
         }
 
@@ -68,15 +81,10 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public override decimal Check(object data)
-        {
-            return Check(data as string[]);
-        }
-
-        public decimal Check(string[] fields)
+        public override decimal Check()
         {
             MatchCollection matches = Regex.Matches(_blankText, FieldPattern);
-            int count = fields.Length;
+            int count = ActualAnswers.Count;
 
             if (matches.Count != count)
                 throw new ArgumentOutOfRangeException();
@@ -86,7 +94,7 @@ namespace TAlex.Testcheck.Core.Questions
 
             for (int i = 0; i < count; i++)
             {
-                if (matches[i].Groups["field"].Value.ToUpper() == fields[i].ToUpper())
+                if (matches[i].Groups["field"].Value.ToUpper() == ActualAnswers[i].ToUpper())
                     pointValue += pointValuePerAnswer;
             }
 

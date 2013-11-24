@@ -66,7 +66,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public override decimal Check(object data)
+        public override decimal Check()
         {
             for (int i = 0; i < Choices.Count - 1; i++)
             {

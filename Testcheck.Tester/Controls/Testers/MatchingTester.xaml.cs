@@ -21,13 +21,11 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for MatchingTester.xaml
     /// </summary>
-    public partial class MatchingTester : UserControl, ICheckable
+    public partial class MatchingTester : UserControl
     {
         #region Fields
 
         private MatchingQuestion _question;
-
-        private List<KeyPair> _keyPairs = new List<KeyPair>();
 
         private LinkLine _currentLinkLine = new LinkLine();
 
@@ -92,11 +90,6 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
                 rightChoicesStackPanel.Children.Add(textBlock);
             }
-        }
-
-        public decimal Check()
-        {
-            return _question.Check(_keyPairs.ToArray());
         }
 
         #region Event Handlers
@@ -194,7 +187,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             else if (elem is LinkLine)
             {
                 _currentLinkLine = (LinkLine)elem;
-                _keyPairs.Remove((KeyPair)_currentLinkLine.Tag);
+                _question.ActualKeyPairs.Remove((KeyPair)_currentLinkLine.Tag);
 
                 // Determine the distance from the current point to the ends of the line linking
                 double distance1 = Math.Sqrt((_currentLinkLine.X1 - pos.X) * (_currentLinkLine.X1 - pos.X) + (_currentLinkLine.Y1 - pos.Y) * (_currentLinkLine.Y1 - pos.Y));
@@ -272,10 +265,10 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                         keyPair = new KeyPair(keyPair.Key1, (int)textBlock.Tag);
 
 
-                    if (!_keyPairs.Contains(keyPair) &&
+                    if (!_question.ActualKeyPairs.Contains(keyPair) &&
                         CanContainsLeftChoice(keyPair.Key1) && CanContainsRightChoice(keyPair.Key2))
                     {
-                        _keyPairs.Add(keyPair);
+                        _question.ActualKeyPairs.Add(keyPair);
                         _currentLinkLine.Tag = keyPair;
 
                         Point anchorPoint = GetAnchorPoint(textBlock, isLeftSide);                        
@@ -343,7 +336,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
         private void RemoveLinkLine(FrameworkElement line)
         {
-            _keyPairs.Remove((KeyPair)line.Tag);
+            _question.ActualKeyPairs.Remove((KeyPair)line.Tag);
             mainGrid.Children.Remove(line);
             
             if (line == _currentLinkLine)
@@ -379,9 +372,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 _question.MatchingMode == MatchingMode.ManyToOne)
                 return true;
 
-            for (int i = 0; i < _keyPairs.Count; i++)
+            foreach (var actualKeyPair in _question.ActualKeyPairs)
             {
-                if (_keyPairs[i].Key1 == key)
+                if (actualKeyPair.Key1 == key)
                     return false;
             }
 
@@ -394,9 +387,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 _question.MatchingMode == MatchingMode.OneToMany)
                 return true;
 
-            for (int i = 0; i < _keyPairs.Count; i++)
+            foreach (var actualKeyPair in _question.ActualKeyPairs)
             {
-                if (_keyPairs[i].Key2 == key)
+                if (actualKeyPair.Key2 == key)
                     return false;
             }
 

@@ -18,7 +18,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for EssayTester.xaml
     /// </summary>
-    public partial class EssayTester : UserControl, ICheckable
+    public partial class EssayTester : UserControl
     {
         #region Fields
 
@@ -37,15 +37,6 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             : this()
         {
             DataContext = Question = question;
-        }
-
-        #endregion
-
-        #region Methods
-
-        public decimal Check()
-        {
-            return Question.Check("");
         }
 
         #endregion

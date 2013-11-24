@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 using TAlex.Testcheck.Core.Helpers;
 
 namespace TAlex.Testcheck.Core.Questions
@@ -33,6 +34,9 @@ namespace TAlex.Testcheck.Core.Questions
 
         private List<KeyPair> _keyPairs = new List<KeyPair>();
 
+        [NonSerialized]
+        private List<KeyPair> _actualKeyPairs = new List<KeyPair>();
+
         private MatchingMode _matchingMode = MatchingMode.OneToOne;
 
         #endregion
@@ -60,6 +64,15 @@ namespace TAlex.Testcheck.Core.Questions
             get
             {
                 return _keyPairs;
+            }
+        }
+
+        [XmlIgnore]
+        public List<KeyPair> ActualKeyPairs
+        {
+            get
+            {
+                return _actualKeyPairs;
             }
         }
 
@@ -120,20 +133,15 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public override decimal Check(object data)
+        public override decimal Check()
         {
-            return Check(data as KeyPair[]);
-        }
-
-        public decimal Check(KeyPair[] keyPairs)
-        {
-            decimal pointValuePerPair = 1M / _keyPairs.Count;
+            decimal pointValuePerPair = 1M / ActualKeyPairs.Count;
 
             decimal pointValue = 0;
 
-            for (int i = 0; i < keyPairs.Length; i++)
+            foreach (KeyPair actualKeyPair in ActualKeyPairs)
             {
-                if (_keyPairs.Contains(keyPairs[i]))
+                if (_keyPairs.Contains(actualKeyPair))
                     pointValue += pointValuePerPair;
             }
 

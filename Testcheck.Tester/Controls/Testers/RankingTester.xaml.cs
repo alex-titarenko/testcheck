@@ -18,7 +18,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for RankingTester.xaml
     /// </summary>
-    public partial class RankingTester : UserControl, ICheckable
+    public partial class RankingTester : UserControl
     {
         #region Fields
 
@@ -123,11 +123,6 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             var temp = _question.Choices[idx1];
             _question.Choices[idx1] = _question.Choices[idx2];
             _question.Choices[idx2] = temp;
-        }
-
-        public decimal Check()
-        {
-            return _question.Check("");
         }
 
         #endregion

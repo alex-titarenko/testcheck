@@ -18,7 +18,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for MultipleChoiceTester.xaml
     /// </summary>
-    public partial class MultipleChoiceTester : UserControl, ICheckable
+    public partial class MultipleChoiceTester : UserControl
     {
         #region Fields
 
@@ -47,11 +47,6 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         {
             string answer = ((FrameworkElement)sender).DataContext as String;
             Question.ActualAnswer = Question.Choices.IndexOf(answer);
-        }
-
-        public decimal Check()
-        {
-            return Question.Check("");
         }
 
         #endregion

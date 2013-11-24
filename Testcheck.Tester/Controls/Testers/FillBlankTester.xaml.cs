@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,15 +21,13 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for FillBlankTester.xaml
     /// </summary>
-    public partial class FillBlankTester : UserControl, ICheckable
+    public partial class FillBlankTester : UserControl
     {
         #region Fields
 
         private const string FieldTextBoxNameFormat = "fieldTextBox_a25f0sd456c_{0}";
 
         private FillBlankQuestion _question;
-
-        private int _fieldIndex = 0;
 
         #endregion
 
@@ -39,10 +38,10 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public FillBlankTester(FillBlankQuestion question)
+        public FillBlankTester(Question question)
             : this()
         {
-            _question = question;
+            _question = question as FillBlankQuestion;
             LoadQuestion();
         }
 
@@ -56,14 +55,32 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
             Regex regex = new Regex(FillBlankQuestion.FieldPattern);
 
-            _fieldIndex = 0;
-            while (regex.IsMatch(text))
-            {
-                string name = String.Format(FieldTextBoxNameFormat, _fieldIndex);
-                string replacement = String.Format("<InlineUIContainer BaselineAlignment='Center'><TextBox Name='{0}' Height='20' Width='90' Margin='1' Padding='0'></TextBox></InlineUIContainer>", name);
-                text = regex.Replace(text, replacement, 1);
+            int fieldIndex = 0;
 
-                _fieldIndex++;
+            var replacements = new List<KeyValuePair<string, string>>();
+            var matches = regex.Matches(text);
+            foreach (Match match in matches)
+            {
+                if (_question.ActualAnswers.Count < matches.Count)
+                {
+                    _question.ActualAnswers.Add(String.Empty);
+                }
+
+                string name = String.Format(FieldTextBoxNameFormat, fieldIndex);
+                string replacement = String.Format(
+                    @"<InlineUIContainer BaselineAlignment='Center'>
+                        <TextBox Name='{0}' Height='20' Width='90' Margin='1' Padding='0' Text='{{Binding [" + fieldIndex + @"]}}' />
+                    </InlineUIContainer>",
+                    name);
+
+                text = regex.Replace(text, name, 1);
+                replacements.Add(new KeyValuePair<string, string>(name, replacement));
+
+                fieldIndex++;
+            }
+            foreach (var replacement in replacements)
+            {
+                text = text.Replace(replacement.Key, replacement.Value);
             }
 
             string flowDocumentText = String.Format(
@@ -77,27 +94,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             doc.FontFamily = FontFamily;
             doc.FontSize = FontSize;
             doc.PagePadding = new Thickness(3);
-            
+            doc.DataContext = _question.ActualAnswers;
+
             blankTextFlowDocumentScrollViewer.Document = doc;
-        }
-
-        public decimal Check()
-        {
-            string[] fields = new string[_fieldIndex];
-
-            FlowDocument doc = blankTextFlowDocumentScrollViewer.Document;
-            for (int i = 0; i < _fieldIndex; i++)
-            {
-                string textBoxName = String.Format(FieldTextBoxNameFormat, i);
-
-                TextBox fieldTextBox = doc.FindName(textBoxName) as TextBox;
-                if (fieldTextBox != null)
-                {
-                    fields[i] = fieldTextBox.Text;
-                }
-            }
-
-            return _question.Check(fields);
         }
 
         #endregion

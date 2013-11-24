@@ -160,11 +160,12 @@ namespace TAlex.Testcheck.Tester.Views
         {
             if (_questions.Count > 0)
             {
-                _points += CheckAnswer();
-                progressBarTest.TotalCurrentValue += _questions[GetQuestionKeyByIndex(_currQuestionIndex)].Points;
+                int questionKey = GetQuestionKeyByIndex(_currQuestionIndex);
+                _points += _questions[questionKey].Check();
+                progressBarTest.TotalCurrentValue += _questions[questionKey].Points;
                 progressBarTest.CorrectCurrentValue = _points;
 
-                _questions.Remove(GetQuestionKeyByIndex(_currQuestionIndex));
+                _questions.Remove(questionKey);
 
                 _currQuestionIndex = (_currQuestionIndex >= _questions.Count) ? 0 : _currQuestionIndex;
 
@@ -281,14 +282,6 @@ namespace TAlex.Testcheck.Tester.Views
                 questinChoicesScrollViewer.Content = new RankingTester(question);
             else
                 questinChoicesScrollViewer.Content = null;
-        }
-
-        private decimal CheckAnswer()
-        {
-            if (questinChoicesScrollViewer.Content is ICheckable)
-                return ((ICheckable)questinChoicesScrollViewer.Content).Check();
-            else
-                return 0;
         }
 
         private string ConvertToHtml(string source)

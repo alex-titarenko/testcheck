@@ -81,9 +81,9 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
-        public override decimal Check(object data)
+        public override decimal Check()
         {
-            return (_correctly == ActualChoice) ? Points : 0;
+            return (Correctly == ActualChoice) ? Points : 0;
         }
 
         protected override void ReadXml(XmlElement element)
