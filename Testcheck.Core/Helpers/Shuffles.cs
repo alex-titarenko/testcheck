@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -78,15 +79,34 @@ namespace TAlex.Testcheck.Core.Helpers
             }
         }
 
+        public static int[] GetRandomSequence(int length, ShuffleMode mode)
+        {
+            return GetRandomSequence(length, mode, _rnd);
+        }
+
         public static int[] GetRandomSequence(int length, ShuffleMode mode, Random rand)
         {
             int[] sequence = new int[length];
-
+            
             for (int i = 0; i < length; i++)
                 sequence[i] = i;
 
             Shuffle<int>(sequence, mode, rand);
             return sequence;
+        }
+
+        public static void ReorderBySequence<T>(IList<T> list, int[] sequence)
+        {
+            IList<T> tempList = new List<T>();
+            foreach (int index in sequence)
+            {
+                tempList.Add(list[index]);
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = tempList[i];
+            }
         }
 
         #endregion

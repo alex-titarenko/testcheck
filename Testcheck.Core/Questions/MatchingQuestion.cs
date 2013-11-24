@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using TAlex.Testcheck.Core.Helpers;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -137,6 +138,21 @@ namespace TAlex.Testcheck.Core.Questions
             }
 
             return pointValue * Points;
+        }
+
+        public override void Shuffle()
+        {
+            int[] leftSequence = Shuffles.GetRandomSequence(LeftChoices.Count, ShuffleMode);
+            int[] rightSequence = Shuffles.GetRandomSequence(RightChoices.Count, ShuffleMode);
+
+            for (int i = 0; i < KeyPairs.Count; i++)
+            {
+                KeyPair pair = _keyPairs[i];
+                _keyPairs[i] = new KeyPair(Array.IndexOf(leftSequence, pair.Key1), Array.IndexOf(rightSequence, pair.Key2));
+            }
+
+            Shuffles.ReorderBySequence(LeftChoices, leftSequence);
+            Shuffles.ReorderBySequence(RightChoices, rightSequence);
         }
 
         protected override void ReadXml(XmlElement element)

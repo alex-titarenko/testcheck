@@ -55,7 +55,7 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
 
                 choicesGrid.Children.Add(EditorControlsHelper.CreateMoveUpButton(i, 0, (i != 0), moveUpButton_Click));
                 choicesGrid.Children.Add(EditorControlsHelper.CreateMoveDownButton(i, 1, (i != _question.Choices.Count - 1), moveDownButton_Click));
-                choicesGrid.Children.Add(EditorControlsHelper.CreateChoiceTextBox(i, 2, _question.Choices[i], choiceTextBox_TextChanged));
+                choicesGrid.Children.Add(EditorControlsHelper.CreateChoiceTextBox(i, 2, _question.Choices[i].Choice, choiceTextBox_TextChanged));
                 choicesGrid.Children.Add(EditorControlsHelper.CreateRemoveChoiceButton(i, 3, removeButton_Click));
             }
         }
@@ -67,10 +67,7 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
             int key1 = (int)((FrameworkElement)sender).Tag;
             int key2 = key1 - 1;
 
-            string temp = _question.Choices[key1];
-            _question.Choices[key1] = _question.Choices[key2];
-            _question.Choices[key2] = temp;
-
+            SwapChoices(key1, key2);
             LoadQuestion();
         }
 
@@ -79,10 +76,7 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
             int key1 = (int)((FrameworkElement)sender).Tag;
             int key2 = key1 + 1;
 
-            string temp = _question.Choices[key1];
-            _question.Choices[key1] = _question.Choices[key2];
-            _question.Choices[key2] = temp;
-
+            SwapChoices(key1, key2);
             LoadQuestion();
         }
 
@@ -93,7 +87,7 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
             if (textBox != null)
             {
                 int answerKey = (int)textBox.Tag;
-                _question.Choices[answerKey] = textBox.Text;
+                _question.Choices[answerKey].Choice = textBox.Text;
             }
         }
 
@@ -111,8 +105,23 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
 
         private void addChoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            _question.Choices.Add(String.Empty);
+            _question.AddChoice(String.Empty);
             LoadQuestion();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private void SwapChoices(int idx1, int idx2)
+        {
+            var temp = _question.Choices[idx1];
+            _question.Choices[idx1] = _question.Choices[idx2];
+            _question.Choices[idx2] = temp;
+
+            int tempOrder = _question.Choices[idx1].Order;
+            _question.Choices[idx1].Order = _question.Choices[idx2].Order;
+            _question.Choices[idx2].Order = tempOrder;
         }
 
         #endregion

@@ -51,31 +51,28 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             _stopAnimationTimer.Interval = _animationDuration;
         }
 
-        public MatchingTester(MatchingQuestion question, Random rand)
+        public MatchingTester(MatchingQuestion question)
             : this()
         {
             _question = question;
-            LoadQuestion(rand);
+            LoadQuestion();
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion(Random rand)
+        private void LoadQuestion()
         {
             leftChoicesStackPanel.Children.Clear();
             rightChoicesStackPanel.Children.Clear();
 
-            int[] leftIndexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.LeftChoices.Count, _question.ShuffleMode, rand);
-            int[] rightIndexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.RightChoices.Count, _question.ShuffleMode, rand);
-
-            for (int i = 0; i < leftIndexes.Length; i++)
+            for (int i = 0; i < _question.LeftChoices.Count; i++)
             {
                 TextBlock textBlock = new TextBlock();
                 textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.LeftChoices[leftIndexes[i]];
-                textBlock.Tag = leftIndexes[i];
+                textBlock.Text = _question.LeftChoices[i];
+                textBlock.Tag = i;
                 textBlock.Margin = new Thickness(2);
                 textBlock.Padding = new Thickness(15, 1, 10, 1);
                 textBlock.Background = Brushes.WhiteSmoke;
@@ -83,12 +80,12 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 leftChoicesStackPanel.Children.Add(textBlock);
             }
 
-            for (int i = 0; i < rightIndexes.Length; i++)
+            for (int i = 0; i < _question.RightChoices.Count; i++)
             {
                 TextBlock textBlock = new TextBlock();
                 textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.RightChoices[rightIndexes[i]];
-                textBlock.Tag = rightIndexes[i];
+                textBlock.Text = _question.RightChoices[i];
+                textBlock.Tag = i;
                 textBlock.Margin = new Thickness(2);
                 textBlock.Padding = new Thickness(15, 1, 10, 1);
                 textBlock.Background = Brushes.WhiteSmoke;

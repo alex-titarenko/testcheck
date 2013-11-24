@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
+using TAlex.Testcheck.Core.Helpers;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -20,13 +23,13 @@ namespace TAlex.Testcheck.Core.Questions
         private const string ChoicesElemName = "Choices";
         private const string ChoiceElemName = "Choice";
 
-        private List<string> _choices = new List<string>();
+        private List<RankingChoice> _choices = new List<RankingChoice>();
 
         #endregion
 
         #region Properties
 
-        public List<string> Choices
+        public List<RankingChoice> Choices
         {
             get
             {
@@ -53,10 +56,9 @@ namespace TAlex.Testcheck.Core.Questions
         protected RankingQuestion(RankingQuestion question)
             : base(question)
         {
-            int n = question._choices.Count;
-            for (int i = 0; i < n; i++)
+            foreach (var choice in question.Choices)
             {
-                _choices.Add((string)question._choices[i].Clone());
+                _choices.Add(new RankingChoice(choice.Order, choice.Choice));
             }
         }
 
@@ -66,18 +68,22 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check(object data)
         {
-            return Check(data as int[]);
-        }
-
-        public decimal Check(int[] keys)
-        {
-            for (int i = 0; i < keys.Length; i++)
+            for (int i = 0; i < Choices.Count - 1; i++)
             {
-                if (keys[i] != i)
+                if (Choices[i].Order >= Choices[i + 1].Order)
                     return 0;
             }
-
             return Points;
+        }
+
+        public override void Shuffle()
+        {
+            Shuffles.Shuffle(Choices, ShuffleMode);
+        }
+
+        public void AddChoice(string choice)
+        {
+            _choices.Add(new RankingChoice(_choices.Any() ? _choices.Max(x => x.Order) + 1 : 0, choice));
         }
 
         protected override void ReadXml(XmlElement element)
@@ -87,11 +93,12 @@ namespace TAlex.Testcheck.Core.Questions
             _choices.Clear();
 
             XmlElement choicesElem = element[ChoicesElemName];
+            int order = 0;
             foreach (XmlElement choice in choicesElem.ChildNodes)
             {
                 if (choice.Name == ChoiceElemName)
                 {
-                    _choices.Add(choice.InnerText);
+                    _choices.Add(new RankingChoice(order++, choice.InnerText));
                 }
             }
         }
@@ -102,9 +109,9 @@ namespace TAlex.Testcheck.Core.Questions
 
             writer.WriteStartElement(ChoicesElemName);
 
-            foreach (string choice in Choices)
+            foreach (RankingChoice choice in Choices.OrderBy(x => x.Order))
             {
-                writer.WriteElementString(ChoiceElemName, choice);
+                writer.WriteElementString(ChoiceElemName, choice.Choice);
             }
 
             writer.WriteEndElement();
@@ -143,6 +150,67 @@ namespace TAlex.Testcheck.Core.Questions
         public override object Clone()
         {
             return new RankingQuestion(this);
+        }
+
+        #endregion
+
+        #region Nested Types
+
+        [Serializable]
+        public class RankingChoice
+        {
+            #region Fields
+
+            private int _order;
+
+            private string _choice;
+
+            #endregion
+
+            #region Properties
+            
+            public int Order
+            {
+                get
+                {
+                    return _order;
+                }
+
+                set
+                {
+                    _order = value;
+                }
+            }
+
+            public string Choice
+            {
+                get
+                {
+                    return _choice;
+                }
+
+                set
+                {
+                    _choice = value;
+                }
+            }
+
+            #endregion
+
+            #region Construcrors
+
+            public RankingChoice()
+            {
+            }
+
+            public RankingChoice(int order, string choice)
+                : this()
+            {
+                Order = order;
+                Choice = choice;
+            }
+
+            #endregion
         }
 
         #endregion

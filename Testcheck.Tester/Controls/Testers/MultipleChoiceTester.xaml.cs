@@ -22,7 +22,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     {
         #region Fields
 
-        private MultipleChoiceQuestion _question;
+        protected MultipleChoiceQuestion Question;
 
         #endregion
 
@@ -33,53 +33,25 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public MultipleChoiceTester(MultipleChoiceQuestion question, Random rand)
+        public MultipleChoiceTester(MultipleChoiceQuestion question)
             : this()
         {
-            _question = question;
-            LoadQuestion(rand);
+            DataContext = Question = question;
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion(Random rand)
+        private void answerChoiceRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            choicesStackPanel.Children.Clear();
-
-            int[] indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.Choices.Count, _question.ShuffleMode, rand);
-
-            for (int i = 0; i < _question.Choices.Count; i++)
-            {
-                RadioButton button = new RadioButton();
-                button.Margin = new Thickness(0, 1, 0, 1);
-
-                TextBlock textBlock = new TextBlock();
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.Choices[indexes[i]];
-
-                button.Content = textBlock;
-                button.Tag = indexes[i];
-
-                choicesStackPanel.Children.Add(button);
-            }
+            string answer = ((FrameworkElement)sender).DataContext as String;
+            Question.ActualAnswer = Question.Choices.IndexOf(answer);
         }
 
         public decimal Check()
         {
-            int key = -1;
-
-            foreach (RadioButton button in choicesStackPanel.Children)
-            {
-                if (button.IsChecked == true)
-                {
-                    key = (int)button.Tag;
-                    break;
-                }
-            }
-
-            return _question.Check(key);
+            return Question.Check("");
         }
 
         #endregion

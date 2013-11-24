@@ -41,6 +41,8 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Methods
 
+        public abstract void Shuffle();
+
         protected override void ReadXml(System.Xml.XmlElement element)
         {
             base.ReadXml(element);

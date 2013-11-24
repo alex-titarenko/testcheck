@@ -7,5 +7,6 @@ namespace TAlex.Testcheck.Core
     public interface IShuffles
     {
         ShuffleMode ShuffleMode { get; set; }
+        void Shuffle();
     }
 }

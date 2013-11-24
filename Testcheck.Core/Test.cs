@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
@@ -296,6 +297,11 @@ namespace TAlex.Testcheck.Core
             if (ShuffleQuestions)
             {
                 Shuffles.Shuffle<Question>(Questions);
+            }
+
+            foreach (IShuffles question in Questions.OfType<IShuffles>())
+            {
+                question.Shuffle();
             }
         }
 

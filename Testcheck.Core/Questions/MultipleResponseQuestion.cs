@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using TAlex.Testcheck.Core.Choices;
+using TAlex.Testcheck.Core.Helpers;
 
 
 namespace TAlex.Testcheck.Core.Questions
@@ -86,6 +87,11 @@ namespace TAlex.Testcheck.Core.Questions
             }
 
             return Math.Max(0, pointValue * Points);
+        }
+
+        public override void Shuffle()
+        {
+            Shuffles.Shuffle(Choices, ShuffleMode);
         }
 
         protected override void ReadXml(XmlElement element)

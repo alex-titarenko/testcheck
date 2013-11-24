@@ -28,7 +28,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
         private FillBlankQuestion _question;
 
-        private int _fieldCount = 0;
+        private int _fieldIndex = 0;
 
         #endregion
 
@@ -56,14 +56,14 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
             Regex regex = new Regex(FillBlankQuestion.FieldPattern);
 
-            _fieldCount = 0;
+            _fieldIndex = 0;
             while (regex.IsMatch(text))
             {
-                string name = String.Format(FieldTextBoxNameFormat, _fieldCount);
+                string name = String.Format(FieldTextBoxNameFormat, _fieldIndex);
                 string replacement = String.Format("<InlineUIContainer BaselineAlignment='Center'><TextBox Name='{0}' Height='20' Width='90' Margin='1' Padding='0'></TextBox></InlineUIContainer>", name);
                 text = regex.Replace(text, replacement, 1);
 
-                _fieldCount++;
+                _fieldIndex++;
             }
 
             string flowDocumentText = String.Format(
@@ -83,10 +83,10 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
         public decimal Check()
         {
-            string[] fields = new string[_fieldCount];
+            string[] fields = new string[_fieldIndex];
 
             FlowDocument doc = blankTextFlowDocumentScrollViewer.Document;
-            for (int i = 0; i < _fieldCount; i++)
+            for (int i = 0; i < _fieldIndex; i++)
             {
                 string textBoxName = String.Format(FieldTextBoxNameFormat, i);
 

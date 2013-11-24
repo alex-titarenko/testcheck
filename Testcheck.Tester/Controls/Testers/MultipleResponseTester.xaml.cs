@@ -33,10 +33,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public MultipleResponseTester(Question question, Random rand)
+        public MultipleResponseTester(Question question)
             : this()
         {
-            //int[] indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(Question.Choices.Count, Question.ShuffleMode, rand);
             DataContext = Question = question;
         }
 

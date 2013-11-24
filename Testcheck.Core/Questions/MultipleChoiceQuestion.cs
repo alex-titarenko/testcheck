@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-
+using System.Xml.Serialization;
 using TAlex.Testcheck.Core.Choices;
+using TAlex.Testcheck.Core.Helpers;
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -23,6 +24,9 @@ namespace TAlex.Testcheck.Core.Questions
         private const string AnswerElemName = "Answer";
 
         private int _answer = -1;
+
+        [NonSerialized]
+        private int? _actualAnswer;
 
         private List<string> _choices = new List<string>();
 
@@ -48,6 +52,20 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _answer = value;
+            }
+        }
+
+        [XmlIgnore]
+        public int? ActualAnswer
+        {
+            get
+            {
+                return _actualAnswer;
+            }
+
+            set
+            {
+                _actualAnswer = value;
             }
         }
 
@@ -85,12 +103,14 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check(object data)
         {
-            return Check((int)data);
+            return (ActualAnswer == _answer) ? Points : 0;
         }
 
-        public decimal Check(int key)
+        public override void Shuffle()
         {
-            return (key == _answer) ? Points : 0;
+            int[] indexes = Shuffles.GetRandomSequence(Choices.Count, ShuffleMode);
+            Answer = Array.IndexOf(indexes, Answer);
+            Shuffles.ReorderBySequence(Choices, indexes);
         }
 
         protected override void ReadXml(XmlElement element)

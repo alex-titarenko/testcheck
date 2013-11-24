@@ -24,8 +24,6 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
         private RankingQuestion _question;
 
-        private int[] _indexes;
-
         #endregion
 
         #region Constructors
@@ -35,12 +33,10 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public RankingTester(RankingQuestion question, Random rand)
+        public RankingTester(Question question)
             : this()
         {
-            _question = question;
-            _indexes = TAlex.Testcheck.Core.Helpers.Shuffles.GetRandomSequence(_question.Choices.Count, _question.ShuffleMode, rand);
-
+            _question = question as RankingQuestion;
             LoadQuestion();
         }
 
@@ -54,9 +50,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
             Style buttonsStyle = (Style)Resources["SimpleButton"];
 
-            for (int i = 0; i < _question.Choices.Count; i++)
+            foreach (var choice in _question.Choices)
             {
-                int index = _indexes[i];
+                int index = _question.Choices.IndexOf(choice);
 
                 Grid grid = new Grid();
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(22) });
@@ -71,9 +67,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 moveUpButton.Margin = new Thickness(1, 0.5, 1, 0.5);
                 moveUpButton.Style = buttonsStyle;
                 moveUpButton.Height = 18;
-                moveUpButton.Tag = i;
+                moveUpButton.Tag = index;
                 moveUpButton.Focusable = false;
-                moveUpButton.IsEnabled = (i != 0);
+                moveUpButton.IsEnabled = (index != 0);
                 moveUpButton.SetValue(Grid.ColumnProperty, 0);
                 moveUpButton.Click += new RoutedEventHandler(moveUpButton_Click);
 
@@ -83,9 +79,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 moveDownButton.Margin = new Thickness(1, 0.5, 1, 0.5);
                 moveDownButton.Style = buttonsStyle;
                 moveDownButton.Height = 18;
-                moveDownButton.Tag = i;
+                moveDownButton.Tag = index;
                 moveDownButton.Focusable = false;
-                moveDownButton.IsEnabled = (i != _question.Choices.Count - 1);
+                moveDownButton.IsEnabled = (index != _question.Choices.Count - 1);
                 moveDownButton.SetValue(Grid.ColumnProperty, 1);
                 moveDownButton.Click += new RoutedEventHandler(moveDownButton_Click);
 
@@ -94,7 +90,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 textBlock.SetValue(Grid.ColumnProperty, 3);
                 textBlock.Margin = new Thickness(2);
                 textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.Choices[index];
+                textBlock.Text = choice.Choice;
 
                 grid.Children.Add(moveUpButton);
                 grid.Children.Add(moveDownButton);
@@ -109,10 +105,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             int key1 = (int)((FrameworkElement)sender).Tag;
             int key2 = key1 - 1;
 
-            int temp = _indexes[key1];
-            _indexes[key1] = _indexes[key2];
-            _indexes[key2] = temp;
-
+            SwapChoices(key1, key2);
             LoadQuestion();
         }
 
@@ -121,16 +114,20 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             int key1 = (int)((FrameworkElement)sender).Tag;
             int key2 = key1 + 1;
 
-            int temp = _indexes[key1];
-            _indexes[key1] = _indexes[key2];
-            _indexes[key2] = temp;
-
+            SwapChoices(key1, key2);
             LoadQuestion();
+        }
+
+        private void SwapChoices(int idx1, int idx2)
+        {
+            var temp = _question.Choices[idx1];
+            _question.Choices[idx1] = _question.Choices[idx2];
+            _question.Choices[idx2] = temp;
         }
 
         public decimal Check()
         {
-            return _question.Check(_indexes);
+            return _question.Check("");
         }
 
         #endregion

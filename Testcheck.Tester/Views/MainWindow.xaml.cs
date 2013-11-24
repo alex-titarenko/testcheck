@@ -39,8 +39,6 @@ namespace TAlex.Testcheck.Tester.Views
 
         private decimal _points;
 
-        private int _seed = new Random().Next();
-
         #endregion
 
         #region Constructors
@@ -267,23 +265,20 @@ namespace TAlex.Testcheck.Tester.Views
             currentQuestionStatusBarItem.Content = String.Format("{0} of {1}", GetQuestionKeyByIndex(questionIndex), _test.QuestionCount);
             questionWebBrowser.NavigateToString(ConvertToHtml(question.Description));
 
-
-            Random rnd = new Random(_seed + GetQuestionKeyByIndex(questionIndex));
-
             if (question is TrueFalseQuestion)
                 questinChoicesScrollViewer.Content = new TrueFalseTester(question);
             else if (question is MultipleChoiceQuestion)
-                questinChoicesScrollViewer.Content = new MultipleChoiceTester((MultipleChoiceQuestion)question, rnd);
+                questinChoicesScrollViewer.Content = new MultipleChoiceTester((MultipleChoiceQuestion)question);
             else if (question is MultipleResponseQuestion)
-                questinChoicesScrollViewer.Content = new MultipleResponseTester(question, rnd);
+                questinChoicesScrollViewer.Content = new MultipleResponseTester(question);
             else if (question is EssayQuestion)
                 questinChoicesScrollViewer.Content = new EssayTester(question);
             else if (question is FillBlankQuestion)
                 questinChoicesScrollViewer.Content = new FillBlankTester((FillBlankQuestion)question);
             else if (question is MatchingQuestion)
-                questinChoicesScrollViewer.Content = new MatchingTester((MatchingQuestion)question, rnd);
+                questinChoicesScrollViewer.Content = new MatchingTester((MatchingQuestion)question);
             else if (question is RankingQuestion)
-                questinChoicesScrollViewer.Content = new RankingTester((RankingQuestion)question, rnd);
+                questinChoicesScrollViewer.Content = new RankingTester(question);
             else
                 questinChoicesScrollViewer.Content = null;
         }
