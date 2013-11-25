@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +18,7 @@ using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
 using TAlex.Testcheck.Tester.Controls.Testers;
 using TAlex.Testcheck.Tester.Reporting;
+using TAlex.Testcheck.Tester.Infrastructure;
 
 namespace TAlex.Testcheck.Tester.Views
 {
@@ -158,7 +161,7 @@ namespace TAlex.Testcheck.Tester.Views
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_questions.Count > 0)
+            if (_questions.Any())
             {
                 int questionKey = GetQuestionKeyByIndex(_currQuestionIndex);
                 _points += _questions[questionKey].Check();
@@ -166,17 +169,15 @@ namespace TAlex.Testcheck.Tester.Views
                 progressBarTest.CorrectCurrentValue = _points;
 
                 _questions.Remove(questionKey);
-
                 _currQuestionIndex = (_currQuestionIndex >= _questions.Count) ? 0 : _currQuestionIndex;
 
-                
-                if (_questions.Count != 0)
+                if (_questions.Any())
                 {
                     LoadQuestion(_currQuestionIndex);
                 }
             }
 
-            if (_questions.Count == 0)
+            if (!_questions.Any())
             {
                 ShowResultTest();
             }
@@ -266,22 +267,20 @@ namespace TAlex.Testcheck.Tester.Views
             currentQuestionStatusBarItem.Content = String.Format("{0} of {1}", GetQuestionKeyByIndex(questionIndex), _test.QuestionCount);
             questionWebBrowser.NavigateToString(ConvertToHtml(question.Description));
 
-            if (question is TrueFalseQuestion)
-                questinChoicesScrollViewer.Content = new TrueFalseTester(question);
-            else if (question is MultipleChoiceQuestion)
-                questinChoicesScrollViewer.Content = new MultipleChoiceTester((MultipleChoiceQuestion)question);
-            else if (question is MultipleResponseQuestion)
-                questinChoicesScrollViewer.Content = new MultipleResponseTester(question);
-            else if (question is EssayQuestion)
-                questinChoicesScrollViewer.Content = new EssayTester(question);
-            else if (question is FillBlankQuestion)
-                questinChoicesScrollViewer.Content = new FillBlankTester((FillBlankQuestion)question);
-            else if (question is MatchingQuestion)
-                questinChoicesScrollViewer.Content = new MatchingTester((MatchingQuestion)question);
-            else if (question is RankingQuestion)
-                questinChoicesScrollViewer.Content = new RankingTester(question);
-            else
-                questinChoicesScrollViewer.Content = null;
+            questinChoicesScrollViewer.Content = GetTester(question);
+        }
+
+        private object GetTester(Question question)
+        {
+            Type testerType = typeof(App).Assembly.DefinedTypes
+                .FirstOrDefault(x => x.GetCustomAttributes<QuestionTesterAttribute>()
+                    .Any(a => a.QuestionType == question.GetType()));
+
+            if (testerType != null)
+            {
+                return Activator.CreateInstance(testerType, question);
+            }
+            return null;
         }
 
         private string ConvertToHtml(string source)

@@ -1,33 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Markup;
-
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Tester.Infrastructure;
+
 
 namespace TAlex.Testcheck.Tester.Controls.Testers
 {
     /// <summary>
     /// Interaction logic for FillBlankTester.xaml
     /// </summary>
+    [QuestionTester(typeof(FillBlankQuestion))]
     public partial class FillBlankTester : UserControl
     {
         #region Fields
 
         private const string FieldTextBoxNameFormat = "fieldTextBox_a25f0sd456c_{0}";
-
-        private FillBlankQuestion _question;
 
         #endregion
 
@@ -38,20 +31,19 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             InitializeComponent();
         }
 
-        public FillBlankTester(Question question)
+        public FillBlankTester(FillBlankQuestion question)
             : this()
         {
-            _question = question as FillBlankQuestion;
-            LoadQuestion();
+            LoadQuestion(question);
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadQuestion()
+        private void LoadQuestion(FillBlankQuestion question)
         {
-            string text = _question.BlankText;
+            string text = question.BlankText;
 
             Regex regex = new Regex(FillBlankQuestion.FieldPattern);
 
@@ -61,9 +53,9 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             var matches = regex.Matches(text);
             foreach (Match match in matches)
             {
-                if (_question.ActualAnswers.Count < matches.Count)
+                if (question.ActualAnswers.Count < matches.Count)
                 {
-                    _question.ActualAnswers.Add(String.Empty);
+                    question.ActualAnswers.Add(String.Empty);
                 }
 
                 string name = String.Format(FieldTextBoxNameFormat, fieldIndex);
@@ -94,7 +86,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
             doc.FontFamily = FontFamily;
             doc.FontSize = FontSize;
             doc.PagePadding = new Thickness(3);
-            doc.DataContext = _question.ActualAnswers;
+            doc.DataContext = question.ActualAnswers;
 
             blankTextFlowDocumentScrollViewer.Document = doc;
         }

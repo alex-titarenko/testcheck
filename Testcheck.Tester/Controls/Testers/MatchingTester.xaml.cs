@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Tester.Infrastructure;
 
 
 namespace TAlex.Testcheck.Tester.Controls.Testers
@@ -21,6 +22,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
     /// <summary>
     /// Interaction logic for MatchingTester.xaml
     /// </summary>
+    [QuestionTester(typeof(MatchingQuestion))]
     public partial class MatchingTester : UserControl
     {
         #region Fields
