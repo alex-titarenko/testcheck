@@ -61,7 +61,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 string name = String.Format(FieldTextBoxNameFormat, fieldIndex);
                 string replacement = String.Format(
                     @"<InlineUIContainer BaselineAlignment='Center'>
-                        <TextBox Name='{0}' Height='20' Width='90' Margin='1' Padding='0' Text='{{Binding [" + fieldIndex + @"]}}' />
+                        <TextBox Name='{0}' Height='20' Width='90' Margin='1' Padding='0' Text='{{Binding [" + fieldIndex + @"], UpdateSourceTrigger=PropertyChanged}}' />
                     </InlineUIContainer>",
                     name);
 

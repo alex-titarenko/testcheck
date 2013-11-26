@@ -64,6 +64,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="TAlex.WPF.Mvvm">
+      <HintPath>..\packages\TAlex.WPF.Mvvm.1.0.4937.37054\lib\net45\TAlex.WPF.Mvvm.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -90,7 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ProgressBarTest.xaml">
+    <Page Include="Controls\TestProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -160,9 +163,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviours\BrowserBehavior.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
     <Compile Include="Converters\MultipleChoiceConverter.cs" />
+    <Compile Include="Converters\QuestionDescriptionToHtmlConverter.cs" />
+    <Compile Include="Converters\QuestionToTesterControlConverter.cs" />
     <Compile Include="Infrastructure\QuestionTesterAttribute.cs" />
+    <Compile Include="ViewModels\TesterViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -174,8 +181,8 @@
     </Compile>
     <Compile Include="Controls\GridLengthAnimation.cs" />
     <Compile Include="Controls\LinkLine.cs" />
-    <Compile Include="Controls\ProgressBarTest.xaml.cs">
-      <DependentUpon>ProgressBarTest.xaml</DependentUpon>
+    <Compile Include="Controls\TestProgressBar.xaml.cs">
+      <DependentUpon>TestProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Testers\EssayTester.xaml.cs">
       <DependentUpon>EssayTester.xaml</DependentUpon>
@@ -222,6 +229,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="TAlex.Testcheck.Tester.Controls.TestProgressBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="60">
+    
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="NormalBg" EndPoint="1,0">
+            <GradientStop Color="#e9e9e9" Offset="0" />
+            <GradientStop Color="#e9e9e9" Offset="0.49" />
+            <GradientStop Color="#efefef" Offset="0.5" />
+            <GradientStop Color="#fdfdfd" Offset="1" />
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="wrongAnswersBg" EndPoint="1,0">
+            <GradientStop Color="#ffcd1717" Offset="0" />
+            <GradientStop Color="#ffcd1717" Offset="0.499" />
+            <GradientStop Color="#ffda2121" Offset="0.5" />
+            <GradientStop Color="#fffcb1b1" Offset="1" />
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="correctAnswersBg" EndPoint="1,0">
+            <GradientStop Color="#ff209201" Offset="0" />
+            <GradientStop Color="#ff209201" Offset="0.499" />
+            <GradientStop Color="#ff4aa033" Offset="0.5" />
+            <GradientStop Color="#ff88dc71" Offset="1" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    
+    <Grid Background="{StaticResource NormalBg}">
+        <Grid Name="progressGrid" Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+            </Grid.RowDefinitions>
+                    
+            <Rectangle Grid.Row="1" Fill="{DynamicResource wrongAnswersBg}" />
+            <Rectangle Grid.Row="2" Fill="{DynamicResource correctAnswersBg}" />
+        </Grid>
+        
+        <Label Name="progressLabel" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <Border BorderBrush="#ffc0c0c0" BorderThickness="1" CornerRadius="3" />
+        <Border BorderBrush="#fff1f1f1" BorderThickness="1" CornerRadius="2" Margin="1" />
+    </Grid>
+</UserControl>

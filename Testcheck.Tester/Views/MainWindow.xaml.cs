@@ -19,6 +19,8 @@ using TAlex.Testcheck.Core.Questions;
 using TAlex.Testcheck.Tester.Controls.Testers;
 using TAlex.Testcheck.Tester.Reporting;
 using TAlex.Testcheck.Tester.Infrastructure;
+using TAlex.Testcheck.Tester.ViewModels;
+
 
 namespace TAlex.Testcheck.Tester.Views
 {
@@ -37,10 +39,6 @@ namespace TAlex.Testcheck.Tester.Views
         
         private Test _test;
         private TestReport _testReport;
-        private Dictionary<int, Question> _questions;
-        private int _currQuestionIndex;
-
-        private decimal _points;
 
         #endregion
 
@@ -124,7 +122,7 @@ namespace TAlex.Testcheck.Tester.Views
             Close();
         }
 
-        void _timer_Tick(object sender, EventArgs e)
+        private void _timer_Tick(object sender, EventArgs e)
         {
             _timeElapsed = DateTime.Now - _startTime;
             TimeSpan timeLeft = _test.Timelimit - _timeElapsed;
@@ -159,179 +157,38 @@ namespace TAlex.Testcheck.Tester.Views
             }
         }
 
-        private void acceptButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_questions.Any())
-            {
-                int questionKey = GetQuestionKeyByIndex(_currQuestionIndex);
-                _points += _questions[questionKey].Check();
-                progressBarTest.TotalCurrentValue += _questions[questionKey].Points;
-                progressBarTest.CorrectCurrentValue = _points;
-
-                _questions.Remove(questionKey);
-                _currQuestionIndex = (_currQuestionIndex >= _questions.Count) ? 0 : _currQuestionIndex;
-
-                if (_questions.Any())
-                {
-                    LoadQuestion(_currQuestionIndex);
-                }
-            }
-
-            if (!_questions.Any())
-            {
-                ShowResultTest();
-            }
-        }
-
-        private void previousButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_questions.Count != 0)
-            {
-                _currQuestionIndex--;
-                if (_currQuestionIndex < 0)
-                    _currQuestionIndex = _questions.Count - 1;
-
-                LoadQuestion(_currQuestionIndex);
-            }
-        }
-
-        private void nextButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_questions.Count != 0)
-            {
-                _currQuestionIndex++;
-                if (_currQuestionIndex >= _questions.Count)
-                    _currQuestionIndex = 0;
-
-                LoadQuestion(_currQuestionIndex);
-            }
-        }
-
         #endregion
 
         private void LoadTest(Test test)
         {
             _test = test;
-            _test.Shuffle();
+            test.Shuffle();
 
-            if (!String.IsNullOrEmpty(_test.Description))
+            if (!String.IsNullOrEmpty(test.Description))
             {
-                if (_test.Description.Length < MaxSubjectLength)
-                    Title += String.Format(" - {0} ({1})", _test.Title, _test.Description);
+                if (test.Description.Length < MaxSubjectLength)
+                    Title += String.Format(" - {0} ({1})", test.Title, test.Description);
                 else
-                    Title += String.Format(" - {0} ({1}...)", _test.Title, _test.Description.Substring(0, MaxSubjectLength));
+                    Title += String.Format(" - {0} ({1}...)", test.Title, test.Description.Substring(0, MaxSubjectLength));
             }
 
-            if (_test.NoTimelimit)
+            if (test.NoTimelimit)
                 timeLeftLabel.Content = "Unlimited";
 
-            progressBarTest.Maximum = _test.TotalPoints;
-
-            GetQuestions(_test);
-            _currQuestionIndex = 0;
-
-            if (_questions.Count != 0)
-                LoadQuestion(_currQuestionIndex);
-
-            _points = 0;
+            DataContext = new TesterViewModel(test);
 
             _startTime = DateTime.Now;
             _timer.Start();
         }
 
-        private int GetQuestionKeyByIndex(int index)
-        {
-            foreach (KeyValuePair<int, Question> pair in _questions)
-            {
-                if (index == 0) return pair.Key;
-                index--;
-            }
-
-            throw new IndexOutOfRangeException();
-        }
-
-        private void GetQuestions(Test test)
-        {
-            _questions = new Dictionary<int, Question>();
-
-            for (int i = 0; i < test.QuestionCount; i++)
-            {
-                _questions.Add(i + 1, (Question)test.Questions[i].Clone());
-            }
-        }
-
-        private void LoadQuestion(int questionIndex)
-        {
-            Question question = _questions[GetQuestionKeyByIndex(questionIndex)];
-
-            currentQuestionStatusBarItem.Content = String.Format("{0} of {1}", GetQuestionKeyByIndex(questionIndex), _test.QuestionCount);
-            questionWebBrowser.NavigateToString(ConvertToHtml(question.Description));
-
-            questinChoicesScrollViewer.Content = GetTester(question);
-        }
-
-        private object GetTester(Question question)
-        {
-            Type testerType = typeof(App).Assembly.DefinedTypes
-                .FirstOrDefault(x => x.GetCustomAttributes<QuestionTesterAttribute>()
-                    .Any(a => a.QuestionType == question.GetType()));
-
-            if (testerType != null)
-            {
-                return Activator.CreateInstance(testerType, question);
-            }
-            return null;
-        }
-
-        private string ConvertToHtml(string source)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(
-                @"<html>
-                    <head>
-                        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-
-                        <style type='text/css'>
-                            body { font: 14px verdana; color: #505050; background: #fcfcfc; }
-                        </style>
-
-                        <script language='JScript'>
-                            function onContextMenu()
-                            {
-                              if (window.event.srcElement.tagName !='INPUT') 
-                              {
-                                window.event.returnValue = false;  
-                                window.event.cancelBubble = true;
-                                return false;
-                              }
-                            }
-
-                            function onLoad()
-                            {
-                              document.oncontextmenu = onContextMenu; 
-                            }
-                        </script>
-                    </head>
-                    <body onload='onLoad();'>"
-                );
-
-            sb.Append(source);
-
-            sb.Append(
-                    @"</body>
-                </html>"
-                );
-
-            return sb.ToString();
-        }
+        
 
         private void ShowResultTest()
         {
             _timer.Stop();
 
-            _testReport.AnsweredQuestion = _testReport.TotalQuestion - _questions.Count;
-            _testReport.Points = _points;
+            //_testReport.AnsweredQuestion = _testReport.TotalQuestion - _questions.Count; // TODO:
+            //_testReport.Points = _points; //TODO:
             _testReport.TimeElapsed = _timeElapsed;
 
             ResultWindow window = new ResultWindow(_testReport);

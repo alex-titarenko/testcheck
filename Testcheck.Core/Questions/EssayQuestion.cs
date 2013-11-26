@@ -85,7 +85,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check()
         {
-            string answer = ActualAnswer.ToUpper();
+            string answer = (ActualAnswer + String.Empty).ToUpper();
             return CorrectAnswers.Any(x => String.Equals(answer, x.ToUpper())) ? Points : 0;
         }
 

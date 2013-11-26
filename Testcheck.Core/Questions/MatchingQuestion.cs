@@ -135,7 +135,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check()
         {
-            decimal pointValuePerPair = 1M / ActualKeyPairs.Count;
+            decimal pointValuePerPair = 1M / KeyPairs.Count;
 
             decimal pointValue = 0;
 
