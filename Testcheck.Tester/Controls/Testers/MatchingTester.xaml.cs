@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -69,28 +70,17 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
             for (int i = 0; i < _question.LeftChoices.Count; i++)
             {
-                TextBlock textBlock = new TextBlock();
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.LeftChoices[i];
-                textBlock.Tag = i;
-                textBlock.Margin = new Thickness(2);
-                textBlock.Padding = new Thickness(15, 1, 10, 1);
-                textBlock.Background = Brushes.WhiteSmoke;
-                
-                leftChoicesStackPanel.Children.Add(textBlock);
+                leftChoicesStackPanel.Children.Add(CreateChoiceItem(_question.LeftChoices[i], i));
             }
 
             for (int i = 0; i < _question.RightChoices.Count; i++)
             {
-                TextBlock textBlock = new TextBlock();
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = _question.RightChoices[i];
-                textBlock.Tag = i;
-                textBlock.Margin = new Thickness(2);
-                textBlock.Padding = new Thickness(15, 1, 10, 1);
-                textBlock.Background = Brushes.WhiteSmoke;
+                rightChoicesStackPanel.Children.Add(CreateChoiceItem(_question.RightChoices[i], i));
+            }
 
-                rightChoicesStackPanel.Children.Add(textBlock);
+            foreach (KeyPair keyPair in _question.ActualKeyPairs)
+            {
+                mainGrid.Children.Add(CreateLinkLine(0, 0, 0, 0, keyPair));
             }
         }
 
@@ -98,47 +88,43 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
 
         private void mainGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            for (int i = 0; i < mainGrid.Children.Count; i++)
+            foreach (LinkLine linkLine in mainGrid.Children.Cast<UIElement>().OfType<LinkLine>())
             {
-                if (mainGrid.Children[i] is LinkLine)
+                KeyPair keyPair = (KeyPair)linkLine.Tag;
+
+                TextBlock leftTextBlock = null;
+                foreach (TextBlock textBlock in leftChoicesStackPanel.Children)
                 {
-                    LinkLine linkLine = mainGrid.Children[i] as LinkLine;
-                    KeyPair keyPair = (KeyPair)linkLine.Tag;
-
-                    TextBlock leftTextBlock = null;
-                    foreach (TextBlock textBlock in leftChoicesStackPanel.Children)
+                    if ((int)textBlock.Tag == keyPair.Key1)
                     {
-                        if ((int)textBlock.Tag == keyPair.Key1)
-                        {
-                            leftTextBlock = textBlock;
-                            break;
-                        }
+                        leftTextBlock = textBlock;
+                        break;
                     }
-
-                    if (leftTextBlock == null)
-                        return;
-
-                    TextBlock rightTextBlock = null;
-                    foreach (TextBlock textBlock in rightChoicesStackPanel.Children)
-                    {
-                        if ((int)textBlock.Tag == keyPair.Key2)
-                        {
-                            rightTextBlock = textBlock;
-                            break;
-                        }
-                    }
-
-                    if (rightTextBlock == null)
-                        return;
-
-                    Point p0 = GetAnchorPoint(leftTextBlock, true);
-                    Point p1 = GetAnchorPoint(rightTextBlock, false);
-
-                    linkLine.X1 = p0.X;
-                    linkLine.Y1 = p0.Y;
-                    linkLine.X2 = p1.X;
-                    linkLine.Y2 = p1.Y;
                 }
+
+                if (leftTextBlock == null)
+                    return;
+
+                TextBlock rightTextBlock = null;
+                foreach (TextBlock textBlock in rightChoicesStackPanel.Children)
+                {
+                    if ((int)textBlock.Tag == keyPair.Key2)
+                    {
+                        rightTextBlock = textBlock;
+                        break;
+                    }
+                }
+
+                if (rightTextBlock == null)
+                    return;
+
+                Point p0 = GetAnchorPoint(leftTextBlock, true);
+                Point p1 = GetAnchorPoint(rightTextBlock, false);
+
+                linkLine.X1 = p0.X;
+                linkLine.Y1 = p0.Y;
+                linkLine.X2 = p1.X;
+                linkLine.Y2 = p1.Y;
             }
         }
 
@@ -163,25 +149,10 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                     _currentLinkLine = null;
                     return;
                 }
-                
 
                 // Create a new link line
-                _currentLinkLine = new LinkLine();
-                _currentLinkLine.X1 = anchorPoint.X;
-                _currentLinkLine.Y1 = anchorPoint.Y;
-                _currentLinkLine.X2 = anchorPoint.X;
-                _currentLinkLine.Y2 = anchorPoint.Y;
-
-                _currentLinkLine.Stroke = _linkLineBrush;
-                _currentLinkLine.StrokeThickness = 2;
-                _currentLinkLine.Fill = _linkLineBrush;
-                _currentLinkLine.SetValue(Grid.ColumnSpanProperty, 3);
-
-                // Sets key pair for the link line
-                if (isLeftSide)
-                    _currentLinkLine.Tag = new KeyPair((int)textBlock.Tag, -1);
-                else
-                    _currentLinkLine.Tag = new KeyPair(-1, (int)textBlock.Tag);
+                KeyPair keyPair = (isLeftSide) ? new KeyPair((int)textBlock.Tag, -1) : new KeyPair(-1, (int)textBlock.Tag);
+                _currentLinkLine = CreateLinkLine(anchorPoint.X, anchorPoint.Y, anchorPoint.X, anchorPoint.Y, keyPair);
 
                 mainGrid.Children.Add(_currentLinkLine);
                 mainGrid.CaptureMouse();
@@ -327,6 +298,37 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         #endregion
 
         #region Helpers
+
+        private UIElement CreateChoiceItem(string choice, int index)
+        {
+            return new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = choice,
+                Tag = index,
+                Margin = new Thickness(2),
+                Padding = new Thickness(15, 1, 10, 1),
+                Background = new SolidColorBrush(Color.FromRgb(235, 235, 235))
+            };
+        }
+
+        private LinkLine CreateLinkLine(double x1, double y1, double x2, double y2, KeyPair keyPair)
+        {
+            LinkLine linkLine = new LinkLine
+            {
+                X1 = x1,
+                Y1 = y1,
+                X2 = x2,
+                Y2 = y2,
+                Stroke = _linkLineBrush,
+                StrokeThickness = 2,
+                Fill = _linkLineBrush,
+                Tag = keyPair
+            };
+
+            linkLine.SetValue(Grid.ColumnSpanProperty, 3);
+            return linkLine;
+        }
 
         private Point GetAnchorPoint(UIElement elem, bool isLeftSide)
         {

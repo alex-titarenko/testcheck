@@ -118,27 +118,23 @@ namespace TAlex.Testcheck.Tester.ViewModels
         private void InitCommands()
         {
             AcceptCommand = new RelayCommand(AcceptCommandExecute, CanAccept);
-            MovePreviousCommand = new RelayCommand(MovePreviousCommandExecute, CanMove);
-            MoveNextCommand = new RelayCommand(MoveNextCommandExecute, CanMove);
+            MovePreviousCommand = new RelayCommand(MovePreviousCommandExecute, CanMoveTo);
+            MoveNextCommand = new RelayCommand(MoveNextCommandExecute, CanMoveTo);
         }
 
         private void AcceptCommandExecute()
         {
+            ScoredPoints += CurrentQuestion.Check();
+            PossiblePoints += CurrentQuestion.Points;
+
+            _questions.Remove(CurrentQuestionNumber);
+            _currQuestionIndex = (_currQuestionIndex >= _questions.Count) ? 0 : _currQuestionIndex;
+
             if (_questions.Any())
             {
-                ScoredPoints += CurrentQuestion.Check();
-                PossiblePoints += CurrentQuestion.Points;
-
-                _questions.Remove(CurrentQuestionNumber);
-                _currQuestionIndex = (_currQuestionIndex >= _questions.Count) ? 0 : _currQuestionIndex;
-
-                if (_questions.Any())
-                {
-                    SetCurrentQuestion(_currQuestionIndex);
-                }
+                SetCurrentQuestion(_currQuestionIndex);
             }
-
-            if (!_questions.Any())
+            else
             {
                 //ShowResultTest();
             }
@@ -146,28 +142,16 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         private void MovePreviousCommandExecute()
         {
-            if (_questions.Any())
-            {
-                _currQuestionIndex--;
-                if (_currQuestionIndex < 0)
-                {
-                    _currQuestionIndex = _questions.Count - 1;
-                }
-                SetCurrentQuestion(_currQuestionIndex);
-            }
+            _currQuestionIndex--;
+            if (_currQuestionIndex < 0) _currQuestionIndex = _questions.Count - 1;
+            SetCurrentQuestion(_currQuestionIndex);
         }
 
         private void MoveNextCommandExecute()
         {
-            if (_questions.Any())
-            {
-                _currQuestionIndex++;
-                if (_currQuestionIndex >= _questions.Count)
-                {
-                    _currQuestionIndex = 0;
-                }
-                SetCurrentQuestion(_currQuestionIndex);
-            }
+            _currQuestionIndex++;
+            if (_currQuestionIndex >= _questions.Count) _currQuestionIndex = 0;
+            SetCurrentQuestion(_currQuestionIndex);
         }
 
         private bool CanAccept()
@@ -175,7 +159,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
             return _questions.Any();
         }
 
-        private bool CanMove()
+        private bool CanMoveTo()
         {
             return _questions.Count > 1;
         }
@@ -184,16 +168,16 @@ namespace TAlex.Testcheck.Tester.ViewModels
         private void Init(Test test)
         {
             _questions = new Dictionary<int, Question>();
+            _currQuestionIndex = 0;
+
             QuestionsCount = test.QuestionCount;
             TotalPoints = test.TotalPoints;
+            ScoredPoints = 0;
 
             for (int i = 0; i < test.QuestionCount; i++)
             {
                 _questions.Add(i + 1, (Question)test.Questions[i].Clone());
             }
-
-            _currQuestionIndex = 0;
-            ScoredPoints = 0;
 
             if (_questions.Any())
             {
