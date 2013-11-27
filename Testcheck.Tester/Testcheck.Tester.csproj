@@ -164,7 +164,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Behaviours\BrowserBehavior.cs" />
-    <Compile Include="Converters\BoolInverterConverter.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\MultipleChoiceConverter.cs" />
     <Compile Include="Converters\QuestionDescriptionToHtmlConverter.cs" />
     <Compile Include="Converters\QuestionToTesterControlConverter.cs" />

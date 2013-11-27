@@ -9,32 +9,34 @@ using System.Windows.Data;
 
 namespace TAlex.Testcheck.Tester.Converters
 {
-    public class BoolInverterConverter : IValueConverter
+    public class BooleanConverter : IValueConverter
     {
         #region IValueConverter Members
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            bool paramValue = bool.Parse((string)parameter);
             if (value is bool)
             {
-                return !(bool)value;
+                return (bool)value == paramValue;
             }
             else if (value is bool?)
             {
-                return ((bool?)value).HasValue ? !((bool?)value).Value : (bool?)null;
+                return ((bool?)value) == paramValue;
             }
-            return null;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            bool paramValue = bool.Parse((string)parameter);
             if (value is bool)
             {
-                return !(bool)value;
+                return (bool)value == paramValue;
             }
             else if (value is bool?)
             {
-                return ((bool?)value).HasValue ? !((bool?)value).Value : (bool?)null;
+                return ((bool?)value) == paramValue;
             }
             return value;
         }

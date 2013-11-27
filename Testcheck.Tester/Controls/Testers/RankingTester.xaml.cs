@@ -54,37 +54,44 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(3) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
-                
-                Button moveUpButton = new Button();
-                moveUpButton.Content = new Image() { Source = new BitmapImage(new Uri(@"/Resources/Images/up.png", UriKind.Relative)) };
-                moveUpButton.ToolTip = "Move Up";
-                moveUpButton.Margin = new Thickness(1, 0.5, 1, 0.5);
-                moveUpButton.Style = buttonsStyle;
-                moveUpButton.Height = 18;
-                moveUpButton.Tag = index;
-                moveUpButton.Focusable = false;
-                moveUpButton.IsEnabled = (index != 0);
+
+                Button moveUpButton = new Button
+                {
+                    Content = new Image() { Source = new BitmapImage(new Uri(@"/Resources/Images/up.png", UriKind.Relative)) },
+                    ToolTip = "Move Up",
+                    Margin = new Thickness(1, 0.5, 1, 0.5),
+                    Style = buttonsStyle,
+                    Height = 18,
+                    Tag = index,
+                    Focusable = false,
+                    IsEnabled = (index != 0)
+                };
                 moveUpButton.SetValue(Grid.ColumnProperty, 0);
                 moveUpButton.Click += new RoutedEventHandler(moveUpButton_Click);
 
-                Button moveDownButton = new Button();
-                moveDownButton.Content = new Image() { Source = new BitmapImage(new Uri(@"/Resources/Images/down.png", UriKind.Relative)) };
-                moveDownButton.ToolTip = "Move Down";
-                moveDownButton.Margin = new Thickness(1, 0.5, 1, 0.5);
-                moveDownButton.Style = buttonsStyle;
-                moveDownButton.Height = 18;
-                moveDownButton.Tag = index;
-                moveDownButton.Focusable = false;
-                moveDownButton.IsEnabled = (index != _question.Choices.Count - 1);
+                Button moveDownButton = new Button
+                {
+                    Content = new Image() { Source = new BitmapImage(new Uri(@"/Resources/Images/down.png", UriKind.Relative)) },
+                    ToolTip = "Move Down",
+                    Margin = new Thickness(1, 0.5, 1, 0.5),
+                    Style = buttonsStyle,
+                    Height = 18,
+                    Tag = index,
+                    Focusable = false,
+                    IsEnabled = (index != _question.Choices.Count - 1)
+                };
                 moveDownButton.SetValue(Grid.ColumnProperty, 1);
                 moveDownButton.Click += new RoutedEventHandler(moveDownButton_Click);
 
-                TextBlock textBlock = new TextBlock();
-                textBlock.VerticalAlignment = VerticalAlignment.Center;
+                TextBlock textBlock = new TextBlock
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(2),
+                    TextWrapping = TextWrapping.Wrap,
+                    Text = choice.Choice
+                };
                 textBlock.SetValue(Grid.ColumnProperty, 3);
-                textBlock.Margin = new Thickness(2);
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.Text = choice.Choice;
+
 
                 grid.Children.Add(moveUpButton);
                 grid.Children.Add(moveDownButton);
