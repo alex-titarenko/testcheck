@@ -168,6 +168,8 @@
     <Compile Include="Converters\MultipleChoiceConverter.cs" />
     <Compile Include="Converters\QuestionDescriptionToHtmlConverter.cs" />
     <Compile Include="Converters\QuestionToTesterControlConverter.cs" />
+    <Compile Include="Converters\TimeLeftToBrushConverter.cs" />
+    <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="Infrastructure\QuestionTesterAttribute.cs" />
     <Compile Include="ViewModels\TesterViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">

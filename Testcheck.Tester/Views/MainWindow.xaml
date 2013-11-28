@@ -10,6 +10,8 @@
     <Window.Resources>
         <convs:QuestionToTesterControlConverter x:Key="QuestionToTesterControlConverter" />
         <convs:QuestionDescriptionToHtmlConverter x:Key="QuestionDescriptionToHtmlConverter" />
+        <convs:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+        <convs:TimeLeftToBrushConverter x:Key="TimeLeftToBrushConverter" />
         
         <SolidColorBrush x:Key="TextBrush" Color="DimGray" />
         
@@ -71,11 +73,18 @@
         </Grid>
         
         <Label Grid.Row="1" Grid.Column="1" Margin="35,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource TextBrush}">Time elapsed:</Label>
-        <Label Grid.Row="1" Grid.Column="1" Margin="35,20,0,0" Name="timeElapsedLabel" VerticalAlignment="Top" HorizontalAlignment="Left"  Foreground="{StaticResource TextBrush}"></Label>
-        
-        <Label Grid.Row="1" Grid.Column="1" Margin="35,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource TextBrush}">Time left:</Label>
-        <Label Grid.Row="1" Grid.Column="1" Margin="35,60,0,0" Name="timeLeftLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource TextBrush}"></Label>
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Foreground="{StaticResource TextBrush}" Content="{Binding TimeElapsed, Converter={StaticResource TimeSpanToStringConverter}}" />
 
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource TextBrush}">Time left:</Label>
+        <Label Grid.Row="1" Grid.Column="1" Margin="35,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="{Binding TimeLeft, Converter={StaticResource TimeSpanToStringConverter}}">
+            <Label.Foreground>
+                <MultiBinding Converter="{StaticResource TimeLeftToBrushConverter}">
+                    <Binding Path="TimeLimit" />
+                    <Binding Path="TimeLeft" />
+                </MultiBinding>
+            </Label.Foreground>
+        </Label>
+        
         <controls:TestProgressBar Grid.Row="1" Grid.Column="1" Margin="0,100,0,25" TotalPoints="{Binding TotalPoints}" ScoredPoints="{Binding ScoredPoints}" PossiblePoints="{Binding PossiblePoints}" />
                
         <!-- Control panel -->

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Input;
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
@@ -15,6 +16,12 @@ namespace TAlex.Testcheck.Tester.ViewModels
     public class TesterViewModel : ViewModelBase
     {
         #region Fields
+
+        private Timer _timer;
+        private DateTime _startTime;
+        private TimeSpan? _timeLimit;
+        private TimeSpan _timeElapsed;
+        private TimeSpan? _timeLeft; 
 
         private Question _currentQuestion;
         private int _currentQuestionNumber;
@@ -91,6 +98,40 @@ namespace TAlex.Testcheck.Tester.ViewModels
             private set;
         }
 
+        public TimeSpan? TimeLimit
+        {
+            get
+            {
+                return _timeLimit;
+            }
+        }
+
+        public TimeSpan TimeElapsed
+        {
+            get
+            {
+                return _timeElapsed;
+            }
+
+            private set
+            {
+                Set(() => TimeElapsed, ref _timeElapsed, value);
+            }
+        }
+
+        public TimeSpan? TimeLeft
+        {
+            get
+            {
+                return _timeLeft;
+            }
+
+            private set
+            {
+                Set(() => TimeLeft, ref _timeLeft, value);
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -107,6 +148,9 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         public TesterViewModel(Test test)
         {
+            _timer = new Timer(200);
+            _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+
             InitCommands();
             Init(test);
         }
@@ -182,6 +226,10 @@ namespace TAlex.Testcheck.Tester.ViewModels
             if (_questions.Any())
             {
                 SetCurrentQuestion(_currQuestionIndex);
+
+                _timeLimit = test.NoTimelimit ? (TimeSpan?)null : test.Timelimit;
+                _startTime = DateTime.Now;
+                _timer.Start();
             }
         }
 
@@ -201,6 +249,22 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
             throw new IndexOutOfRangeException();
         }
+
+
+        #region Event Handlers
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            TimeElapsed = DateTime.Now - _startTime;
+            TimeLeft = _timeLimit - TimeElapsed;
+
+            if (TimeLeft.HasValue && TimeLeft <= TimeSpan.Zero)
+            {
+                //ShowTestResult();
+            }
+        }
+
+        #endregion
 
         #endregion
     }

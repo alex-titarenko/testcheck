@@ -14,10 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core;
-using TAlex.Testcheck.Tester.Controls;
-using TAlex.Testcheck.Tester.Controls.Testers;
 using TAlex.Testcheck.Tester.Reporting;
-using TAlex.Testcheck.Tester.Infrastructure;
 using TAlex.Testcheck.Tester.ViewModels;
 
 
@@ -31,12 +28,6 @@ namespace TAlex.Testcheck.Tester.Views
         #region Fields
 
         private const int MaxSubjectLength = 60;
-
-        private System.Windows.Threading.DispatcherTimer _timer;
-        private TimeSpan _timeElapsed;
-        private DateTime _startTime;
-        
-        private Test _test;
         private TestReport _testReport;
 
         #endregion
@@ -46,10 +37,6 @@ namespace TAlex.Testcheck.Tester.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            _timer = new System.Windows.Threading.DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(0.2);
-            _timer.Tick += new EventHandler(_timer_Tick);
         }
 
         #endregion
@@ -90,8 +77,7 @@ namespace TAlex.Testcheck.Tester.Views
             }
 
             // User authorization
-            UserAuthorizationWindow authWindow = new UserAuthorizationWindow();
-            authWindow.Owner = this;
+            UserAuthorizationWindow authWindow = new UserAuthorizationWindow { Owner = this };
             if (authWindow.ShowDialog() == true)
             {
                 _testReport = new TestReport();
@@ -121,29 +107,6 @@ namespace TAlex.Testcheck.Tester.Views
             Close();
         }
 
-        private void _timer_Tick(object sender, EventArgs e)
-        {
-            _timeElapsed = DateTime.Now - _startTime;
-            TimeSpan timeLeft = _test.Timelimit - _timeElapsed;
-
-            if (!_test.NoTimelimit && timeLeft <= TimeSpan.Zero)
-            {
-                ShowResultTest();
-            }
-            else
-            {
-                timeElapsedLabel.Content = String.Format("{0:D2}:{1:D2}:{2:D2}", _timeElapsed.Hours, _timeElapsed.Minutes, _timeElapsed.Seconds);
-
-                if (_test.NoTimelimit == false)
-                {
-                    if (timeLeft <= TimeSpan.FromMilliseconds(_test.Timelimit.TotalMilliseconds * 0.1))
-                        timeLeftLabel.Foreground = Brushes.Red;
-
-                    timeLeftLabel.Content = String.Format("{0:D2}:{1:D2}:{2:D2}", timeLeft.Hours, timeLeft.Minutes, timeLeft.Seconds);
-                }
-            }
-        }
-
         private void questionWebBrowser_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -160,9 +123,6 @@ namespace TAlex.Testcheck.Tester.Views
 
         private void LoadTest(Test test)
         {
-            _test = test;
-            test.Shuffle();
-
             if (!String.IsNullOrEmpty(test.Description))
             {
                 if (test.Description.Length < MaxSubjectLength)
@@ -171,27 +131,21 @@ namespace TAlex.Testcheck.Tester.Views
                     Title += String.Format(" - {0} ({1}...)", test.Title, test.Description.Substring(0, MaxSubjectLength));
             }
 
-            if (test.NoTimelimit)
-                timeLeftLabel.Content = "Unlimited";
-
+            test.Shuffle();
             DataContext = new TesterViewModel(test);
-
-            _startTime = DateTime.Now;
-            _timer.Start();
         }
 
         
 
-        private void ShowResultTest()
+        private void ShowTestResult()
         {
-            _timer.Stop();
+            //_timer.Stop();
 
             //_testReport.AnsweredQuestion = _testReport.TotalQuestion - _questions.Count; // TODO:
             //_testReport.Points = _points; //TODO:
-            _testReport.TimeElapsed = _timeElapsed;
+            //_testReport.TimeElapsed = _timeElapsed;
 
-            ResultWindow window = new ResultWindow(_testReport);
-            window.Owner = this;
+            ResultWindow window = new ResultWindow(_testReport) { Owner = this };
             window.ShowDialog();
         }
 
