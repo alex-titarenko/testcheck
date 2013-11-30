@@ -72,9 +72,9 @@ namespace TAlex.Testcheck.Tester.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please enter the user name..
         /// </summary>
-        internal static string UserAuthorizationFailedVerification {
+        internal static string UserAuthenticationFailedVerification {
             get {
-                return ResourceManager.GetString("UserAuthorizationFailedVerification", resourceCulture);
+                return ResourceManager.GetString("UserAuthenticationFailedVerification", resourceCulture);
             }
         }
     }

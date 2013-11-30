@@ -7,6 +7,7 @@ using System.Timers;
 using System.Windows.Input;
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Tester.Reporting;
 using TAlex.WPF.Mvvm;
 using TAlex.WPF.Mvvm.Commands;
 
@@ -25,11 +26,14 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         private Question _currentQuestion;
         private int _currentQuestionNumber;
-        private decimal _points;
+        private decimal _scoredPoints;
         private decimal _possiblePoints;
 
         private Dictionary<int, Question> _questions;
         private int _currQuestionIndex;
+
+        private decimal _gradingScale;
+        private UserInfo _userInfo;
 
         #endregion
 
@@ -70,12 +74,12 @@ namespace TAlex.Testcheck.Tester.ViewModels
         {
             get
             {
-                return _points;
+                return _scoredPoints;
             }
 
             private set
             {
-                Set(() => ScoredPoints, ref _points, value);
+                Set(() => ScoredPoints, ref _scoredPoints, value);
             }
         }
 
@@ -146,13 +150,13 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         #region Constructors
 
-        public TesterViewModel(Test test)
+        public TesterViewModel(Test test, UserInfo userInfo)
         {
             _timer = new Timer(200);
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
 
             InitCommands();
-            Init(test);
+            Init(test, userInfo);
         }
 
         #endregion
@@ -180,7 +184,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
             }
             else
             {
-                //ShowResultTest();
+                ShowTestResult();
             }
         }
 
@@ -209,8 +213,10 @@ namespace TAlex.Testcheck.Tester.ViewModels
         }
 
 
-        private void Init(Test test)
+        private void Init(Test test, UserInfo userInfo)
         {
+            _userInfo = userInfo;
+            _gradingScale = test.GradingScale;
             _questions = new Dictionary<int, Question>();
             _currQuestionIndex = 0;
 
@@ -251,6 +257,25 @@ namespace TAlex.Testcheck.Tester.ViewModels
         }
 
 
+        private void ShowTestResult()
+        {
+            _timer.Stop();
+
+            TestReport report = new TestReport
+            {
+                UserInfo = _userInfo,
+                GradingScale = _gradingScale,
+                TotalQuestion = QuestionsCount,
+                AnsweredQuestion = QuestionsCount - _questions.Count,
+                TotalPoints = TotalPoints,
+                ScoredPoints = ScoredPoints,
+                TimeElapsed = TimeElapsed
+            };
+
+            TAlex.Testcheck.Tester.Views.ResultWindow window = new TAlex.Testcheck.Tester.Views.ResultWindow(report);
+            window.ShowDialog();
+        }
+
         #region Event Handlers
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -260,7 +285,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
             if (TimeLeft.HasValue && TimeLeft <= TimeSpan.Zero)
             {
-                //ShowTestResult();
+                ShowTestResult();
             }
         }
 

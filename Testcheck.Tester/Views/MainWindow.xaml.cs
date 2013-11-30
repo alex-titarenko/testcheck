@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core;
-using TAlex.Testcheck.Tester.Reporting;
 using TAlex.Testcheck.Tester.ViewModels;
 
 
@@ -28,7 +27,6 @@ namespace TAlex.Testcheck.Tester.Views
         #region Fields
 
         private const int MaxSubjectLength = 60;
-        private TestReport _testReport;
 
         #endregion
 
@@ -67,9 +65,7 @@ namespace TAlex.Testcheck.Tester.Views
             }
             else
             {
-                ChoiceTestWindow window = new ChoiceTestWindow();
-                window.Owner = this;
-
+                ChoiceTestWindow window = new ChoiceTestWindow { Owner = this };
                 if (window.ShowDialog() == true && window.DialogResult == true)
                 {
                     test = window.SelectedTest;
@@ -77,20 +73,12 @@ namespace TAlex.Testcheck.Tester.Views
             }
 
             // User authorization
-            UserAuthorizationWindow authWindow = new UserAuthorizationWindow { Owner = this };
+            UserAuthenticationWindow authWindow = new UserAuthenticationWindow { Owner = this };
+
             if (authWindow.ShowDialog() == true)
             {
-                _testReport = new TestReport();
-
-                _testReport.UserName = authWindow.UserName;
-                _testReport.UserGroup = authWindow.UserGroup;
-                _testReport.TotalQuestion = test.QuestionCount;
-                _testReport.GradingScale = test.GradingScale;
-                _testReport.TotalPoints = test.TotalPoints;
+                LoadTest(test, authWindow.UserInfo);
             }
-
-            // Load and run the test
-            LoadTest(test);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -121,7 +109,7 @@ namespace TAlex.Testcheck.Tester.Views
 
         #endregion
 
-        private void LoadTest(Test test)
+        private void LoadTest(Test test, UserInfo userInfo)
         {
             if (!String.IsNullOrEmpty(test.Description))
             {
@@ -132,21 +120,7 @@ namespace TAlex.Testcheck.Tester.Views
             }
 
             test.Shuffle();
-            DataContext = new TesterViewModel(test);
-        }
-
-        
-
-        private void ShowTestResult()
-        {
-            //_timer.Stop();
-
-            //_testReport.AnsweredQuestion = _testReport.TotalQuestion - _questions.Count; // TODO:
-            //_testReport.Points = _points; //TODO:
-            //_testReport.TimeElapsed = _timeElapsed;
-
-            ResultWindow window = new ResultWindow(_testReport) { Owner = this };
-            window.ShowDialog();
+            DataContext = new TesterViewModel(test, userInfo);
         }
 
         #endregion

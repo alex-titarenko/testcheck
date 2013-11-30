@@ -1,130 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using TAlex.Testcheck.Core;
+
 
 namespace TAlex.Testcheck.Tester.Reporting
 {
     public class TestReport
     {
-        #region Fields
-
-        private string _userName;
-
-        private string _userGroup;
-
-        private int _totalQuestion;
-
-        private int _answeredQuestion;
-
-        private decimal _points;
-
-        private decimal _totalPoints;
-
-        private decimal _gradingScale;
-
-        private TimeSpan _timeElapsed;
-
-        #endregion
-
-        #region Properties
-
-        public string UserName
+        public UserInfo UserInfo
         {
-            get
-            {
-                return _userName;
-            }
-
-            set
-            {
-                _userName = value;
-            }
-        }
-
-        public string UserGroup
-        {
-            get
-            {
-                return _userGroup;
-            }
-
-            set
-            {
-                _userGroup = value;
-            }
+            get;
+            set;
         }
 
         public int TotalQuestion
         {
-            get
-            {
-                return _totalQuestion;
-            }
-
-            set
-            {
-                _totalQuestion = value;
-            }
+            get;
+            set;
         }
 
         public int AnsweredQuestion
         {
-            get
-            {
-                return _answeredQuestion;
-            }
-
-            set
-            {
-                _answeredQuestion = value;
-            }
+            get;
+            set;
         }
 
-        public decimal Points
+        public decimal ScoredPoints
         {
-            get
-            {
-                return _points;
-            }
-
-            set
-            {
-                _points = value;
-            }
+            get;
+            set;
         }
 
         public decimal TotalPoints
         {
-            get
-            {
-                return _totalPoints;
-            }
-
-            set
-            {
-                _totalPoints = value;
-            }
+            get;
+            set;
         }
 
         public decimal GradingScale
         {
-            get
-            {
-                return _gradingScale;
-            }
-
-            set
-            {
-                _gradingScale = value;
-            }
+            get;
+            set;
         }
 
         public decimal PercentCorrect
         {
             get
             {
-                if (_totalQuestion != 0)
-                    return _points / _totalPoints;
+                if (TotalQuestion != 0)
+                    return ScoredPoints / TotalPoints;
                 else
                     return 0;
             }
@@ -134,23 +57,14 @@ namespace TAlex.Testcheck.Tester.Reporting
         {
             get
             {
-                return PercentCorrect * _gradingScale;
+                return PercentCorrect * GradingScale;
             }
         }
 
         public TimeSpan TimeElapsed
         {
-            get
-            {
-                return _timeElapsed;
-            }
-
-            set
-            {
-                _timeElapsed = value;
-            }
+            get;
+            set;
         }
-
-        #endregion
     }
 }

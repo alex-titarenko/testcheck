@@ -153,7 +153,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserAuthorizationWindow.xaml">
+    <Page Include="Views\UserAuthenticationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -224,8 +224,8 @@
     <Compile Include="Views\ResultWindow.xaml.cs">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserAuthorizationWindow.xaml.cs">
-      <DependentUpon>UserAuthorizationWindow.xaml</DependentUpon>
+    <Compile Include="Views\UserAuthenticationWindow.xaml.cs">
+      <DependentUpon>UserAuthenticationWindow.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

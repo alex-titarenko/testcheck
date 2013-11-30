@@ -10,29 +10,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TAlex.Testcheck.Core;
+
 
 namespace TAlex.Testcheck.Tester.Views
 {
     /// <summary>
-    /// Interaction logic for UserAuthorizationWindow.xaml
+    /// Interaction logic for UserAuthenticationWindow.xaml
     /// </summary>
-    public partial class UserAuthorizationWindow : Window
+    public partial class UserAuthenticationWindow : Window
     {
         #region Properties
 
-        public string UserName
+        public UserInfo UserInfo
         {
             get
             {
-                return userNameTextBox.Text;
-            }
-        }
-
-        public string UserGroup
-        {
-            get
-            {
-                return userGroupTextBox.Text;
+                return (UserInfo)DataContext;
             }
         }
 
@@ -40,7 +34,7 @@ namespace TAlex.Testcheck.Tester.Views
 
         #region Constructors
 
-        public UserAuthorizationWindow()
+        public UserAuthenticationWindow()
         {
             InitializeComponent();
         }
@@ -53,9 +47,9 @@ namespace TAlex.Testcheck.Tester.Views
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(userNameTextBox.Text.Trim()))
+            if (String.IsNullOrWhiteSpace(UserInfo.Name))
             {
-                MessageBox.Show(this, Properties.Resources.UserAuthorizationFailedVerification, "Testcheck",
+                MessageBox.Show(this, Properties.Resources.UserAuthenticationFailedVerification, "Testcheck",
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
