@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Tester.ViewModels;
+using TAlex.Testcheck.Tester.Infrastructure.UI;
 
 
 namespace TAlex.Testcheck.Tester.Views
@@ -120,7 +121,7 @@ namespace TAlex.Testcheck.Tester.Views
             }
 
             test.Shuffle();
-            DataContext = new TesterViewModel(test, userInfo);
+            DataContext = new TesterViewModel(test, userInfo, new TestResultDialogService());
         }
 
         #endregion

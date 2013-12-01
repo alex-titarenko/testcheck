@@ -171,6 +171,8 @@
     <Compile Include="Converters\TimeLeftToBrushConverter.cs" />
     <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="Infrastructure\QuestionTesterAttribute.cs" />
+    <Compile Include="Infrastructure\UI\ITestResultDialogService.cs" />
+    <Compile Include="Infrastructure\UI\TestResultDialogService.cs" />
     <Compile Include="ViewModels\TesterViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

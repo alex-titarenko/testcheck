@@ -7,6 +7,7 @@ using System.Timers;
 using System.Windows.Input;
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Tester.Infrastructure.UI;
 using TAlex.Testcheck.Tester.Reporting;
 using TAlex.WPF.Mvvm;
 using TAlex.WPF.Mvvm.Commands;
@@ -34,6 +35,8 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         private decimal _gradingScale;
         private UserInfo _userInfo;
+
+        protected readonly ITestResultDialogService TestResultDialogService;
 
         #endregion
 
@@ -150,8 +153,10 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         #region Constructors
 
-        public TesterViewModel(Test test, UserInfo userInfo)
+        public TesterViewModel(Test test, UserInfo userInfo, ITestResultDialogService testResultDialogService)
         {
+            TestResultDialogService = testResultDialogService;
+
             _timer = new Timer(200);
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
 
@@ -272,8 +277,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
                 TimeElapsed = TimeElapsed
             };
 
-            TAlex.Testcheck.Tester.Views.ResultWindow window = new TAlex.Testcheck.Tester.Views.ResultWindow(report);
-            window.ShowDialog();
+            TestResultDialogService.ShowResult(report);
         }
 
         #region Event Handlers
