@@ -132,6 +132,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         {
             if (_animationEnded == false)
                 return;
+            Cursor = Cursors.Hand;
 
             Point pos = e.GetPosition((IInputElement)sender);
             IInputElement elem = mainGrid.InputHitTest(pos);
@@ -213,6 +214,7 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
         {
             mainGrid.ReleaseMouseCapture();
 
+            Cursor = null;
             if (_currentLinkLine == null)
                 return;
 
@@ -308,7 +310,8 @@ namespace TAlex.Testcheck.Tester.Controls.Testers
                 Tag = index,
                 Margin = new Thickness(2),
                 Padding = new Thickness(15, 1, 10, 1),
-                Background = new SolidColorBrush(Color.FromRgb(235, 235, 235))
+                Background = new SolidColorBrush(Color.FromRgb(235, 235, 235)),
+                Cursor = Cursors.Hand
             };
         }
 

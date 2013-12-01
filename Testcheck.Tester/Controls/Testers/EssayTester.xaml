@@ -2,6 +2,23 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid VerticalAlignment="Top">
-        <TextBox Text="{Binding ActualAnswer, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#F0F0F0" Height="23" />
+        <Grid.Resources>
+            <Style TargetType="TextBox" x:Key="stlHintbox">
+                <Style.Triggers>
+                    <Trigger Property="Text" Value="">
+                        <Setter Property="TextBox.Background">
+                            <Setter.Value>
+                                <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Center" Visual="{Binding ElementName=hintText}" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+
+        <TextBox Name="answerTextBox" Text="{Binding ActualAnswer, UpdateSourceTrigger=PropertyChanged}" Tag="Please type answer here!" Style="{StaticResource stlHintbox}" BorderBrush="#F0F0F0" Height="23" />
+        <Border Visibility="Hidden">
+            <TextBlock Padding="2,0,0,3" Name="hintText" Background="{Binding Path=Background, ElementName=answerTextBox}" Text="{Binding Tag, ElementName=answerTextBox}" FontStyle="Italic" Foreground="Gray" VerticalAlignment="Center" />
+        </Border>
     </Grid>
 </UserControl>
