@@ -97,6 +97,14 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                return ActualKeyPairs != null && ActualKeyPairs.Count >= Math.Max(LeftChoices.Count, RightChoices.Count);
+            }
+        }
+
         #endregion
 
         #region Constructors

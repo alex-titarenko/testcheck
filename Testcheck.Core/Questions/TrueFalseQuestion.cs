@@ -63,6 +63,14 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                return ActualChoice.HasValue;
+            }
+        }
+
         #endregion
 
         #region Constructors

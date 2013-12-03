@@ -60,6 +60,14 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                return !String.IsNullOrWhiteSpace(ActualAnswer);
+            }
+        }
+
         #endregion
 
         #region Constructors

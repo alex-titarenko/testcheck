@@ -73,6 +73,11 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public abstract bool CanCheck
+        {
+            get;
+        }
+
         [XmlIgnore]
         public abstract string TypeName { get; }
 

@@ -209,7 +209,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         private bool CanAccept()
         {
-            return _questions.Any();
+            return _questions.Any() && CurrentQuestion != null && CurrentQuestion.CanCheck;
         }
 
         private bool CanMoveTo()

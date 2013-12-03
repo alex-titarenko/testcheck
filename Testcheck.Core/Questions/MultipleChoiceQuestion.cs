@@ -77,6 +77,14 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                return ActualAnswer.HasValue;
+            }
+        }
+
         #endregion
 
         #region Constructors

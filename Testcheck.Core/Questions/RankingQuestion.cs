@@ -45,6 +45,14 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         #endregion
 
         #region Constructors

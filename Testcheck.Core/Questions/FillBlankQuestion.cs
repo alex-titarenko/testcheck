@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
+
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -62,6 +64,15 @@ namespace TAlex.Testcheck.Core.Questions
             }
         }
 
+        public override bool CanCheck
+        {
+            get
+            {
+                IList<string> gaps = ExtractBlankGaps();
+                return gaps.Count == ActualAnswers.Count && ActualAnswers.All(x => !String.IsNullOrWhiteSpace(x));
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -73,8 +84,7 @@ namespace TAlex.Testcheck.Core.Questions
         protected FillBlankQuestion(FillBlankQuestion question)
             : base(question)
         {
-            if (question._blankText != null)
-                _blankText = (string)question._blankText.Clone();
+            BlankText = question.BlankText;
         }
 
         #endregion
@@ -83,10 +93,10 @@ namespace TAlex.Testcheck.Core.Questions
 
         public override decimal Check()
         {
-            MatchCollection matches = Regex.Matches(_blankText, FieldPattern);
+            IList<string> gaps = ExtractBlankGaps();
             int count = ActualAnswers.Count;
 
-            if (matches.Count != count)
+            if (gaps.Count != count)
                 throw new ArgumentOutOfRangeException();
 
             decimal pointValue = 0;
@@ -94,7 +104,7 @@ namespace TAlex.Testcheck.Core.Questions
 
             for (int i = 0; i < count; i++)
             {
-                if (matches[i].Groups["field"].Value.ToUpper() == ActualAnswers[i].ToUpper())
+                if (gaps[i].ToUpper() == ActualAnswers[i].ToUpper())
                     pointValue += pointValuePerAnswer;
             }
 
@@ -141,6 +151,17 @@ namespace TAlex.Testcheck.Core.Questions
         {
             return new FillBlankQuestion(this);
         }
+
+
+        #region Helpers
+
+        private IList<string> ExtractBlankGaps()
+        {
+            MatchCollection matches = Regex.Matches(_blankText, FieldPattern);
+            return matches.Cast<Match>().Select(m => m.Groups["field"].Value).ToList();
+        }
+
+        #endregion
 
         #endregion
     }
