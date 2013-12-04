@@ -161,7 +161,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
             _timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
 
             InitCommands();
-            Init(test, userInfo);
+            Launch(test, userInfo);
         }
 
         #endregion
@@ -218,7 +218,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
         }
 
 
-        private void Init(Test test, UserInfo userInfo)
+        private void Launch(Test test, UserInfo userInfo)
         {
             _userInfo = userInfo;
             _gradingScale = test.GradingScale;

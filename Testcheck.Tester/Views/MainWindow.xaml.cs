@@ -25,12 +25,6 @@ namespace TAlex.Testcheck.Tester.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Fields
-
-        private const int MaxSubjectLength = 60;
-
-        #endregion
-
         #region Constructors
 
         public MainWindow()
@@ -112,14 +106,8 @@ namespace TAlex.Testcheck.Tester.Views
 
         private void LoadTest(Test test, UserInfo userInfo)
         {
-            if (!String.IsNullOrEmpty(test.Description))
-            {
-                if (test.Description.Length < MaxSubjectLength)
-                    Title += String.Format(" - {0} ({1})", test.Title, test.Description);
-                else
-                    Title += String.Format(" - {0} ({1}...)", test.Title, test.Description.Substring(0, MaxSubjectLength));
-            }
-
+            Title += String.Format(" - {0}", test.Title);
+            
             test.Shuffle();
             DataContext = new TesterViewModel(test, userInfo, new TestResultDialogService());
         }

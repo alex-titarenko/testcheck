@@ -23,6 +23,11 @@
         </LinearGradientBrush>
     </Window.Resources>
     
+    <Window.InputBindings>
+        <KeyBinding Key="Left" Command="{Binding MovePreviousCommand}" />
+        <KeyBinding Key="Right" Command="{Binding MoveNextCommand}" />
+    </Window.InputBindings>
+    
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -98,10 +103,87 @@
 
             <Grid Width="250" Margin="5">
                 <Grid.Resources>
+                    <Style x:Key="ControlButtonStyle" TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="1"/>
+                        
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <ControlTemplate.Resources>
+                                        <Storyboard x:Key="MouseOverAnimation">
+                                            <ColorAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(BorderBrush).(Color)" To="#ffc7c7ff" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                        <Storyboard x:Key="MouseOutAnimation">
+                                            <ColorAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(BorderBrush).(Color)" To="Silver" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                        <Storyboard x:Key="MouseDownAnimation">
+                                            <ColorAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(BorderBrush).(Color)" To="#ffc7c7ff" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="content" Storyboard.TargetProperty="(RenderTransform).(ScaleX)" To=".97" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="content" Storyboard.TargetProperty="(RenderTransform).(ScaleY)" To=".97" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                        <Storyboard x:Key="MouseUpAnimation">
+                                            <ColorAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(BorderBrush).(Color)" To="Silver" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="content" Storyboard.TargetProperty="(RenderTransform).(ScaleX)" To="1" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetName="content" Storyboard.TargetProperty="(RenderTransform).(ScaleY)" To="1" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </ControlTemplate.Resources>
+
+
+                                    <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter Name="content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            Margin="{TemplateBinding Padding}"
+                                            RecognizesAccessKey="True"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                            <ContentPresenter.RenderTransform>
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </ContentPresenter.RenderTransform>
+                                            
+                                        </ContentPresenter>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource MouseDownAnimation}" />
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource MouseUpAnimation}" />
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource MouseOverAnimation}" />
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource MouseOutAnimation}" />
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
                     <Style x:Key="ImageButtonStyle" TargetType="Image">
+                        <Style.Resources>
+                            <Storyboard x:Key="IsDisabledAnimation">
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.2" />
+                            </Storyboard>
+                            <Storyboard x:Key="IsEnabledAnimation">
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </Style.Resources>
+
                         <Style.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsDisabledAnimation}" />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsEnabledAnimation}" />
+                                </Trigger.ExitActions>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -113,15 +195,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Margin="0,5,10,5" Grid.Column="0" Background="{DynamicResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Previous question" Command="{Binding MovePreviousCommand}">
+                <Button Margin="0,5,10,5" Grid.Column="0" Background="{DynamicResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Previous question" Style="{StaticResource ControlButtonStyle}" Command="{Binding MovePreviousCommand}">
                     <Image Source="..\Resources\Images\previous.png" Style="{StaticResource ImageButtonStyle}" />
                 </Button>
 
-                <Button Margin="10,0,10,0" Grid.Column="1" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Accept answer" Command="{Binding AcceptCommand}">
+                <Button Margin="10,0,10,0" Grid.Column="1" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Accept answer" Style="{StaticResource ControlButtonStyle}" Command="{Binding AcceptCommand}">
                     <Image Source="..\Resources\Images\accept.png" Style="{StaticResource ImageButtonStyle}" />
                 </Button>
 
-                <Button Margin="10,5,0,5" Grid.Column="2" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Next question" Command="{Binding MoveNextCommand}">
+                <Button Margin="10,5,0,5" Grid.Column="2" Background="{StaticResource ButtonBgBrush}" BorderBrush="Silver" Focusable="False" ToolTip="Next question" Style="{StaticResource ControlButtonStyle}" Command="{Binding MoveNextCommand}">
                     <Image Source="..\Resources\Images\forward.png" Style="{StaticResource ImageButtonStyle}" />
                 </Button>
             </Grid>
@@ -138,9 +220,9 @@
             
             <StatusBarItem Content="Question" Foreground="{StaticResource TextBrush}" />
 
-            <StatusBarItem Content="{Binding CurrentQuestionNumber}" Foreground="{StaticResource TextBrush}" />
+            <StatusBarItem Content="{Binding CurrentQuestionNumber, FallbackValue=0}" Foreground="{StaticResource TextBrush}" />
             <StatusBarItem Content="of" Foreground="{StaticResource TextBrush}" />
-            <StatusBarItem Content="{Binding QuestionsCount}" Foreground="{StaticResource TextBrush}" />
+            <StatusBarItem Content="{Binding QuestionsCount, FallbackValue=0}" Foreground="{StaticResource TextBrush}" />
         </StatusBar>
     </Grid>
 </Window>
