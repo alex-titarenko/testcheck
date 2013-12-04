@@ -106,7 +106,7 @@ namespace TAlex.Testcheck.Tester.Views
 
         private void LoadTest(Test test, UserInfo userInfo)
         {
-            Title += String.Format(" - {0}", test.Title);
+            Title = String.Format("Testcheck Tester - {0}", test.Title);
             
             test.Shuffle();
             DataContext = new TesterViewModel(test, userInfo, new TestResultDialogService());

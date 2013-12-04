@@ -10,8 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
-
 using TAlex.Testcheck.Core;
+
 
 namespace TAlex.Testcheck.Tester.Views
 {
@@ -92,6 +92,11 @@ namespace TAlex.Testcheck.Tester.Views
         }
 
         #region Event Handlers
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            testsListView.SelectedIndex = 0;
+        }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
