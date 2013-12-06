@@ -13,12 +13,14 @@ using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core.Choices;
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Editor.Infrastructure;
 
 namespace TAlex.Testcheck.Editor.Controls.Editors
 {
     /// <summary>
     /// Interaction logic for MultipleResponseEditor.xaml
     /// </summary>
+    [QuestionEditor(typeof(MultipleResponseQuestion))]
     public partial class MultipleResponseEditor : UserControl
     {
         #region Fields

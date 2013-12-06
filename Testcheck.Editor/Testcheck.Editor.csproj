@@ -99,6 +99,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\QuestionToEditorControlConverter.cs" />
+    <Compile Include="Infrastructure\QuestionEditorAttribute.cs" />
     <Compile Include="Services\Windows\ApplicationService.cs" />
     <Compile Include="Services\Windows\IApplicationService.cs" />
     <Compile Include="Views\ErrorReportingWindow.xaml.cs">

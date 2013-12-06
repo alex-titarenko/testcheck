@@ -2,7 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
+    xmlns:convs="clr-namespace:TAlex.Testcheck.Editor.Converters"
     MinHeight="480" MinWidth="740" Height="600" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <convs:QuestionToEditorControlConverter x:Key="QuestionToEditorControlConverter" />
+    </Window.Resources>
     
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="CommandBindingNew_Executed" />
@@ -117,17 +122,17 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition MinHeight="100" Height="215" />
                             </Grid.RowDefinitions>
-                            
-                            <Label Name="questionTypeLabel" Grid.Row="0" Margin="10,5,0,0" Padding="0" FontWeight="800" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                            <Label Content="{Binding TypeName}" Grid.Row="0" Margin="10,5,0,0" Padding="0" FontWeight="800" HorizontalAlignment="Left" VerticalAlignment="Top" />
                             
                             <Label Margin="10,30,0,0" Grid.Row="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top">Title:</Label>
                             <TextBox Name="questionTitleTextBox" Grid.Row="0" Margin="50,28,150,0" Height="23" Padding="0" VerticalAlignment="Top" TextChanged="questionTitleTextBox_TextChanged"></TextBox>
                             
                             <Label Margin="0,30,100,0" Grid.Row="0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top">Points:</Label>
-                            <talex:NumericUpDown x:Name="questionPointsNumericUpDown" Grid.Row="0" Margin="0,28,12,0" Width="70" Height="22" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top" Increment="0.5" DecimalPlaces="2" Maximum="1000"></talex:NumericUpDown>
-                            
+                            <talex:NumericUpDown Value="{Binding Points, Mode=TwoWay}" Grid.Row="0" Margin="0,28,12,0" Width="70" Height="22" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top" Increment="0.5" DecimalPlaces="2" Maximum="1000" />
+
                             <GroupBox Grid.Row="0" Header="Question (plaintext/html)" Margin="10,55,10,5">
-                                <TextBox Name="questionTextBox" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" TextChanged="questionTextBox_TextChanged"  />
+                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" />
                             </GroupBox>
                                     
                             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -154,8 +159,8 @@
                                         <ComboBoxItem>Except two last</ComboBoxItem>
                                     </ComboBox>
                                 </Grid>
-                                
-                                <Grid Name="questionEditor" Grid.Row="1" />
+
+                                <ContentControl Content="{Binding Path=., Converter={StaticResource QuestionToEditorControlConverter}}" Grid.Row="1" />
                             </Grid>
                         </Grid>
                     </GroupBox>

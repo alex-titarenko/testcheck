@@ -12,12 +12,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Editor.Infrastructure;
 
 namespace TAlex.Testcheck.Editor.Controls.Editors
 {
     /// <summary>
     /// Interaction logic for FillBlankEditor.xaml
     /// </summary>
+    [QuestionEditor(typeof(FillBlankQuestion))]
     public partial class FillBlankEditor : UserControl
     {
         #region Fields

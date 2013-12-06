@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
@@ -16,11 +18,11 @@ using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
-using TAlex.Testcheck.Editor.Controls.Editors;
 
 using TAlex.WPF.Controls;
 using TAlex.Testcheck.Editor.Locators;
 using TAlex.Testcheck.Editor.Services.Licensing;
+using TAlex.Testcheck.Editor.Infrastructure;
 
 namespace TAlex.Testcheck.Editor.Views
 {
@@ -205,6 +207,38 @@ namespace TAlex.Testcheck.Editor.Views
             timelimitTextBox.Text = TimeSpan.Zero.ToString();
         }
 
+        private void passwordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            _currentTest.Password = passwordPasswordBox.Password;
+            PasswordBox passwordBox = (PasswordBox)sender;
+
+            passwordTextBox.TextChanged -= passwordTextBox_TextChanged;
+            passwordTextBox.Text = _currentTest.Password;
+            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
+        }
+
+        private void passwordTextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            passwordPasswordBox.Password = passwordTextBox.Text;
+        }
+
+        private void showPasswordCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+
+            if (checkBox.IsChecked == true)
+            {
+                passwordPasswordBox.Visibility = System.Windows.Visibility.Collapsed;
+                passwordTextBox.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                passwordPasswordBox.Visibility = System.Windows.Visibility.Visible;
+                passwordTextBox.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
+
         private void questionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _currentQuestionIndex = questionsListBox.SelectedIndex;
@@ -282,48 +316,11 @@ namespace TAlex.Testcheck.Editor.Views
             }
         }
 
-        private void questionTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (_currentQuestionIndex != -1)
-                _currentTest.Questions[_currentQuestionIndex].Description = questionTextBox.Text;
-        }
-
         private void shuffleModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_currentTest != null && _currentQuestionIndex != -1)
             {
                 ((IShuffles)_currentTest.Questions[_currentQuestionIndex]).ShuffleMode = (ShuffleMode)shuffleModeComboBox.SelectedIndex;
-            }
-        }
-
-        private void passwordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            _currentTest.Password = passwordPasswordBox.Password;
-            PasswordBox passwordBox = (PasswordBox)sender;
-
-            passwordTextBox.TextChanged -= passwordTextBox_TextChanged;
-            passwordTextBox.Text = _currentTest.Password;
-            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
-        }
-
-        private void passwordTextBox_TextChanged(object sender, RoutedEventArgs e)
-        {
-            passwordPasswordBox.Password = passwordTextBox.Text;
-        }
-
-        private void showPasswordCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-
-            if (checkBox.IsChecked == true)
-            {
-                passwordPasswordBox.Visibility = System.Windows.Visibility.Collapsed;
-                passwordTextBox.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                passwordPasswordBox.Visibility = System.Windows.Visibility.Visible;
-                passwordTextBox.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -390,29 +387,17 @@ namespace TAlex.Testcheck.Editor.Views
 
         private void LoadQuestionToUI(Question question)
         {
-            questionEditor.Children.Clear();
-
+            questionInformationGroupBox.DataContext = question;
 
             if (question == null)
             {
-                questionTypeLabel.Content = null;
                 questionTitleTextBox.Text = String.Empty;
-
-                questionPointsNumericUpDown.SetBinding(NumericUpDown.ValueProperty, new Binding());
-
-                questionTextBox.Text = String.Empty;
                 questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(0);
                 return;
             }
 
-            questionTypeLabel.Content = question.TypeName;
             questionTitleTextBox.Text = question.Title;
-            questionTextBox.Text = question.Description;
-
-            questionPointsNumericUpDown.SetBinding(NumericUpDown.ValueProperty,
-                new Binding("Points") { Source = question, Mode = BindingMode.TwoWay });
-
-
+            
             if (question is IShuffles)
             {
                 questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(35);
@@ -422,21 +407,6 @@ namespace TAlex.Testcheck.Editor.Views
             {
                 questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(0);
             }
-
-            if (question is TrueFalseQuestion)
-                questionEditor.Children.Add(new TrueFalseEditor((TrueFalseQuestion)question));
-            else if (question is MultipleChoiceQuestion)
-                questionEditor.Children.Add(new MultipleChoiceEditor((MultipleChoiceQuestion)question));
-            else if (question is MultipleResponseQuestion)
-                questionEditor.Children.Add(new MultipleResponseEditor((MultipleResponseQuestion)question));
-            else if (question is EssayQuestion)
-                questionEditor.Children.Add(new EssayEditor((EssayQuestion)question));
-            else if (question is FillBlankQuestion)
-                questionEditor.Children.Add(new FillBlankEditor((FillBlankQuestion)question));
-            else if (question is MatchingQuestion)
-                questionEditor.Children.Add(new MatchingEditor((MatchingQuestion)question));
-            else if (question is RankingQuestion)
-                questionEditor.Children.Add(new RankingEditor((RankingQuestion)question));
         }
 
         #region Helpers

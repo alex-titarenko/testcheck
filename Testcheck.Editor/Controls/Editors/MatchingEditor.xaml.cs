@@ -12,12 +12,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core.Questions;
+using TAlex.Testcheck.Editor.Infrastructure;
+
 
 namespace TAlex.Testcheck.Editor.Controls.Editors
 {
     /// <summary>
     /// Interaction logic for MatchingEditor.xaml
     /// </summary>
+    [QuestionEditor(typeof(MatchingQuestion))]
     public partial class MatchingEditor : UserControl
     {
         #region Fields
