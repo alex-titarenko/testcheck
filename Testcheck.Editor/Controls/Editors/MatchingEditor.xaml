@@ -4,6 +4,7 @@
     xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:core="clr-namespace:TAlex.Testcheck.Core;assembly=Testcheck.Core"
+    xmlns:questions="clr-namespace:TAlex.Testcheck.Core.Questions;assembly=Testcheck.Core"
     xmlns:convs="clr-namespace:TAlex.Testcheck.Editor.Converters"
     MinWidth="500">
     <UserControl.Resources>
@@ -12,6 +13,12 @@
         <ObjectDataProvider x:Key="ShuffleModesDataProvider" ObjectType="{x:Type system:Enum}" MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="core:ShuffleMode" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="MatchingModeDataProvider" ObjectType="{x:Type system:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="questions:MatchingMode" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
@@ -29,11 +36,14 @@
         </Grid.ColumnDefinitions>
                
         <Label Padding="0" Margin="0,0,160,0" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Left">Matching mode:</Label>
-        <ComboBox Name="matchingModeComboBox" SelectedIndex="0" Margin="100,0,0,0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" Width="150" SelectionChanged="matchingModeComboBox_SelectionChanged">
-            <ComboBoxItem>One to One</ComboBoxItem>
-            <ComboBoxItem>Many to One</ComboBoxItem>
-            <ComboBoxItem>One to Many</ComboBoxItem>
-            <ComboBoxItem>Many to Many</ComboBoxItem>
+        <ComboBox SelectedIndex="0" Margin="100,0,0,0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" Width="150"
+                ItemsSource="{Binding Source={StaticResource MatchingModeDataProvider}}"
+                SelectedItem="{Binding MatchingMode}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=., Converter={StaticResource EnumValueToReadableValueConverter}}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <Grid Grid.ColumnSpan="3">

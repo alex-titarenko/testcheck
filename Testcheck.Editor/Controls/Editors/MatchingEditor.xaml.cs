@@ -49,8 +49,6 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
 
         private void LoadQuestion()
         {
-            matchingModeComboBox.SelectedIndex = (int)_question.MatchingMode;
-
             leftChoicesGrid.Children.Clear();
             leftChoicesGrid.RowDefinitions.Clear();
 
@@ -90,12 +88,6 @@ namespace TAlex.Testcheck.Editor.Controls.Editors
         }
 
         #region Event Handlers
-
-        private void matchingModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_question != null)
-                _question.MatchingMode = (MatchingMode)matchingModeComboBox.SelectedIndex;
-        }
 
         private void moveUpLeftChoiceButton_Click(object sender, RoutedEventArgs e)
         {
