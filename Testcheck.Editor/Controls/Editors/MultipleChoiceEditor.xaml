@@ -1,8 +1,39 @@
 ﻿<UserControl x:Class="TAlex.Testcheck.Editor.Controls.Editors.MultipleChoiceEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:core="clr-namespace:TAlex.Testcheck.Core;assembly=Testcheck.Core"
+    xmlns:convs="clr-namespace:TAlex.Testcheck.Editor.Converters">
+    <UserControl.Resources>
+        <convs:EnumValueToReadableValueConverter x:Key="EnumValueToReadableValueConverter" />
+
+        <ObjectDataProvider x:Key="ShuffleModesDataProvider" ObjectType="{x:Type system:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="core:ShuffleMode" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+
     <Grid Margin="0">
-        <GroupBox Header="Choices" Margin="0,0,0,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Label Margin="0,0,160,0" HorizontalAlignment="Right" VerticalAlignment="Center">Shuffle mode:</Label>
+            <ComboBox Height="23" Width="150" HorizontalAlignment="Right"
+                      ItemsSource="{Binding Source={StaticResource ShuffleModesDataProvider}}"
+                      SelectedItem="{Binding ShuffleMode}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=., Converter={StaticResource EnumValueToReadableValueConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <GroupBox Header="Choices" Grid.Row="1" Margin="0,0,0,30">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid Name="choicesGrid">
                     <Grid.ColumnDefinitions>
@@ -16,7 +47,7 @@
             </ScrollViewer>
         </GroupBox>
 
-        <Button Height="25" VerticalAlignment="Bottom" Click="addChoiceButton_Click">
+        <Button Height="25" Grid.Row="1" VerticalAlignment="Bottom" Click="addChoiceButton_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Margin="2,2,10,2" Source="/Resources/Images/add.png" />
                 <Label Padding="0">Add choice</Label>

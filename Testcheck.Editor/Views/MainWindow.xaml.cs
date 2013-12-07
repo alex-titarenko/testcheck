@@ -316,14 +316,6 @@ namespace TAlex.Testcheck.Editor.Views
             }
         }
 
-        private void shuffleModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_currentTest != null && _currentQuestionIndex != -1)
-            {
-                ((IShuffles)_currentTest.Questions[_currentQuestionIndex]).ShuffleMode = (ShuffleMode)shuffleModeComboBox.SelectedIndex;
-            }
-        }
-
         #endregion
 
         private bool LoadTest(string path)
@@ -388,25 +380,7 @@ namespace TAlex.Testcheck.Editor.Views
         private void LoadQuestionToUI(Question question)
         {
             questionInformationGroupBox.DataContext = question;
-
-            if (question == null)
-            {
-                questionTitleTextBox.Text = String.Empty;
-                questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(0);
-                return;
-            }
-
-            questionTitleTextBox.Text = question.Title;
-            
-            if (question is IShuffles)
-            {
-                questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(35);
-                shuffleModeComboBox.SelectedIndex = (int)((IShuffles)question).ShuffleMode;
-            }
-            else
-            {
-                questionAddInfoGrid.RowDefinitions[0].Height = new GridLength(0);
-            }
+            questionTitleTextBox.Text = question == null ? String.Empty : question.Title;
         }
 
         #region Helpers

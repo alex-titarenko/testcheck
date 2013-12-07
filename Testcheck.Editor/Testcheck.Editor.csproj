@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnumValueToReadableValueConverter.cs" />
     <Compile Include="Converters\QuestionToEditorControlConverter.cs" />
     <Compile Include="Infrastructure\QuestionEditorAttribute.cs" />
     <Compile Include="Services\Windows\ApplicationService.cs" />
