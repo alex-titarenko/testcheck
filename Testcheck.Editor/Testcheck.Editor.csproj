@@ -58,6 +58,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -70,8 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TAlex.Common.1.5.5065.41482\lib\net40\TAlex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="TAlex.WPF.Controls">
-      <HintPath>..\packages\TAlex.WPF.Controls.1.7.5018.40064\lib\net40\TAlex.WPF.Controls.dll</HintPath>
+    <Reference Include="TAlex.WPF.Controls, Version=1.8.5125.42106, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TAlex.WPF.Controls.1.8.5125.42106\lib\net40\TAlex.WPF.Controls.dll</HintPath>
     </Reference>
     <Reference Include="TAlex.WPF.Mvvm">
       <HintPath>..\packages\TAlex.WPF.Mvvm.1.0.4937.37054\lib\net45\TAlex.WPF.Mvvm.dll</HintPath>

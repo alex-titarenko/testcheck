@@ -4,8 +4,8 @@
     <Grid>
         <GroupBox Header="Answer">
             <StackPanel>
-                <RadioButton Name="trueRadioButton" Margin="4" Checked="trueRadioButton_Checked">True</RadioButton>
-                <RadioButton Name="falseRadioButton" Margin="4" Checked="falseRadioButton_Checked">False</RadioButton>
+                <RadioButton Name="trueRadioButton" Margin="3" Checked="trueRadioButton_Checked">True</RadioButton>
+                <RadioButton Name="falseRadioButton" Margin="3" Checked="falseRadioButton_Checked">False</RadioButton>
             </StackPanel>
         </GroupBox>
     </Grid>

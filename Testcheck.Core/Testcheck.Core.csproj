@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Choices\AnswerChoice.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
+    <Compile Include="Helpers\QuestionContentHelper.cs" />
     <Compile Include="Helpers\Shuffles.cs" />
     <Compile Include="IShuffles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

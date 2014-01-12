@@ -303,7 +303,7 @@ namespace TAlex.Testcheck.Editor.Views
                 string title = questionTitleTextBox.Text;
 
                 _currentTest.Questions[_currentQuestionIndex].Title = title;
-
+                
                 questionsListBox.SelectionChanged -= new SelectionChangedEventHandler(questionsListBox_SelectionChanged);
 
                 if (String.IsNullOrEmpty(title))

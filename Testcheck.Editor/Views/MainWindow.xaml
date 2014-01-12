@@ -3,9 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
     xmlns:convs="clr-namespace:TAlex.Testcheck.Editor.Converters"
-    MinHeight="480" MinWidth="740" Height="600" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    MinHeight="480" MinWidth="740" Height="650" Width="930" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     
     <Window.Resources>
+        <talex:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <convs:QuestionToEditorControlConverter x:Key="QuestionToEditorControlConverter" />
     </Window.Resources>
     
@@ -132,7 +133,7 @@
                             <talex:NumericUpDown Value="{Binding Points, Mode=TwoWay}" Grid.Row="0" Margin="0,28,12,0" Width="70" Height="22" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top" Increment="0.5" DecimalPlaces="2" Maximum="1000" />
 
                             <GroupBox Grid.Row="0" Header="Question (plaintext/html)" Margin="10,55,10,5">
-                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" />
+                                <talex:HtmlRichEditor HtmlSource="{Binding Description, Mode=TwoWay}" />
                             </GroupBox>
                                     
                             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

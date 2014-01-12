@@ -148,7 +148,7 @@ namespace TAlex.Testcheck.Core.Questions
 
             for (int i = 0; i < _choices.Count; i++)
             {
-                if (_choices[i] != q._choices[i])
+                if (!Object.Equals(_choices[i], q._choices[i]))
                     return false;
             }
 
@@ -216,6 +216,33 @@ namespace TAlex.Testcheck.Core.Questions
             {
                 Order = order;
                 Choice = choice;
+            }
+
+            #endregion
+
+            #region Methods
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+
+                RankingChoice q = (RankingChoice)obj;
+
+                if (Order != q.Order) return false;
+                if (Choice != q.Choice) return false;
+
+                return true;
+            }
+
+            public override int GetHashCode()
+            {
+                return Order.GetHashCode() ^ Choice.GetHashCode();
+            }
+
+            public override string ToString()
+            {
+                return String.Format("{0}: {1}", Order, Choice);
             }
 
             #endregion

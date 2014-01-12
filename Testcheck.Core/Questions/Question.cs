@@ -5,6 +5,9 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Globalization;
+using System.ComponentModel;
+using System.Net;
+
 
 namespace TAlex.Testcheck.Core.Questions
 {
@@ -13,7 +16,7 @@ namespace TAlex.Testcheck.Core.Questions
     /// such as multiple choice, true/false, matching, etc.
     /// </summary>
     [Serializable]
-    public abstract class Question : ICloneable, IXmlSerializable
+    public abstract class Question : INotifyPropertyChanged, ICloneable, IXmlSerializable
     {
         #region Fields
 
@@ -54,6 +57,7 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _description = value;
+                OnPropertyChanged("Description");
             }
         }
 
@@ -87,13 +91,14 @@ namespace TAlex.Testcheck.Core.Questions
 
         public Question()
         {
+            Description = String.Empty;
         }
 
         protected Question(Question question)
         {
-            _title = (string)question._title.Clone();
-            _description = (string)question._description.Clone();
-            _points = question._points;
+            Title = question.Title;
+            Description = question.Description;
+            Points = question.Points;
         }
 
         #endregion
@@ -121,7 +126,7 @@ namespace TAlex.Testcheck.Core.Questions
             if (titleElem != null)
                 Title = titleElem.InnerText;
 
-            Description = element[DescriptionElemName].InnerXml;
+            Description = WebUtility.HtmlDecode(element[DescriptionElemName].InnerXml);
 
             XmlElement pointsElem = element[PointsElemName];
             if (pointsElem != null)
@@ -134,9 +139,9 @@ namespace TAlex.Testcheck.Core.Questions
             {
                 writer.WriteElementString(TitleElemName, Title);
             }
-
+            
             writer.WriteStartElement(DescriptionElemName);
-            writer.WriteRaw(Description);
+            writer.WriteString(Description);
             writer.WriteEndElement();
 
             writer.WriteElementString(PointsElemName, Points.ToString(CultureInfo.InvariantCulture));
@@ -167,6 +172,21 @@ namespace TAlex.Testcheck.Core.Questions
         }
 
         public abstract Object Clone();
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        [field:NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         #endregion
     }
