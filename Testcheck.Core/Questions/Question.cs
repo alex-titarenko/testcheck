@@ -126,7 +126,7 @@ namespace TAlex.Testcheck.Core.Questions
             if (titleElem != null)
                 Title = titleElem.InnerText;
 
-            Description = WebUtility.HtmlDecode(element[DescriptionElemName].InnerXml);
+            Description = WebUtility.HtmlDecode(element[DescriptionElemName].InnerXml).Replace("\n", Environment.NewLine);
 
             XmlElement pointsElem = element[PointsElemName];
             if (pointsElem != null)

@@ -239,25 +239,25 @@ namespace TAlex.Testcheck.Core
         public static Test Load(string path)
         {
             string extension = Path.GetExtension(path);
-            FileStream file = new FileStream(path, FileMode.Open);
             Test test = null;
 
-            switch (extension)
+            using (FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                case BinaryTestFileExtension:
-                    test = (Test)CryptoHelper.DecriptBinaryTestFile(file);
-                    break;
+                switch (extension)
+                {
+                    case BinaryTestFileExtension:
+                        test = (Test)CryptoHelper.DecriptBinaryTestFile(file);
+                        break;
 
-                case XmlTestFileExtension:
-                    XmlSerializer sr = new XmlSerializer(typeof(Test));
-                    test = (Test)sr.Deserialize(file);
-                    break;
+                    case XmlTestFileExtension:
+                        XmlSerializer sr = new XmlSerializer(typeof(Test));
+                        test = (Test)sr.Deserialize(file);
+                        break;
 
-                default:
-                    throw new ArgumentException("Unknown file type.");
+                    default:
+                        throw new ArgumentException("Unknown file type.");
+                }
             }
-
-            file.Close();
 
             return test;
         }
@@ -272,24 +272,23 @@ namespace TAlex.Testcheck.Core
                 path = Path.ChangeExtension(path, BinaryTestFileExtension);
             }
 
-            FileStream file = new FileStream(path, FileMode.Create);
-
-            switch (extension)
+            using (FileStream file = new FileStream(path, FileMode.Create))
             {
-                case XmlTestFileExtension:
-                    XmlSerializer sr = new XmlSerializer(typeof(Test));
-                    sr.Serialize(file, this);
-                    break;
+                switch (extension)
+                {
+                    case XmlTestFileExtension:
+                        XmlSerializer sr = new XmlSerializer(typeof(Test));
+                        sr.Serialize(file, this);
+                        break;
 
-                case BinaryTestFileExtension:
-                    CryptoHelper.EncryptBinaryTestFile(this, file);
-                    break;
+                    case BinaryTestFileExtension:
+                        CryptoHelper.EncryptBinaryTestFile(this, file);
+                        break;
 
-                default:
-                    throw new ArgumentException();
+                    default:
+                        throw new ArgumentException();
+                }
             }
-
-            file.Close();
         }
 
         public void Shuffle()

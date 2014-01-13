@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
     xmlns:convs="clr-namespace:TAlex.Testcheck.Editor.Converters"
-    MinHeight="480" MinWidth="740" Height="650" Width="930" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    MinHeight="480" MinWidth="740" Height="650" Width="950" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     
     <Window.Resources>
         <talex:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
