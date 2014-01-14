@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<Test xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Title>Simple test</Title>
+  <Description>Demonstration of different types of questions</Description>
+  <Author>Alex Titarenko</Author>
+  <Copyright>Copyright © T-Alex Software 2013</Copyright>
+  <Timelimit>00:10:00</Timelimit>
+  <ShuffleQuestions>true</ShuffleQuestions>
+  <GradingScale>100</GradingScale>
+  <Questions>
+    <TrueFalseQuestion>
+      <Description>Is it true that dogs are color blind?</Description>
+      <Points>1</Points>
+      <Correctly>True</Correctly>
+    </TrueFalseQuestion>
+    <MultipleChoiceQuestion>
+      <Description>In humans, brown eye colour is dominant and blue eye colour is recessive. A brown-eyed boy and a blue-eyed girl have a blue-eyed mother.
+What eye colour does the father have and why?</Description>
+      <Points>1</Points>
+      <ShuffleMode>All</ShuffleMode>
+      <Choices>
+        <Choice>Brown, because the gene for brown eye colour is sex linked.</Choice>
+        <Choice>Brown, because at least one of the parents must have brown eyes.</Choice>
+        <Choice>Blue, because at least two other members of the family have blue eyes.</Choice>
+        <Choice>Blue, because at least one of the parents must be heterozygous for eye colour.</Choice>
+      </Choices>
+      <Answer>1</Answer>
+    </MultipleChoiceQuestion>
+    <MultipleResponseQuestion>
+      <Description>Which of the following elements are used to form water?</Description>
+      <Points>1</Points>
+      <ShuffleMode>All</ShuffleMode>
+      <Choices>
+        <Choice IsCorrect="True">Hydrogen</Choice>
+        <Choice>Helium</Choice>
+        <Choice>Carbon</Choice>
+        <Choice IsCorrect="True">Oxygen</Choice>
+        <Choice>Nitrogen</Choice>
+        <Choice>Chlorine</Choice>
+      </Choices>
+    </MultipleResponseQuestion>
+    <EssayQuestion>
+      <Description>Which galaxy solar system belongs?</Description>
+      <Points>1</Points>
+      <CorrectAnswers>
+        <Answer>Milky Way</Answer>
+      </CorrectAnswers>
+    </EssayQuestion>
+    <FillBlankQuestion>
+      <Description>Choose the correct word and fill in the gaps.
+A, THE, SOME, ANY?</Description>
+      <Points>1</Points>
+      <BlankText>"[The] place is so beautiful! Let's stop and take [some] photos." "Yes, it's [a] lovely place. Let me park [the] car."</BlankText>
+    </FillBlankQuestion>
+    <MatchingQuestion>
+      <Description>Associate countries of the capital</Description>
+      <Points>1</Points>
+      <ShuffleMode>All</ShuffleMode>
+      <LeftChoices>
+        <Choice>United State</Choice>
+        <Choice>Germany</Choice>
+        <Choice>Ukraine</Choice>
+        <Choice>Armenia</Choice>
+      </LeftChoices>
+      <RightChoices>
+        <Choice>Washington, D.C.</Choice>
+        <Choice>Berlin</Choice>
+        <Choice>Kiev</Choice>
+        <Choice>Yerevan</Choice>
+      </RightChoices>
+      <KeyPairs>
+        <KeyPair Key1="0" Key2="0" />
+        <KeyPair Key1="1" Key2="1" />
+        <KeyPair Key1="2" Key2="2" />
+        <KeyPair Key1="3" Key2="3" />
+      </KeyPairs>
+      <MatchingMode>OneToOne</MatchingMode>
+    </MatchingQuestion>
+    <RankingQuestion>
+      <Description>Rank these countries in order based on their total areas</Description>
+      <Points>1</Points>
+      <ShuffleMode>All</ShuffleMode>
+      <Choices>
+        <Choice>Russia</Choice>
+        <Choice>Canada</Choice>
+        <Choice>United States</Choice>
+        <Choice>People's Republic of China</Choice>
+      </Choices>
+    </RankingQuestion>
+  </Questions>
+</Test>
