@@ -39,7 +39,7 @@ namespace TAlex.Testcheck.Core.Helpers
                             }
                         </script>
                     </head>
-                    <body contenteditable onload='onLoad();'>"
+                    <body onload='onLoad();'>"
                 );
 
             sb.Append(source);
