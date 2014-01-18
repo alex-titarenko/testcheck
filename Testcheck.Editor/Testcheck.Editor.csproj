@@ -77,8 +77,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TAlex.WPF.Controls.1.8.5128.39856\lib\net40\TAlex.WPF.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="TAlex.WPF.Mvvm">
-      <HintPath>..\packages\TAlex.WPF.Mvvm.1.0.4937.37054\lib\net45\TAlex.WPF.Mvvm.dll</HintPath>
+    <Reference Include="TAlex.WPF.Mvvm, Version=1.1.5131.38598, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TAlex.WPF.Mvvm.1.1.5131.38598\lib\net45\TAlex.WPF.Mvvm.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
