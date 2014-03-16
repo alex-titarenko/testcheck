@@ -69,13 +69,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="TAlex.Common, Version=1.5.5065.41482, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TAlex.Common, Version=1.5.5145.31419, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TAlex.Common.1.5.5065.41482\lib\net40\TAlex.Common.dll</HintPath>
+      <HintPath>..\packages\TAlex.Common.1.5.5145.31419\lib\net40\TAlex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="TAlex.WPF.Controls, Version=1.8.5128.39856, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TAlex.WPF.Controls, Version=1.8.5188.34346, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TAlex.WPF.Controls.1.8.5128.39856\lib\net40\TAlex.WPF.Controls.dll</HintPath>
+      <HintPath>..\packages\TAlex.WPF.Controls.1.8.5188.34346\lib\net40\TAlex.WPF.Controls.dll</HintPath>
     </Reference>
     <Reference Include="TAlex.WPF.Mvvm, Version=1.1.5131.38598, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
