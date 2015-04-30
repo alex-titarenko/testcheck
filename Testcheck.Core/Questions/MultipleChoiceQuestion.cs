@@ -66,6 +66,7 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _actualAnswer = value;
+                OnCanCheckChanged();
             }
         }
 

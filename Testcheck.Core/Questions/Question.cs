@@ -87,6 +87,12 @@ namespace TAlex.Testcheck.Core.Questions
 
         #endregion
 
+        #region Events
+
+        public event EventHandler CanCheckChanged;
+
+        #endregion
+
         #region Constructors
 
         public Question()
@@ -172,6 +178,15 @@ namespace TAlex.Testcheck.Core.Questions
         }
 
         public abstract Object Clone();
+
+        protected virtual void OnCanCheckChanged()
+        {
+            var @event = CanCheckChanged;
+            if (@event != null)
+            {
+                @event(this, new EventArgs());
+            }
+        }
 
         #endregion
 

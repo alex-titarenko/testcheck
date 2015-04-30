@@ -52,6 +52,7 @@ namespace TAlex.Testcheck.Core.Questions
             set
             {
                 _actualChoice = value;
+                OnCanCheckChanged();
             }
         }
 
