@@ -7,9 +7,9 @@
       <Feature Id="Tester" Title="Tester" Description="Tester" Level="1" AllowAdvertise="no" Absent="disallow" InstallDefault="local">
         <ComponentRef Id="CMP_TestcheckCore" />
         <ComponentRef Id="CMP_TesterExecutable" />
-        <ComponentRef Id="CMP_TAlexCommon" />
-        <ComponentRef Id="CMP_TAlexWPFMvvm" />
-        
+        <ComponentRef Id="CMP_TAlexMvvm" />
+        <ComponentRef Id="CMP_TAlexMvvmWpf" />
+
         <ComponentRef Id="CMP_ProgramsMenuShortcuts" />
         <ComponentRef Id="CMP_TesterExecutableDesktopShorctut" />
 
@@ -21,6 +21,9 @@
       <Feature Id="Editor" Title="Editor" Description="Editor" Level="1001" AllowAdvertise="no" Absent="allow" InstallDefault="local">
         <ComponentRef Id="CMP_EditorExecutable" />
         <ComponentRef Id="CMP_TAlexWPFControls" />
+        <ComponentRef Id="CMP_TAlexCommon" />
+        <ComponentRef Id="CMP_TAlexCommonDiagnostics" />
+        <ComponentRef Id="CMP_TAlexLicense" />
         <ComponentRef Id="CMP_Ninject" />
         
         <ComponentRef Id="CMP_EditorProgramsMenuShortcut" />

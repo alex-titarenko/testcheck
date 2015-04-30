@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TAlex.Common.Licensing;
+using TAlex.License;
 
 
 namespace TAlex.Testcheck.Editor.Services.Licensing

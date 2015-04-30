@@ -26,13 +26,25 @@
       <Component Id="CMP_TAlexCommon" Guid="AEE820B9-8A3D-42A6-852F-0A03ECC93F83">
         <File Id="FILE_TAlexCommon" Name="TAlex.Common.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
+      <!-- TAlex.Common.Diagnostics -->
+      <Component Id="CMP_TAlexCommonDiagnostics" Guid="F2045474-42C1-4A32-9321-B4E2E1F262A8">
+        <File Id="FILE_TAlexCommonDiagnostics" Name="TAlex.Common.Diagnostics.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <!-- TAlex.License -->
+      <Component Id="CMP_TAlexLicense" Guid="32E3A77E-8780-45F4-997F-50AD5DB1BE9F">
+        <File Id="FILE_TAlexLicense" Name="TAlex.License.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
       <!-- TAlex.WPF.Controls -->
       <Component Id="CMP_TAlexWPFControls" Guid="56B914D0-FCD2-4429-BEC4-8185B4D6F781">
         <File Id="FILE_TAlexWPFControls" Name="TAlex.WPF.Controls.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
-      <!-- TAlex.WPF.Mvvm -->
-      <Component Id="CMP_TAlexWPFMvvm" Guid="28AF635B-93C8-427A-BC0B-D264DB3C7883">
-        <File Id="FILE_TAlexWPFMvvm" Name="TAlex.WPF.Mvvm.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
+      <!-- TAlex.Mvvm -->
+      <Component Id="CMP_TAlexMvvm" Guid="28AF635B-93C8-427A-BC0B-D264DB3C7883">
+        <File Id="FILE_TAlexMvvm" Name="TAlex.Mvvm.dll" Source="$(var.Testcheck.Tester.TargetDir)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <!-- TAlex.Mvvm.Wpf -->
+      <Component Id="CMP_TAlexMvvmWpf" Guid="43EC8442-3A47-4904-B9E9-C9959369E28A">
+        <File Id="FILE_TAlexMvvmWpf" Name="TAlex.Mvvm.Wpf.dll" Source="$(var.Testcheck.Tester.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
       <!-- Ninject -->
       <Component Id="CMP_Ninject" Guid="C754C162-2838-477B-AD46-1DE53CFBFC5B">

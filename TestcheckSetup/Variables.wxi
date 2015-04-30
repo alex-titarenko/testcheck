@@ -3,7 +3,7 @@
   <?define ProductName = "Testcheck" ?>
   <?define TesterProductName = "Tester" ?>
   <?define EditorProductName = "Editor" ?>
-  <?define ProductVersion="2.1.1" ?>
+  <?define ProductVersion="2.1.2" ?>
   <?define Manufacturer = "T-Alex Software" ?>
   <?define ProductCode="C4A2E03A-8882-4758-91DF-4AE5BE8341D4" ?>
   <?define UpgradeCode="3F5D1E5A-B02E-4FC7-989C-5F152E52589E" ?>

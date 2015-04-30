@@ -11,11 +11,6 @@ namespace TAlex.Testcheck.KeyGenerator
     {
         #region Fields
 
-        /// <summary>
-        /// Input file encoding.
-        /// </summary>
-        private static Encoding _fileEncoding = new UTF8Encoding();
-
         private static readonly IKeyGenerator TestcheckKeyGenerator = new TestcheckKeyGenerator();
 
         #endregion
@@ -77,7 +72,6 @@ namespace TAlex.Testcheck.KeyGenerator
         {
             try
             {
-                Console.InputEncoding = _fileEncoding;
                 IDictionary<string, string> inputs = ReadInputValues();
 
                 HandleWriteKey(TestcheckKeyGenerator.Generate(inputs));

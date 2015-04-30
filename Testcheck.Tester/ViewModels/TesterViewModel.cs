@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
+using TAlex.Mvvm.Commands;
+using TAlex.Mvvm.ViewModels;
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
 using TAlex.Testcheck.Tester.Infrastructure.UI;
 using TAlex.Testcheck.Tester.Reporting;
-using TAlex.WPF.Mvvm;
-using TAlex.WPF.Mvvm.Commands;
 
 
 namespace TAlex.Testcheck.Tester.ViewModels

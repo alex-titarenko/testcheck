@@ -1,4 +1,4 @@
-﻿using TAlex.Common.Licensing;
+﻿using TAlex.License;
 
 
 namespace TAlex.Testcheck.Editor.Services.Licensing

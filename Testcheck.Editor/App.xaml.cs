@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using TAlex.Common.Diagnostics.ErrorReporting;
-using TAlex.Common.Environment;
+using TAlex.Common.Models;
 using TAlex.Testcheck.Editor.Locators;
 using TAlex.Testcheck.Editor.Services.Licensing;
 using TAlex.Testcheck.Editor.Views;
+
 
 namespace TAlex.Testcheck.Editor
 {
@@ -65,7 +67,7 @@ namespace TAlex.Testcheck.Editor
             Trace.TraceError(exc.ToString());
 
             ErrorReportingWindow reportWindow =
-                new ErrorReportingWindow(new ErrorReport(exc), ApplicationInfo.Current);
+                new ErrorReportingWindow(new ErrorReport(exc), new AssemblyInfo(Assembly.GetEntryAssembly()));
 
             Window activeWindow = null;
             foreach (Window w in Windows)

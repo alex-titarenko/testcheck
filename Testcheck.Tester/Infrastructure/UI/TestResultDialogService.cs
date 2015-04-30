@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using TAlex.Testcheck.Tester.Reporting;
 using TAlex.Testcheck.Tester.Views;
-using TAlex.WPF.Mvvm.Extensions;
+using TAlex.Mvvm.Extensions;
 
 
 namespace TAlex.Testcheck.Tester.Infrastructure.UI

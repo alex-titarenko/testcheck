@@ -23,6 +23,7 @@ using TAlex.WPF.Controls;
 using TAlex.Testcheck.Editor.Locators;
 using TAlex.Testcheck.Editor.Services.Licensing;
 using TAlex.Testcheck.Editor.Infrastructure;
+using TAlex.Common.Models;
 
 namespace TAlex.Testcheck.Editor.Views
 {
@@ -32,6 +33,8 @@ namespace TAlex.Testcheck.Editor.Views
     public partial class MainWindow : Window
     {
         #region Fields
+
+        protected AssemblyInfo AssemblyInfo;
 
         private const string DefaultFilePath = "Untitled";
         private const string OpenSaveDialogFilter = "Xml file test (*.xml)|*.xml|Binary file test (*.tst)|*.tst";
@@ -51,10 +54,10 @@ namespace TAlex.Testcheck.Editor.Views
         {
             InitializeComponent();
 
-            string productTitle = TAlex.Common.Environment.ApplicationInfo.Current.Title;
-            Title = productTitle;
+            AssemblyInfo = new AssemblyInfo(Assembly.GetEntryAssembly());
 
-            aboutMenuItem.Header = "_About " + productTitle;
+            Title = AssemblyInfo.Title;
+            aboutMenuItem.Header = "_About " + AssemblyInfo.Title;
         }
 
         #endregion
@@ -390,7 +393,7 @@ namespace TAlex.Testcheck.Editor.Views
             ViewModelLocator locator = App.Current.Resources["viewModelLocator"] as ViewModelLocator;
             AppLicense license = locator.Get<AppLicense>();
 
-            string title = String.Format("{0} - {1}", TAlex.Common.Environment.ApplicationInfo.Current.Title, filename);
+            string title = String.Format("{0} - {1}", AssemblyInfo.Title, filename);
             if (license.IsTrial)
             {
                 title = String.Format("{0} (days left: {1})", title, license.TrialDaysLeft);

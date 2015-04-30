@@ -1,7 +1,7 @@
 ﻿using Ninject.Modules;
 using System;
-using TAlex.Common.Licensing;
 using TAlex.Testcheck.Editor.Services.Licensing;
+using TAlex.License;
 
 
 namespace TAlex.Testcheck.Editor.Locators.Modules

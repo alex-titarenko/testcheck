@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using TAlex.Common.Environment;
-using TAlex.Common.Licensing;
+using TAlex.Common.Models;
+using TAlex.License;
 
 
 namespace TAlex.Testcheck.Editor.ViewModels
@@ -14,37 +13,12 @@ namespace TAlex.Testcheck.Editor.ViewModels
     {
         #region Fields
 
-        protected readonly ApplicationInfo ApplicationInfo;
+        public virtual AssemblyInfo AssemblyInfo { get; set; }
         protected readonly LicenseBase AppLicense;
-        //protected readonly IRegistrationWindowService RegistrationWindowService;
 
         #endregion
 
         #region Properties
-
-        public virtual string Title
-        {
-            get
-            {
-                return "About " + ApplicationInfo.Title;
-            }
-        }
-
-        public virtual string AboutLogoTitle
-        {
-            get
-            {
-                return ApplicationInfo.Title;
-            }
-        }
-
-        public virtual Version Version
-        {
-            get
-            {
-                return ApplicationInfo.Version;
-            }
-        }
 
         /// <summary>
         /// Gets the email support title for this product.
@@ -90,14 +64,6 @@ namespace TAlex.Testcheck.Editor.ViewModels
             }
         }
 
-        public virtual string Copyright
-        {
-            get
-            {
-                return ApplicationInfo.CopyrightDisplayText;
-            }
-        }
-
 
         public virtual string LicenseName
         {
@@ -125,35 +91,12 @@ namespace TAlex.Testcheck.Editor.ViewModels
 
         #endregion
 
-        #region Commands
-
-        public ICommand OpenRegistrationDialogCommand { get; set; }
-
-        #endregion
-
         #region Constructors
 
-        public AboutViewModel(ApplicationInfo applicationInfo, LicenseBase appLicense/*, IRegistrationWindowService registrationWindowService*/)
+        public AboutViewModel(AssemblyInfo assemblyInfo, LicenseBase appLicense)
         {
-            ApplicationInfo = applicationInfo;
+            AssemblyInfo = assemblyInfo;
             AppLicense = appLicense;
-            //RegistrationWindowService = registrationWindowService;
-
-            InitCommands();
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void InitCommands()
-        {
-            //OpenRegistrationDialogCommand = new RelayCommand(OpenRegistrationDialogCommandExecute);
-        }
-
-        private void OpenRegistrationDialogCommandExecute()
-        {
-            //RegistrationWindowService.Show();
         }
 
         #endregion

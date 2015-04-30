@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
     DataContext="{Binding Source={StaticResource viewModelLocator}, Path=AboutViewModel, Mode=OneTime}"
-    Title="{Binding Title}" Height="300" Width="400" ResizeMode="NoResize"
+    Title="{Binding AssemblyInfo.Title, StringFormat=About {0}}" Height="300" Width="400" ResizeMode="NoResize"
     WindowStartupLocation="CenterOwner" Background="WhiteSmoke">
     
     <Window.Resources>
@@ -29,14 +29,14 @@
         <Rectangle VerticalAlignment="Top" Height="100" Fill="{DynamicResource AboutLogoBgBrush}" />
 
         <Label Margin="0,25,0,0" FontSize="36" FontWeight="600" FontFamily="Segoe UI, Arial" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-               Content="{Binding Mode=OneTime, Path=AboutLogoTitle}" Foreground="{DynamicResource AboutLogoTextBrush}" >
+               Content="{Binding Mode=OneTime, Path=AssemblyInfo.Title}" Foreground="{DynamicResource AboutLogoTextBrush}" >
             <Label.BitmapEffect>
                 <DropShadowBitmapEffect Color="White" Direction="270" ShadowDepth="1" Softness="0" />
             </Label.BitmapEffect>
         </Label>
         <Label Margin="0,17,57,0" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="500"
                Foreground="{DynamicResource AboutVersionTextBrush}"
-               Content="{Binding Mode=OneTime, Path=Version}">
+               Content="{Binding Mode=OneTime, Path=AssemblyInfo.Version}">
             <Label.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black" Direction="90" ShadowDepth="1" Softness="0" />
             </Label.BitmapEffect>
@@ -92,7 +92,8 @@
         </Grid>
 
         <Label Margin="0,0,0,12" Padding="0" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-               Content="{Binding Mode=OneTime, Path=Copyright}">
+               ContentStringFormat="{}{0}. All rights reserved."
+               Content="{Binding Mode=OneTime, Path=AssemblyInfo.Copyright}">
         </Label>        
     </Grid>
 </Window>
