@@ -58,7 +58,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
                     CurrentQuestion.CanCheckChanged -= CurrentQuestion_CanCheckChanged;
                     CurrentQuestion.CanCheckChanged += CurrentQuestion_CanCheckChanged;
 
-                    RaiseCanAccept();
+                    AcceptCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -221,15 +221,6 @@ namespace TAlex.Testcheck.Tester.ViewModels
             return _questions.Any() && CurrentQuestion != null && CurrentQuestion.CanCheck;
         }
 
-        private void RaiseCanAccept()
-        {
-            var command = AcceptCommand as RelayCommand;
-            if (command != null)
-            {
-                command.RaiseCanExecuteChanged();
-            }
-        }
-
         private bool CanMoveTo()
         {
             return _questions.Count > 1;
@@ -313,7 +304,7 @@ namespace TAlex.Testcheck.Tester.ViewModels
 
         private void CurrentQuestion_CanCheckChanged(object sender, EventArgs e)
         {
-            RaiseCanAccept();
+            AcceptCommand.RaiseCanExecuteChanged();
         }
 
         #endregion

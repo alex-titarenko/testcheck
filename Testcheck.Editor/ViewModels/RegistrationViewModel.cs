@@ -42,7 +42,7 @@ namespace TAlex.Testcheck.Editor.ViewModels
             set
             {
                 Set(ref _licenseName, value);
-                RaiseCanExecuteRegisterCommand();
+                RegisterCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -57,7 +57,7 @@ namespace TAlex.Testcheck.Editor.ViewModels
             set
             {
                 Set(ref _licenseKey, value);
-                RaiseCanExecuteRegisterCommand();
+                RegisterCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -90,15 +90,6 @@ namespace TAlex.Testcheck.Editor.ViewModels
         private bool RegisterCommandCanExecute()
         {
             return !String.IsNullOrWhiteSpace(LicenseName) && !String.IsNullOrWhiteSpace(LicenseKey);
-        }
-
-        private void RaiseCanExecuteRegisterCommand()
-        {
-            var command = RegisterCommand as RelayCommand;
-            if (command != null)
-            {
-                command.RaiseCanExecuteChanged();
-            }
         }
 
         #endregion
