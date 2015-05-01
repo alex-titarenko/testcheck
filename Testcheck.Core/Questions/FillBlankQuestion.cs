@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Collections.ObjectModel;
 
 
 namespace TAlex.Testcheck.Core.Questions
@@ -28,7 +29,7 @@ namespace TAlex.Testcheck.Core.Questions
         private string _blankText = String.Empty;
 
         [NonSerialized]
-        private List<string> _actualAnswers = new List<string>();
+        private ObservableCollection<string> _actualAnswers;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace TAlex.Testcheck.Core.Questions
         }
 
         [XmlIgnore]
-        public List<string> ActualAnswers
+        public ObservableCollection<string> ActualAnswers
         {
             get
             {
@@ -79,12 +80,15 @@ namespace TAlex.Testcheck.Core.Questions
 
         public FillBlankQuestion()
         {
+            Init();
         }
 
         protected FillBlankQuestion(FillBlankQuestion question)
             : base(question)
         {
             BlankText = question.BlankText;
+
+            Init();
         }
 
         #endregion
@@ -152,6 +156,11 @@ namespace TAlex.Testcheck.Core.Questions
             return new FillBlankQuestion(this);
         }
 
+        protected virtual void Init()
+        {
+            _actualAnswers = new ObservableCollection<string>();
+            _actualAnswers.CollectionChanged += (s, a) => { OnCanCheckChanged(); };
+        }
 
         #region Helpers
 

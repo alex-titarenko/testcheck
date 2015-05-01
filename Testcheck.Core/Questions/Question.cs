@@ -89,6 +89,7 @@ namespace TAlex.Testcheck.Core.Questions
 
         #region Events
 
+        [field: NonSerialized]
         public event EventHandler CanCheckChanged;
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -35,7 +36,7 @@ namespace TAlex.Testcheck.Core.Questions
         private List<KeyPair> _keyPairs = new List<KeyPair>();
 
         [NonSerialized]
-        private List<KeyPair> _actualKeyPairs = new List<KeyPair>();
+        private ObservableCollection<KeyPair> _actualKeyPairs = new ObservableCollection<KeyPair>();
 
         private MatchingMode _matchingMode = MatchingMode.OneToOne;
 
@@ -68,7 +69,7 @@ namespace TAlex.Testcheck.Core.Questions
         }
 
         [XmlIgnore]
-        public List<KeyPair> ActualKeyPairs
+        public ObservableCollection<KeyPair> ActualKeyPairs
         {
             get
             {
@@ -111,11 +112,14 @@ namespace TAlex.Testcheck.Core.Questions
 
         public MatchingQuestion()
         {
+            Init();
         }
 
         protected MatchingQuestion(MatchingQuestion question)
             : base(question)
         {
+            Init();
+
             int nl = question._leftChoices.Count;
             for (int i = 0; i < nl; i++)
             {
@@ -313,6 +317,12 @@ namespace TAlex.Testcheck.Core.Questions
         public override object Clone()
         {
             return new MatchingQuestion(this);
+        }
+
+        protected virtual void Init()
+        {
+            _actualKeyPairs = new ObservableCollection<KeyPair>();
+            _actualKeyPairs.CollectionChanged += (s, a) => { OnCanCheckChanged(); };
         }
 
         #endregion
