@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TAlex.Common.Diagnostics.ErrorReporting;
+using TAlex.Common.Diagnostics.Reporting;
 using TAlex.Common.Models;
 
 

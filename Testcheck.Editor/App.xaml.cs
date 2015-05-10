@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
-using TAlex.Common.Diagnostics.ErrorReporting;
+using TAlex.Common.Diagnostics.Reporting;
 using TAlex.Common.Models;
 using TAlex.Testcheck.Editor.Locators;
 using TAlex.Testcheck.Editor.Services.Licensing;
