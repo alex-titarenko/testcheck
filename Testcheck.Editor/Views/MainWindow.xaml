@@ -36,7 +36,6 @@
             
             <MenuItem Header="_Help">
                 <MenuItem Name="homepageMenuItem" Header="T-Alex Software _Web Site..." Click="homepageMenuItem_Click" />
-                <MenuItem Name="registrationMenuItem" Header="Registration..." Click="registrationMenuItem_Click"  />
                 <Separator />
                 <MenuItem Name="aboutMenuItem" Header="_About" Click="aboutMenuItem_Click" />
             </MenuItem>

@@ -10,7 +10,6 @@ namespace TAlex.Testcheck.Editor.Locators.Modules
         public override void Load()
         {
             Bind<AboutViewModel>().ToSelf().InSingletonScope();
-            Bind<RegistrationViewModel>().ToSelf();
         }
     }
 }

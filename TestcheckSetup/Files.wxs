@@ -30,10 +30,6 @@
       <Component Id="CMP_TAlexCommonDiagnostics" Guid="F2045474-42C1-4A32-9321-B4E2E1F262A8">
         <File Id="FILE_TAlexCommonDiagnostics" Name="TAlex.Common.Diagnostics.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
       </Component>
-      <!-- TAlex.License -->
-      <Component Id="CMP_TAlexLicense" Guid="32E3A77E-8780-45F4-997F-50AD5DB1BE9F">
-        <File Id="FILE_TAlexLicense" Name="TAlex.License.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />
-      </Component>
       <!-- TAlex.WPF.Controls -->
       <Component Id="CMP_TAlexWPFControls" Guid="56B914D0-FCD2-4429-BEC4-8185B4D6F781">
         <File Id="FILE_TAlexWPFControls" Name="TAlex.WPF.Controls.dll" Source="$(var.Testcheck.Editor.TargetDir)" DiskId="1" KeyPath="yes" />

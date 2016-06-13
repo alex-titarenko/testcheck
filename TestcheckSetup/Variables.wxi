@@ -3,9 +3,9 @@
   <?define ProductName = "Testcheck" ?>
   <?define TesterProductName = "Tester" ?>
   <?define EditorProductName = "Editor" ?>
-  <?define ProductVersion="2.1.2" ?>
+  <?define ProductVersion="2.2.0" ?>
   <?define Manufacturer = "T-Alex Software" ?>
-  <?define ProductCode="C4A2E03A-8882-4758-91DF-4AE5BE8341D4" ?>
+  <?define ProductCode="9820F8C1-3712-4EF4-9405-61C9B1AB39D9" ?>
   <?define UpgradeCode="3F5D1E5A-B02E-4FC7-989C-5F152E52589E" ?>
 
   <?define HomePageUrl="http://www.talex-soft.com" ?>

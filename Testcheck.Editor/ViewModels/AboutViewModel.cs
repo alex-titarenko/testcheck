@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
 using TAlex.Common.Models;
-using TAlex.License;
 
 
 namespace TAlex.Testcheck.Editor.ViewModels
@@ -14,7 +9,6 @@ namespace TAlex.Testcheck.Editor.ViewModels
         #region Fields
 
         public virtual AssemblyInfo AssemblyInfo { get; set; }
-        protected readonly LicenseBase AppLicense;
 
         #endregion
 
@@ -64,39 +58,13 @@ namespace TAlex.Testcheck.Editor.ViewModels
             }
         }
 
-
-        public virtual string LicenseName
-        {
-            get
-            {
-                return AppLicense.LicenseName;
-            }
-        }
-
-        public virtual bool LicenseInfoVisibility
-        {
-            get
-            {
-                return AppLicense.IsLicensed;
-            }
-        }
-
-        public bool UnregisteredTextVisibility
-        {
-            get
-            {
-                return !LicenseInfoVisibility;
-            }
-        }
-
         #endregion
 
         #region Constructors
 
-        public AboutViewModel(AssemblyInfo assemblyInfo, LicenseBase appLicense)
+        public AboutViewModel(AssemblyInfo assemblyInfo)
         {
             AssemblyInfo = assemblyInfo;
-            AppLicense = appLicense;
         }
 
         #endregion

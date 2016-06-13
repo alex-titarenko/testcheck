@@ -42,17 +42,8 @@
             </Label.BitmapEffect>
         </Label>
 
-        <StackPanel Margin="60,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding Mode=OneTime, Path=LicenseInfoVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Label Name="licTextLabel" Padding="0">
-                This product is licensed to:
-            </Label>
-            <Label Name="licNameLabel" Padding="0" FontWeight="800" Content="{Binding Mode=OneTime, Path=LicenseName}">
-            </Label>
-        </StackPanel>
-
-        <Label Name="unregTextLabel" Margin="60,115,0,0" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="12" FontWeight="800"
-                        Visibility="{Binding Mode=OneTime, Path=UnregisteredTextVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <TextBlock Foreground="Red">Unregistered evaluation copy</TextBlock>
+        <Label Margin="60,115,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0">
+            This product distributed as freeware
         </Label>
 
         <Grid Margin="60,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">

@@ -1,28 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using TAlex.Testcheck.Core;
 using TAlex.Testcheck.Core.Questions;
 
 using TAlex.WPF.Controls;
 using TAlex.Testcheck.Editor.Locators;
-using TAlex.Testcheck.Editor.Services.Licensing;
-using TAlex.Testcheck.Editor.Infrastructure;
 using TAlex.Common.Models;
 
 namespace TAlex.Testcheck.Editor.Views
@@ -166,11 +156,6 @@ namespace TAlex.Testcheck.Editor.Views
         private void homepageMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(Properties.Resources.HomepageUrl);
-        }
-
-        private void registrationMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            new RegistrationWindow { Owner = this }.ShowDialog();
         }
 
         private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
@@ -390,16 +375,7 @@ namespace TAlex.Testcheck.Editor.Views
 
         private void SetTitle(string filename)
         {
-            ViewModelLocator locator = App.Current.Resources["viewModelLocator"] as ViewModelLocator;
-            AppLicense license = locator.Get<AppLicense>();
-
-            string title = String.Format("{0} - {1}", AssemblyInfo.Title, filename);
-            if (license.IsTrial)
-            {
-                title = String.Format("{0} (days left: {1})", title, license.TrialDaysLeft);
-            }
-
-            Title = title;
+            Title = string.Format("{0} - {1}", AssemblyInfo.Title, filename);
         }
 
         private MessageBoxResult SaveAsBeforeAction()

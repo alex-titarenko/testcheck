@@ -1,10 +1,4 @@
 ﻿using Ninject;
-using Ninject.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TAlex.Testcheck.Editor.Locators.Modules;
 using TAlex.Testcheck.Editor.ViewModels;
 
@@ -25,7 +19,6 @@ namespace TAlex.Testcheck.Editor.Locators
         {
             _kernel = new StandardKernel(
                 new BaseServicesNinjectModule(),
-                new AppLicenseNinjectModule(),
                 new ViewModelNinjectModule());
         }
 
@@ -38,14 +31,6 @@ namespace TAlex.Testcheck.Editor.Locators
             get
             {
                 return _kernel.Get<AboutViewModel>();
-            }
-        }
-
-        public RegistrationViewModel RegistrationViewModel
-        {
-            get
-            {
-                return _kernel.Get<RegistrationViewModel>();
             }
         }
 

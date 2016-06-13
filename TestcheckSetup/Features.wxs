@@ -23,7 +23,6 @@
         <ComponentRef Id="CMP_TAlexWPFControls" />
         <ComponentRef Id="CMP_TAlexCommon" />
         <ComponentRef Id="CMP_TAlexCommonDiagnostics" />
-        <ComponentRef Id="CMP_TAlexLicense" />
         <ComponentRef Id="CMP_Ninject" />
         
         <ComponentRef Id="CMP_EditorProgramsMenuShortcut" />
