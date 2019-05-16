@@ -1,6 +1,6 @@
 # Testcheck
 
-[![Build status](https://ci.appveyor.com/api/projects/status/v86sb2ows9795qkk?svg=true)](https://ci.appveyor.com/project/T-Alex/testcheck)
+[![Build status](https://ci.appveyor.com/api/projects/status/v86sb2ows9795qkk?svg=true)](https://ci.appveyor.com/project/alex-titarenko/testcheck)
 
 Testcheck is a system for creating tests and testing any kind of knowledge.
 
